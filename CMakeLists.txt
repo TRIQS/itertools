@@ -62,9 +62,6 @@ if(NOT IS_SUBPROJECT)
   message(STATUS "-------- BUILD-TYPE: ${CMAKE_BUILD_TYPE} --------")
 endif()
 
-# Python Support
-option(PythonSupport "Build with Python support" ON)
-
 # Documentation
 option(Build_Documentation "Build documentation" OFF)
 
@@ -131,11 +128,6 @@ add_subdirectory(c++/${PROJECT_NAME})
 # Tests
 if(Build_Tests)
   add_subdirectory(test)
-endif()
-
-# Python
-if(PythonSupport)
-  add_subdirectory(python/${PROJECT_NAME})
 endif()
 
 # Docs
