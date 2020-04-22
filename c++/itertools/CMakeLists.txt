@@ -9,5 +9,5 @@ target_include_directories(itertools_c
 target_compile_options(itertools_c INTERFACE -std=c++17 $<$<CXX_COMPILER_ID:GNU>:-fconcepts>)
 
 # Install library and headers
-install(TARGETS itertools_c EXPORT nda-targets)
+install(TARGETS itertools_c EXPORT itertools-targets)
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} DESTINATION include FILES_MATCHING PATTERN "*.hpp" PATTERN "*.h")

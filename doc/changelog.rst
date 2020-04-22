@@ -3,6 +3,6 @@
 Changelog
 =========
 
-This document describes the main changes in NDA.
+This document describes the main changes in ITERTOOLS.
 
 .. include:: ChangeLog.md

@@ -1,6 +1,6 @@
 .. _about:
 
-About nda
+About itertools
 ===============
 
 An example application using ``cpp2py`` and TRIQS.

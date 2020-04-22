@@ -56,13 +56,13 @@ ENV SRC=/src \
     BUILD=/home/build \
     INSTALL=/usr/local \
     PYTHONPATH=/usr/local/lib/python2.7/site-packages:${PYTHONPATH} \
-    CMAKE_PREFIX_PATH=/usr/lib/cmake/nda:${CMAKE_PREFIX_PATH}
+    CMAKE_PREFIX_PATH=/usr/lib/cmake/itertools:${CMAKE_PREFIX_PATH}
 
-COPY . ${SRC}/nda
-WORKDIR ${BUILD}/nda
-RUN chown -R build ${SRC}/nda .
+COPY . ${SRC}/itertools
+WORKDIR ${BUILD}/itertools
+RUN chown -R build ${SRC}/itertools .
 USER build
-RUN cmake $SRC/nda -DCMAKE_INSTALL_PREFIX=$INSTALL -DMSAN=ON -DPYTHON_EXECUTABLE=$(which python)
+RUN cmake $SRC/itertools -DCMAKE_INSTALL_PREFIX=$INSTALL -DMSAN=ON -DPYTHON_EXECUTABLE=$(which python)
 RUN make VERBOSE=1 -j8
 ENV MSAN_SYMBOLIZER_PATH=/usr/lib/llvm-${LLVM}/bin/llvm-symbolizer CTEST_OUTPUT_ON_FAILURE=1
 RUN make test || true

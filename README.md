@@ -1,3 +1,3 @@
-# nda
+# itertools
 
-cmake ~/src/nda -DANALYZE_SOURCE=ON -DUBSAN=ON -DASAN=ON
+cmake ~/src/itertools -DANALYZE_SOURCE=ON -DUBSAN=ON -DASAN=ON
