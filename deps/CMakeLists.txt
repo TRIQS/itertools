@@ -33,7 +33,7 @@ option(Build_Deps "Build dependencies from source" OFF)
 
 # -- GTest --
 external_dependency(GTest
-  GIT_REPO github:google/googletest
+  GIT_REPO https://github.com/google/googletest
   TAG release-1.10.0
   EXCLUDE_FROM_ALL
 )
