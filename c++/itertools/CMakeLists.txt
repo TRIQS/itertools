@@ -2,6 +2,7 @@
 # Create an Interface Target
 file(GLOB_RECURSE headers *.hpp)
 add_library(itertools_c INTERFACE)
+add_library(itertools::itertools_c ALIAS itertools_c)
 
 # Configure target and compilation
 target_compile_options(itertools_c INTERFACE -fPIC -std=c++17)
