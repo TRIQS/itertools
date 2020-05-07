@@ -54,8 +54,8 @@ external_dependency(GTest
   EXCLUDE_FROM_ALL
 )
 
-if(PythonSupport OR Build_Documentation)
-  # -- Cpp2Py --
+# -- Cpp2Py --
+if(Build_Documentation)
   external_dependency(Cpp2Py
     GIT_REPO https://github.com/TRIQS/cpp2py
     VERSION 2.0
