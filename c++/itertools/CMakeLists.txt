@@ -1,4 +1,4 @@
-# MPI C++ Interface is header-only
+# ITERTOOLS C++ Interface is header-only
 # Create an Interface Target
 file(GLOB_RECURSE headers *.hpp)
 add_library(itertools_c INTERFACE)
