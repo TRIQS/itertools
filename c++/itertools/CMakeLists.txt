@@ -5,7 +5,7 @@ add_library(itertools_c INTERFACE)
 add_library(itertools::itertools_c ALIAS itertools_c)
 
 # Configure target and compilation
-target_compile_options(itertools_c INTERFACE -fPIC -std=c++17)
+target_compile_options(itertools_c INTERFACE -std=c++17)
 target_include_directories(itertools_c INTERFACE $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/c++>)
 target_include_directories(itertools_c SYSTEM INTERFACE $<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include>)
 target_compile_definitions(itertools_c INTERFACE
