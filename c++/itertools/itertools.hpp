@@ -67,17 +67,23 @@ namespace itertools {
       return c;
     }
 
+#if __cplusplus > 201703L
+    bool operator==(iterator_facade const &other) const { return self().equal(other.self()); }
+
+#else
     template <typename U>
     bool operator==(U const &other) const {
       return self().equal(other);
     }
+
     template <typename U>
     bool operator!=(U const &other) const {
       return (!operator==(other));
     }
+#endif
 
     decltype(auto) operator*() const { return self().dereference(); }
-    decltype(auto) operator-> () const { return operator*(); }
+    decltype(auto) operator->() const { return operator*(); }
   };
 
   namespace details {
@@ -182,6 +188,11 @@ namespace itertools {
       template <typename U>
       bool equal(sentinel_t<U> const &s) const {
         return (s.it == std::get<sizeof...(It) - 1>(its));
+      }
+
+      template <typename U>
+      bool operator==(sentinel_t<U> const &s) const {
+        return equal(s);
       }
 
       private:
@@ -322,7 +333,7 @@ namespace itertools {
     };
 
     template <typename... T>
-    multiplied(T &&...)->multiplied<std::decay_t<T>...>;
+    multiplied(T &&...) -> multiplied<std::decay_t<T>...>;
 
     // ---------------------------------------------
 
