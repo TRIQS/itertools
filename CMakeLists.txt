@@ -30,7 +30,7 @@ endif()
 
 # ############
 # Define Project
-project(ITERTOOLS VERSION 2.2.0 LANGUAGES C CXX)
+project(itertools VERSION 2.2.0 LANGUAGES C CXX)
 get_directory_property(IS_SUBPROJECT PARENT_DIRECTORY)
 
 # Get the git hash & print status
@@ -45,7 +45,7 @@ endif()
 if(NOT IS_SUBPROJECT)
   message(STATUS "-------- CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX} --------")
 endif()
-set(ITERTOOLS_BINARY_DIR ${PROJECT_BINARY_DIR} CACHE STRING "Binary directory of the ITERTOOLS Project")
+set(${PROJECT_NAME}_BINARY_DIR ${PROJECT_BINARY_DIR} CACHE STRING "Binary directory of the ${PROJECT_NAME} Project")
 
 
 # ############
@@ -82,8 +82,8 @@ add_compile_options(
 )
 
 # Create an Interface target for compiler warnings
-add_library(itertools_warnings INTERFACE)
-target_compile_options(itertools_warnings
+add_library(${PROJECT_NAME}_warnings INTERFACE)
+target_compile_options(${PROJECT_NAME}_warnings
   INTERFACE
     -Wall
     -Wextra
@@ -122,8 +122,8 @@ endif()
 # Find / Build dependencies
 add_subdirectory(deps)
 
-# Build and install the itertools library
-add_subdirectory(c++/itertools)
+# Build and install the library
+add_subdirectory(c++/${PROJECT_NAME})
 
 # Tests
 if(Build_Tests)
@@ -146,10 +146,10 @@ if(BUILD_DEBIAN_PACKAGE AND NOT IS_SUBPROJECT)
   if(NOT CMAKE_INSTALL_PREFIX STREQUAL "/usr")
     message(FATAL_ERROR "CMAKE_INSTALL_PREFIX must be /usr for packaging")
   endif()
-  set(CPACK_PACKAGE_NAME itertools)
+  set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
   set(CPACK_GENERATOR "DEB")
   set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
-  set(CPACK_PACKAGE_CONTACT "https://github.com/TRIQS/itertools")
+  set(CPACK_PACKAGE_CONTACT "https://github.com/TRIQS/${PROJECT_NAME}")
   execute_process(COMMAND dpkg --print-architecture OUTPUT_VARIABLE CMAKE_DEBIAN_PACKAGE_ARCHITECTURE OUTPUT_STRIP_TRAILING_WHITESPACE)
   set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
   set(CPACK_DEBIAN_PACKAGE_GENERATE_SHLIBS ON)
