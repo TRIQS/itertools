@@ -631,6 +631,11 @@ namespace itertools {
     return details::product_range_impl(idx_tpl, std::make_index_sequence<sizeof...(Integers)>{});
   }
 
+  template <typename Integer, size_t Rank, typename EnableIf = std::enable_if_t<std::is_integral_v<Integer>, int>>
+  auto product_range(std::array<Integer, Rank> const &idx_arr) {
+    return details::product_range_impl(idx_arr, std::make_index_sequence<Rank>{});
+  }
+
   /**
    * Given an integer range [start, end), chunk it as equally as possible into n_chunks.
    * If the range is not dividable in n_chunks equal parts, the first chunks have
