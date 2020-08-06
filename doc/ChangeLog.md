@@ -1,10 +1,8 @@
-Version 2.2.0
--------------
+Version 1.0.0
+=============
 
-App4triqs Version 2.2.0 provides a project
-skeleton for TRIQS applications based on
-the TRIQS Library Version 2.2.0.
-It is intended for applications with both
-Python and C++ components.
+Itertools Version 1.0.0 is a single-header
+C++ library that allows, with a simple interface,
+for the writing of various types of range-based for loops.
 
 This is the initial release for this project.

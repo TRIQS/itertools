@@ -13,20 +13,13 @@ Installation steps
 
      $ git clone https://github.com/TRIQS/itertools itertools.src
 
-#. Make sure that all additional dependencies are installed on your system and available in your environment.
-   Alternatively build the dependencies from source instead with::
-
-     $ (cd deps && ./download.sh)
-
-   In this case they will be installed together with your application.
-
 #. Create and move to a new directory where you will compile the code::
 
      $ mkdir itertools.build && cd itertools.build
 
 #. In the build directory call cmake, including any additional custom CMake options, see below::
 
-     $ cmake -DCMAKE_INSTALL_PREFIX=path_to_install_dir ../app4triqs.src
+     $ cmake -DCMAKE_INSTALL_PREFIX=path_to_install_dir ../itertools.src
 
 #. Compile the code, run the tests and install the application::
 
@@ -52,7 +45,7 @@ Custom CMake options
 
 The compilation of ``itertools`` can be configured using CMake-options::
 
-    cmake ../itertools.src -DOPTION1=value1 -DOPTION2=value2 ... ../itertools.src
+    cmake ../itertools.src -DOPTION1=value1 -DOPTION2=value2 ...
 
 +-----------------------------------------------------------------+-----------------------------------------------+
 | Options                                                         | Syntax                                        |
