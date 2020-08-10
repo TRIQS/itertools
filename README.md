@@ -1,4 +1,4 @@
-[![build](https://github.com/TRIQS/itertools/workflows/build/badge.svg?branch=notriqs)](https://github.com/TRIQS/itertools/actions?query=workflow%3Abuild)
+[![build](https://github.com/TRIQS/itertools/workflows/build/badge.svg?branch=unstable)](https://github.com/TRIQS/itertools/actions?query=workflow%3Abuild)
 
 # itertools
 
