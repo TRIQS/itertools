@@ -1,16 +1,12 @@
 easyblock = 'CMakeMake'
 
-name = 'TRIQS-itertools'
+name = 'itertools'
 version = '3.0.0'
 versionsuffix = '-Python-%(pyver)s'
 
 homepage = 'https://triqs.github.io/itertools/'
 description = """
- TRIQS (Toolbox for Research on Interacting Quantum Systems) is a
- scientific project providing a set of C++ and Python libraries to
- develop new tools for the study of interacting quantum systems.
-
- PROVIDE HERE A DESCRIPTION OF YOUR APPLICATION
+ A lightweight C++ library to alter C++ ranges
 """
 
 docurls = ['https://triqs.github.io/itertools/%(version_major_minor)s.x/']
@@ -32,7 +28,6 @@ dependencies = [
     ('HDF5', '1.10.5'),
     ('Mako', '1.0.8'),
     ('h5py', '2.9.0'),
-    ('TRIQS', '3.0.0', versionsuffix),
     ('NFFT', '3.5.1')
 ]
 
@@ -46,7 +41,7 @@ runtest = 'test'
 
 sanity_check_paths = {
     'files': ['include/itertools/itertools.hpp'],
-    'dirs': ['include', 'include/itertools', 'share'],
+    'dirs': ['include/itertools', 'share'],
 }
 
 modextrapaths = {
@@ -54,8 +49,8 @@ modextrapaths = {
     'CMAKE_PREFIX_PATH': 'lib/cmake/itertools',
 }
 modextravars = {
-    'APP4TRIQS_ROOT': '%(installdir)s',
-    'APP4TRIQS_VERSION': '%(version)s',
+    'ITERTOOLS_ROOT': '%(installdir)s',
+    'ITERTOOLS_VERSION': '%(version)s',
 }
 
 moduleclass = 'phys'

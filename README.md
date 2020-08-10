@@ -1,3 +1,5 @@
+[![build](https://github.com/TRIQS/itertools/workflows/build/badge.svg?branch=notriqs)](https://github.com/TRIQS/itertools/actions?query=workflow%3Abuild)
+
 # itertools
 
 itertools is a single-header C++ library that allows, with a simple interface, for the writing of 
