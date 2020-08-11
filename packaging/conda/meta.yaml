@@ -34,10 +34,10 @@ test:
 
 about:
   home: https://triqs.github.io/itertools
-  license: GPL-3.0-or-later
-  license_family: GPL
+  license: Apache-2.0
+  license_family: Apache
   license_file: LICENSE.txt
-  summary: 'An application based on the TRIQS library'
+  summary: 'A lightweight C++ library to alter C++ ranges'
 
 extra:
   recipe-maintainers:
