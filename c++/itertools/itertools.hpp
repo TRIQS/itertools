@@ -542,7 +542,12 @@ namespace itertools {
      * @param step__
      * The step between two indices
      */
-    range(index_t first__, index_t last__, index_t step__ = 1) : first_(first__), last_(last__), step_(step__) {}
+    range(index_t first__, index_t last__, index_t step__ = 1) : first_(first__), last_(last__), step_(step__) {
+      // make empty range e.g. range(7,3) should do nothing
+      if(first_ > last_){
+        first_ = last_;
+      }
+    }
 
     /**
      * Constructor
