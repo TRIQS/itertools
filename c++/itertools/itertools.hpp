@@ -199,6 +199,45 @@ namespace itertools {
       decltype(auto) dereference() const { return tuple_map_impl(std::index_sequence_for<It...>{}); }
     };
 
+    /********************* Product Iterator with homegenous type but varying number of arg ********************/
+
+    // same logic as before, but at runtime
+    template <typename It>
+    struct prod_iter_vec : iterator_facade<prod_iter_vec<It>, std::vector<typename std::iterator_traits<It>::value_type>> {
+
+      std::vector<It> its_begin, its_end;
+      std::vector<It> its = its_begin;
+
+      prod_iter_vec(std::vector<It> its_begin, std::vector<It> its_end) : its_begin(std::move(its_begin)), its_end(std::move(its_end)) {}
+
+      void increment() {
+        for (int N = 0; N < its.size() - 1; ++N) {
+          ++its[N];
+          if (its[N] != its_end[N]) return;
+          its[N] = its_begin[N];
+        }
+        ++its[its.size() - 1];
+      }
+
+      bool equal(prod_iter_vec const &other) const { return (its == other.its); }
+
+      template <typename U>
+      bool equal(sentinel_t<U> const &s) const {
+        return (s.it == its.back());
+      }
+
+      template <typename U>
+      bool operator==(sentinel_t<U> const &s) const {
+        return equal(s);
+      }
+
+      std::vector<typename It::value_type> dereference() const {
+        std::vector<typename It::value_type> r(its.size());
+        for (int i = 0; i < its.size(); ++i) r[i] = *its[i];
+        return r;
+      }
+    };
+
     /********************* Stride Iterator ********************/
 
     template <typename Iter>
@@ -332,6 +371,39 @@ namespace itertools {
     // ---------------------------------------------
 
     template <typename T>
+    struct multiplied_vec {
+      std::vector<T> tu; // T can be a ref.
+
+      using iterator       = prod_iter_vec<decltype(std::begin(std::declval<T &>()))>;
+      using const_iterator = prod_iter_vec<decltype(std::cbegin(std::declval<T &>()))>;
+
+      multiplied_vec(std::vector<T> const &ranges) : tu{ranges} {}
+
+      iterator begin() noexcept {
+        std::vector<typename T::iterator> _b(tu.size()), _e(tu.size());
+        std::transform(tu.begin(), tu.end(), _b.begin(), [](auto &&x) { return std::begin(x); });
+        std::transform(tu.begin(), tu.end(), _e.begin(), [](auto &&x) { return std::end(x); });
+        return iterator{_b, _e};
+      }
+
+      const_iterator cbegin() noexcept {
+        std::vector<typename T::const_iterator> _b(tu.size()), _e(tu.size());
+        std::transform(tu.begin(), tu.end(), _b.begin(), [](auto &&x) { return std::cbegin(x); });
+        std::transform(tu.begin(), tu.end(), _e.begin(), [](auto &&x) { return std::cend(x); });
+        return const_iterator{_b, _e};
+      }
+
+      auto end() noexcept { return make_sentinel(std::end(tu.back())); }
+      auto cend() const noexcept { return make_sentinel(std::cend(tu.back())); }
+      auto end() const noexcept { return cend(); }
+    };
+
+    template <typename T>
+    multiplied_vec(T &&) -> multiplied_vec<std::decay_t<T>>;
+
+    // ---------------------------------------------
+
+    template <typename T>
     struct sliced {
       T x;
       std::ptrdiff_t start_idx, end_idx;
@@ -456,6 +528,16 @@ namespace itertools {
   template <typename... T>
   details::multiplied<T...> product(T &&... ranges) {
     return {std::forward<T>(ranges)...};
+  }
+
+  /**
+   * Lazy-product of multiple ranges. Same as product, but with an uniform type, 
+   * but a number of ranges known at run time.
+   *
+   */
+  template <typename T>
+  details::multiplied_vec<T> product_vec(std::vector<T> const &ranges) {
+    return {ranges};
   }
 
   /**
