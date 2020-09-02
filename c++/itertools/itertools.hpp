@@ -593,9 +593,9 @@ namespace itertools {
       private:
       index_t last, pos, step;
     };
-
-    [[nodiscard]] const_iterator begin() const noexcept { return {this, false}; }
-    [[nodiscard]] const_iterator cbegin() const noexcept { return {this, false}; }
+    
+    [[nodiscard]] const_iterator begin() const noexcept { return {this, step_ > 0 ? first_ > last_ : first_ < last_}; }
+    [[nodiscard]] const_iterator cbegin() const noexcept { return {this, step_ > 0 ? first_ > last_ : first_ < last_}; }
 
     [[nodiscard]] const_iterator end() const noexcept { return {this, true}; }
     [[nodiscard]] const_iterator cend() const noexcept { return {this, true}; }
