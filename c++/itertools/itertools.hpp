@@ -542,7 +542,9 @@ namespace itertools {
      * @param step__
      * The step between two indices
      */
-    range(index_t first__, index_t last__, index_t step__ = 1) : first_(first__), last_(last__), step_(step__) {}
+    range(index_t first__, index_t last__, index_t step__ = 1) : first_(first__), last_(last__), step_(step__) {
+      if(step_ == 0) throw std::runtime_error("Step-size cannot be zero in construction of integer range");
+    }
 
     /**
      * Constructor
@@ -591,9 +593,9 @@ namespace itertools {
       private:
       index_t last, pos, step;
     };
-
-    [[nodiscard]] const_iterator begin() const noexcept { return {this, false}; }
-    [[nodiscard]] const_iterator cbegin() const noexcept { return {this, false}; }
+    
+    [[nodiscard]] const_iterator begin() const noexcept { return {this, step_ > 0 ? first_ > last_ : first_ < last_}; }
+    [[nodiscard]] const_iterator cbegin() const noexcept { return {this, step_ > 0 ? first_ > last_ : first_ < last_}; }
 
     [[nodiscard]] const_iterator end() const noexcept { return {this, true}; }
     [[nodiscard]] const_iterator cend() const noexcept { return {this, true}; }
