@@ -518,90 +518,114 @@ namespace itertools {
    * A range of integer indices that mimics the Python `range`.
    */
   class range {
+    long first_ = 0, last_ = -1, step_ = 1;
 
     public:
-    using index_t = std::ptrdiff_t;
-
     /**
      * Default constructor
      *
      * range() stands for the whole set of indices in the dimension (like `:` in python)
      * Example: A(range(), 0) takes the first column of A
-     */
+     * */
     range() = default;
 
     /**
      * Constructor
      *
-     * @param first__
-     * The first index of the range
+     * @param first: First index of the range
+     * @param last: End of the range (excluded)
      *
-     * @param last__
-     * The first index past the end of the range
+     * @examples :
      *
-     * @param step__
-     * The step between two indices
-     */
-    range(index_t first__, index_t last__, index_t step__ = 1) : first_(first__), last_(last__), step_(step__) {
-      if(step_ == 0) throw std::runtime_error("Step-size cannot be zero in construction of integer range");
+     *      A(range (0,3), 0)  // means  A(0,0), A(1,0), A(2,0)
+     *      A(range (0,4,2), 0) // means A(0,0), A(2,0)  
+     * */
+    range(long first, long last) noexcept : first_(first), last_(last) {}
+
+    /**
+     * Constructor
+     *
+     * @param first: First index of the range
+     * @param last: End of the range (excluded)
+     * @param step: Step-size between two indices
+     *
+     * @examples :
+     *
+     *      A(range (0,3), 0)  // means  A(0,0), A(1,0), A(2,0)
+     *      A(range (0,4,2), 0) // means A(0,0), A(2,0)  
+     * */
+    range(long first, long last, long step) : first_(first), last_(last), step_(step) {
+      if (step_ == 0) throw std::runtime_error("Step-size cannot be zero in construction of integer range");
     }
 
     /**
      * Constructor
      *
-     * Constructs range(0, i, 1)
+     * @param last: End of the range (excluded)
+     *
+     * Equivalent to range(0,last,1)
      */
-    explicit range(index_t i) : range(0, i, 1) {}
+    explicit range(long last) : range(0, last, 1) {}
 
-    /// The first index of the range
-    [[nodiscard]] index_t first() const { return first_; }
+    /// First index of the range
+    [[nodiscard]] long first() const { return first_; }
 
-    /// The first index past the end of the range
-    [[nodiscard]] index_t last() const { return last_; }
+    /// End of the range (excluded)
+    [[nodiscard]] long last() const { return last_; }
 
-    /// The step between two indices
-    [[nodiscard]] index_t step() const { return step_; }
+    /// Step-size between two indices
+    [[nodiscard]] long step() const { return step_; }
 
     /// Number of indices in the range
-    [[nodiscard]] size_t size() const {
-      index_t r = (last_ - first_) / step_;
-      if (r < 0) throw std::runtime_error("range with negative size");
-      return size_t(r);
-    }
+    [[nodiscard]] long size() const { return std::max(0l, (last_ - first_) / step_); }
 
-    range operator+(index_t shift) const { return range(first_ + shift, last_ + shift, step_); }
+    range operator+(long shift) const { return range(first_ + shift, last_ + shift, step_); }
 
-    friend inline std::ostream &operator<<(std::ostream &os, const range &range) {
-      os << "range(" << range.first() << "," << range.last() << "," << range.step() << ")";
+    friend inline std::ostream &operator<<(std::ostream &os, const range &r) {
+      os << "range(" << r.first() << "," << r.last() << "," << r.step() << ")";
       return os;
     }
 
-    struct const_iterator : iterator_facade<const_iterator, const index_t> {
+    // Iterator on the range (for for loop e.g.)
+    class const_iterator {
+      long last, pos, step;
 
-      const_iterator(range const *r, bool atEnd) {
+      public:
+      using value_type        = long;
+      using iterator_category = std::forward_iterator_tag;
+      using pointer           = value_type *;
+      using difference_type   = std::ptrdiff_t;
+      using reference         = value_type const &;
+
+      const_iterator(range const *r, bool atEnd) noexcept {
         last = r->last();
         step = r->step();
         pos  = (atEnd ? last : r->first());
       }
 
-      void increment() { pos += step; }
+      const_iterator &operator++() noexcept {
+        pos += step;
+        return *this;
+      }
 
-      [[nodiscard]] bool equal(const_iterator const &other) const { return (other.pos == pos); }
+      const_iterator operator++(int) noexcept {
+        const_iterator c = *this;
+        pos += step;
+        return c;
+      }
 
-      [[nodiscard]] index_t dereference() const { return pos; }
+      bool operator==(const_iterator const &other) const noexcept { return (other.pos == this->pos); }
+      bool operator!=(const_iterator const &other) const noexcept { return (!operator==(other)); }
 
-      private:
-      index_t last, pos, step;
+      long operator*() const noexcept { return pos; }
+      long operator->() const noexcept { return operator*(); }
     };
-    
+
     [[nodiscard]] const_iterator begin() const noexcept { return {this, step_ > 0 ? first_ > last_ : first_ < last_}; }
     [[nodiscard]] const_iterator cbegin() const noexcept { return {this, step_ > 0 ? first_ > last_ : first_ < last_}; }
 
     [[nodiscard]] const_iterator end() const noexcept { return {this, true}; }
     [[nodiscard]] const_iterator cend() const noexcept { return {this, true}; }
-
-    private:
-    index_t first_ = 0, last_ = -1, step_ = 1;
   };
 
   /**
