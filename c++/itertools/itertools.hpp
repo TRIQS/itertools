@@ -521,6 +521,10 @@ namespace itertools {
     long first_ = 0, last_ = -1, step_ = 1;
 
     public:
+    // Denote the full range at compile-time by variable all of a seperate type
+    struct all_t {};
+    static inline constexpr all_t all;
+
     /**
      * Default constructor
      *
