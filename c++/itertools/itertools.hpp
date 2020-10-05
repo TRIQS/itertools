@@ -525,6 +525,9 @@ namespace itertools {
     struct all_t {};
     static inline constexpr all_t all;
 
+    // Keep alias index_t for backward compatibility
+    using index_t = long;
+
     /**
      * Default constructor
      *
