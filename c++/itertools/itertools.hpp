@@ -523,7 +523,7 @@ namespace itertools {
     public:
     // Denote the full range at compile-time by variable all of a seperate type
     struct all_t {};
-    static inline constexpr all_t all;
+    static inline constexpr all_t all = {};
 
     // Keep alias index_t for backward compatibility
     using index_t = long;
