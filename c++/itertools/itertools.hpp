@@ -20,6 +20,7 @@
 #include <iterator>
 #include <iostream>
 #include <exception>
+#include <algorithm>
 
 namespace itertools {
 
