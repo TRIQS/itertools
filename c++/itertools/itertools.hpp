@@ -595,20 +595,15 @@ namespace itertools {
 
     // Iterator on the range (for for loop e.g.)
     class const_iterator {
-      long last, pos, step;
 
       public:
+      long pos, last, step;
+
       using value_type        = long;
       using iterator_category = std::forward_iterator_tag;
       using pointer           = value_type *;
       using difference_type   = std::ptrdiff_t;
       using reference         = value_type const &;
-
-      const_iterator(range const *r, bool atEnd) noexcept {
-        last = r->last();
-        step = r->step();
-        pos  = (atEnd ? last : r->first());
-      }
 
       const_iterator &operator++() noexcept {
         pos += step;
@@ -621,18 +616,24 @@ namespace itertools {
         return c;
       }
 
-      bool operator==(const_iterator const &other) const noexcept { return (other.pos == this->pos); }
+      [[nodiscard]] bool atEnd() const noexcept { return step > 0 ? pos >= last : pos <= last; }
+
+      bool operator==(const_iterator const &other) const noexcept {
+	// EXPECTS(other.last == this->last);
+	// EXPECTS(other.step == this->step);
+	return (other.pos == this->pos) || (other.atEnd() && this->atEnd());
+      }
       bool operator!=(const_iterator const &other) const noexcept { return (!operator==(other)); }
 
       long operator*() const noexcept { return pos; }
       long operator->() const noexcept { return operator*(); }
     };
 
-    [[nodiscard]] const_iterator begin() const noexcept { return {this, step_ > 0 ? first_ > last_ : first_ < last_}; }
-    [[nodiscard]] const_iterator cbegin() const noexcept { return {this, step_ > 0 ? first_ > last_ : first_ < last_}; }
+    [[nodiscard]] const_iterator begin() const noexcept { return {first_, last_, step_}; }
+    [[nodiscard]] const_iterator cbegin() const noexcept { return {first_, last_, step_}; }
 
-    [[nodiscard]] const_iterator end() const noexcept { return {this, true}; }
-    [[nodiscard]] const_iterator cend() const noexcept { return {this, true}; }
+    [[nodiscard]] const_iterator end() const noexcept { return {last_, last_, step_}; }
+    [[nodiscard]] const_iterator cend() const noexcept { return {last_, last_, step_}; }
   };
 
   /**

@@ -144,6 +144,26 @@ TEST(Itertools, Multi) {
   for (auto [i, x] : enumerate(transform(V, l))) { std::cout << i << "  [" << std::get<0>(x) << ", " << std::get<1>(x) << "]\n"; }
 }
 
+TEST(Itertools, Range) {
+
+  int L = 5;
+  for (int a = -L; a <= L; a++)
+    for (int b = -L; b <= L; b++)
+      for (int s = 1; s <= 3; s++) {
+
+        int sum_with_range = 0;
+        for (auto i : range(a, b, (a <= b) ? s : -s)) { sum_with_range += i; }
+
+        int sum_exact = 0;
+	if (a <= b)
+          for (int i = a; i < b; i += s) { sum_exact += i; }
+	else
+          for (int i = a; i > b; i -= s) { sum_exact += i; }
+
+        EXPECT_EQ(sum_with_range, sum_exact);
+      }
+}
+
 TEST(Itertools, Product_Range) {
 
   long res = 0;
