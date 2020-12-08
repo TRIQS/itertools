@@ -65,6 +65,9 @@ endif()
 # Documentation
 option(Build_Documentation "Build documentation" OFF)
 
+# Benchmarks
+option(Build_Benchs "Build Benchmarks" OFF)
+
 # Testing
 option(Build_Tests "Build tests" ON)
 if(Build_Tests)
@@ -130,6 +133,11 @@ add_subdirectory(c++/${PROJECT_NAME})
 # Tests
 if(Build_Tests)
   add_subdirectory(test)
+endif()
+
+# Benchmarks
+if(Build_Benchs AND NOT ASAN AND NOT UBSAN)
+  add_subdirectory(benchmarks)
 endif()
 
 # Docs
