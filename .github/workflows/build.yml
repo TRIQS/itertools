@@ -66,7 +66,7 @@ jobs:
         CXX: ${{ matrix.cxx }}
         LIBRARY_PATH: /usr/local/opt/llvm/lib
       run: |
-        mkdir build && cmake -B build
+        mkdir build && cmake -B build -DCMAKE_INSTALL_PREFIX=$HOME/install
         cmake --build build -j2
 
     - name: Test itertools
