@@ -105,6 +105,27 @@ TEST(Itertools, Product) {
   EXPECT_EQ(V4, std::vector<int>(4, 1 * 2 * 3 * 4));
 }
 
+TEST(Itertools, ProductVec) {
+
+  std::vector<int> V1{0, 1, 2};
+  std::vector<int> V2{0, 1, 2};
+  std::vector<std::vector<int>> W{V1, V2};
+
+  std::vector<std::vector<int>> res, check{{0, 0}, {1, 0}, {2, 0}, {0, 1}, {1, 1}, {2, 1}, {0, 2}, {1, 2}, {2, 2}};
+  for (auto vec : product_vec(W)) {
+    res.push_back(vec);
+    std::cout << "[" << vec[0] << "," << vec[1] << "]\n";
+  }
+
+  EXPECT_EQ(res.size(), check.size());
+  for (int i : range(res.size())) {
+    EXPECT_EQ(res[i].size(), check[i].size());
+    for (int j : range(res[i].size())) { EXPECT_EQ(res[i][j], check[i][j]); }
+  }
+
+  // make a real check
+}
+
 TEST(Itertools, Slice) {
 
   for (long N : range(1, 6)) {
