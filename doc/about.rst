@@ -1,8 +1,7 @@
 .. _about:
 
 About itertools
-===============
+***************
 
-An example application using ``cpp2py`` and TRIQS.
-
-Written and maintained by N. Wentzell with contributions from H. U.R. Strand.
+itertools is a single-header C++ library that allows, with a simple interface, for the writing of 
+various types of range-based for loops.

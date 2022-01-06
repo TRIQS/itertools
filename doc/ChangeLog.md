@@ -1,5 +1,8 @@
-Version 1.0.0
-=============
+(changelog)=
+
+# Changelog
+
+## Version 1.0.0
 
 Itertools Version 1.0.0 is a single-header
 C++ library that allows, with a simple interface,
