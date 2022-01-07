@@ -264,6 +264,8 @@ namespace itertools {
       template <typename... U>
       zipped(U &&... ranges) : tu{std::forward<U>(ranges)...} {}
 
+      bool operator==(zipped const &) const = default;
+
       private:
       // Apply function to tuple
       template <typename F, size_t... Is>
@@ -305,6 +307,8 @@ namespace itertools {
       template <typename... U>
       multiplied(U &&... ranges) : tu{std::forward<U>(ranges)...} {}
 
+      bool operator==(multiplied const &) const = default;
+
       private:
       template <size_t... Is>
       [[gnu::always_inline]] auto _begin(std::index_sequence<Is...>) {
@@ -339,6 +343,8 @@ namespace itertools {
       using iterator       = decltype(std::begin(x));
       using const_iterator = decltype(std::cbegin(x));
 
+      bool operator==(sliced const &) const = default;
+
       iterator begin() noexcept { return std::next(std::begin(x), start_idx); }
       const_iterator cbegin() const noexcept { return std::next(std::cbegin(x), start_idx); }
       const_iterator begin() const noexcept { return cbegin(); }
@@ -363,6 +369,8 @@ namespace itertools {
 
       using iterator       = stride_iter<decltype(std::begin(x))>;
       using const_iterator = stride_iter<decltype(std::cbegin(x))>;
+
+      bool operator==(strided const &) const = default;
 
       iterator begin() noexcept { return {std::begin(x), stride}; }
       const_iterator cbegin() const noexcept { return {std::cbegin(x), stride}; }
@@ -575,6 +583,8 @@ namespace itertools {
      * Equivalent to range(0,last,1)
      */
     explicit range(long last) : range(0, last, 1) {}
+
+    bool operator==(range const &) const = default;
 
     /// First index of the range
     [[nodiscard]] long first() const { return first_; }
