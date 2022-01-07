@@ -32,7 +32,6 @@ namespace itertools {
    * @tparam Iter
    * The Iterator Class to be implemented
    * `Iter` is required to have the following member functions
-   * - bool equal(Iter other)
    * - value_type [const] [&] dereference()
    * - void increment()
    */
@@ -61,24 +60,30 @@ namespace itertools {
       return c;
     }
 
-#if __cplusplus > 201703L
-    bool operator==(iterator_facade const &other) const { return self().equal(other.self()); }
-
-#else
-    template <typename U>
-    bool operator==(U const &other) const {
-      return self().equal(other);
-    }
-
-    template <typename U>
-    bool operator!=(U const &other) const {
-      return (!operator==(other));
-    }
-#endif
-
     decltype(auto) operator*() const { return self().dereference(); }
     decltype(auto) operator->() const { return operator*(); }
   };
+
+  template <typename Iter, typename EndIter>
+  inline typename std::iterator_traits<Iter>::difference_type distance(Iter first, EndIter last) {
+    if constexpr (std::is_same_v<typename std::iterator_traits<Iter>::iterator_category, std::random_access_iterator_tag>) {
+      return last - first;
+    } else {
+      typename std::iterator_traits<Iter>::difference_type r(0);
+      for (; first != last; ++first) ++r;
+      return r;
+    }
+  }
+
+  // Sentinel_t, used to denote the end of certain ranges
+  template <typename It>
+  struct sentinel_t {
+    It it;
+  };
+  template <typename It>
+  sentinel_t<It> make_sentinel(It it) {
+    return {std::move(it)};
+  }
 
   namespace details {
 
@@ -97,7 +102,12 @@ namespace itertools {
         ++i;
       }
 
-      [[nodiscard]] bool equal(enum_iter const &other) const { return (it == other.it); }
+      bool operator==(enum_iter const &other) const { return it == other.it; }
+
+      template <typename OtherSentinel>
+      bool operator==(sentinel_t<OtherSentinel> const &other) const {
+        return it == other.it;
+      }
 
       [[nodiscard]] decltype(auto) dereference() const { return std::tuple<long, decltype(*it)>{i, *it}; }
     };
@@ -114,7 +124,12 @@ namespace itertools {
 
       void increment() { ++it; }
 
-      bool equal(transform_iter const &other) const { return (it == other.it); }
+      bool operator==(transform_iter const &other) const { return it == other.it; }
+
+      template <typename OtherSentinel>
+      bool operator==(sentinel_t<OtherSentinel> const &other) const {
+        return (it == other.it);
+      }
 
       decltype(auto) dereference() const { return lambda(*it); }
     };
@@ -136,7 +151,13 @@ namespace itertools {
       public:
       void increment() { increment_all(std::index_sequence_for<It...>{}); }
 
-      [[nodiscard]] bool equal(zip_iter const &other) const { return (its == other.its); }
+      bool operator==(zip_iter const &other) const { return its == other.its; }
+
+      template <typename OtherSentinel>
+      bool operator==(sentinel_t<OtherSentinel> const &other) const {
+        return [&]<size_t... Is>(std::index_sequence<Is...>) { return ((std::get<Is>(its) == std::get<Is>(other.it)) || ...); }
+        (std::index_sequence_for<It...>{});
+      }
 
       template <size_t... Is>
       [[nodiscard]] auto tuple_map_impl(std::index_sequence<Is...>) const {
@@ -148,23 +169,14 @@ namespace itertools {
 
     /********************* Product Iterator ********************/
 
-    // Sentinel_t, used to denote the end of a product range
-    template <typename It>
-    struct sentinel_t {
-      It it;
-    };
-    template <typename It>
-    sentinel_t<It> make_sentinel(It &&it) {
-      return {it};
-    }
+    template <typename sentinel_tuple_t, typename... It>
+    struct prod_iter : iterator_facade<prod_iter<sentinel_tuple_t, It...>, std::tuple<typename std::iterator_traits<It>::value_type...>> {
 
-    template <typename... It>
-    struct prod_iter : iterator_facade<prod_iter<It...>, std::tuple<typename std::iterator_traits<It>::value_type...>> {
-
-      std::tuple<It...> its_begin, its_end;
+      std::tuple<It...> its_begin;
+      sentinel_tuple_t its_end;
       std::tuple<It...> its = its_begin;
 
-      prod_iter(std::tuple<It...> its_begin, std::tuple<It...> its_end) : its_begin(std::move(its_begin)), its_end(std::move(its_end)) {}
+      prod_iter(std::tuple<It...> its_begin, sentinel_tuple_t its_end) : its_begin(std::move(its_begin)), its_end(std::move(its_end)) {}
 
       template <int N>
       void _increment() {
@@ -178,15 +190,11 @@ namespace itertools {
       }
       void increment() { _increment<0>(); }
 
-      [[nodiscard]] bool equal(prod_iter const &other) const { return (its == other.its); }
-      template <typename U>
-      [[nodiscard]] bool equal(sentinel_t<U> const &s) const {
-        return (s.it == std::get<sizeof...(It) - 1>(its));
-      }
+      bool operator==(prod_iter const &other) const { return its == other.its; }
 
       template <typename U>
       bool operator==(sentinel_t<U> const &s) const {
-        return equal(s);
+        return (s.it == std::get<sizeof...(It) - 1>(its));
       }
 
       private:
@@ -212,7 +220,9 @@ namespace itertools {
       }
 
       void increment() { std::advance(it, stride); }
-      bool equal(stride_iter const &other) const { return (it == other.it); }
+
+      bool operator==(stride_iter const &other) const { return it == other.it; }
+
       decltype(auto) dereference() const { return *it; }
     };
 
@@ -229,8 +239,8 @@ namespace itertools {
       [[nodiscard]] const_iterator cbegin() const noexcept { return {std::cbegin(x), lambda}; }
       [[nodiscard]] const_iterator begin() const noexcept { return cbegin(); }
 
-      [[nodiscard]] const_iterator cend() const noexcept { return {std::cend(x), lambda}; }
-      [[nodiscard]] const_iterator end() const noexcept { return cend(); }
+      [[nodiscard]] auto cend() const noexcept { return make_sentinel(std::cend(x)); }
+      [[nodiscard]] auto end() const noexcept { return cend(); }
     };
 
     // ---------------------------------------------
@@ -242,13 +252,15 @@ namespace itertools {
       using iterator       = enum_iter<decltype(std::begin(x))>;
       using const_iterator = enum_iter<decltype(std::cbegin(x))>;
 
-      iterator begin() noexcept { return std::begin(x); }
+      bool operator==(enumerated const &) const = default;
+
+      [[nodiscard]] iterator begin() noexcept { return std::begin(x); }
       [[nodiscard]] const_iterator cbegin() const noexcept { return std::cbegin(x); }
       [[nodiscard]] const_iterator begin() const noexcept { return cbegin(); }
 
-      iterator end() noexcept { return std::end(x); }
-      [[nodiscard]] const_iterator cend() const noexcept { return std::cend(x); }
-      [[nodiscard]] const_iterator end() const noexcept { return cend(); }
+      [[nodiscard]] auto end() noexcept { return make_sentinel(std::end(x)); }
+      [[nodiscard]] auto cend() const noexcept { return make_sentinel(std::cend(x)); }
+      [[nodiscard]] auto end() const noexcept { return cend(); }
     };
 
     // ---------------------------------------------
@@ -270,15 +282,15 @@ namespace itertools {
       // Apply function to tuple
       template <typename F, size_t... Is>
       [[gnu::always_inline]] auto tuple_map(F &&f, std::index_sequence<Is...>) {
-        return iterator{std::make_tuple(f(std::get<Is>(tu))...)};
+        return std::make_tuple(f(std::get<Is>(tu))...);
       }
       template <typename F, size_t... Is>
       [[gnu::always_inline]] auto tuple_map(F &&f, std::index_sequence<Is...>) const {
-        return const_iterator{std::make_tuple(f(std::get<Is>(tu))...)};
+        return std::make_tuple(f(std::get<Is>(tu))...);
       }
 
       public:
-      iterator begin() noexcept {
+      [[nodiscard]] iterator begin() noexcept {
         return tuple_map([](auto &&x) { return std::begin(x); }, seq_t{});
       }
       [[nodiscard]] const_iterator cbegin() const noexcept {
@@ -286,13 +298,13 @@ namespace itertools {
       }
       [[nodiscard]] const_iterator begin() const noexcept { return cbegin(); }
 
-      iterator end() noexcept {
-        return tuple_map([](auto &&x) { return std::end(x); }, seq_t{});
+      [[nodiscard]] auto end() noexcept {
+        return make_sentinel(tuple_map([](auto &&x) { return std::end(x); }, seq_t{}));
       }
-      [[nodiscard]] const_iterator cend() const noexcept {
-        return tuple_map([](auto &&x) { return std::cend(x); }, seq_t{});
+      [[nodiscard]] auto cend() const noexcept {
+        return make_sentinel(tuple_map([](auto &&x) { return std::cend(x); }, seq_t{}));
       }
-      [[nodiscard]] const_iterator end() const noexcept { return cend(); }
+      [[nodiscard]] auto end() const noexcept { return cend(); }
     };
 
     // ---------------------------------------------
@@ -301,8 +313,8 @@ namespace itertools {
     struct multiplied {
       std::tuple<T...> tu; // T can be a ref.
 
-      using iterator       = prod_iter<decltype(std::begin(std::declval<T &>()))...>;
-      using const_iterator = prod_iter<decltype(std::cbegin(std::declval<T &>()))...>;
+      using iterator       = prod_iter<std::tuple<decltype(std::end(std::declval<T &>()))...>, decltype(std::begin(std::declval<T &>()))...>;
+      using const_iterator = prod_iter<std::tuple<decltype(std::cend(std::declval<T &>()))...>, decltype(std::cbegin(std::declval<T &>()))...>;
 
       template <typename... U>
       multiplied(U &&...ranges) : tu{std::forward<U>(ranges)...} {}
@@ -321,11 +333,11 @@ namespace itertools {
       }
 
       public:
-      iterator begin() noexcept { return _begin(std::index_sequence_for<T...>{}); }
+      [[nodiscard]] iterator begin() noexcept { return _begin(std::index_sequence_for<T...>{}); }
       [[nodiscard]] const_iterator cbegin() const noexcept { return _cbegin(std::index_sequence_for<T...>{}); }
       [[nodiscard]] const_iterator begin() const noexcept { return cbegin(); }
 
-      auto end() noexcept { return make_sentinel(std::end(std::get<sizeof...(T) - 1>(tu))); }
+      [[nodiscard]] auto end() noexcept { return make_sentinel(std::end(std::get<sizeof...(T) - 1>(tu))); }
       [[nodiscard]] auto cend() const noexcept { return make_sentinel(std::cend(std::get<sizeof...(T) - 1>(tu))); }
       [[nodiscard]] auto end() const noexcept { return cend(); }
     };
@@ -345,16 +357,16 @@ namespace itertools {
 
       bool operator==(sliced const &) const = default;
 
-      iterator begin() noexcept { return std::next(std::begin(x), start_idx); }
+      [[nodiscard]] iterator begin() noexcept { return std::next(std::begin(x), start_idx); }
       [[nodiscard]] const_iterator cbegin() const noexcept { return std::next(std::cbegin(x), start_idx); }
       [[nodiscard]] const_iterator begin() const noexcept { return cbegin(); }
 
-      iterator end() noexcept {
-        std::ptrdiff_t total_size = std::distance(std::cbegin(x), std::cend(x));
+      [[nodiscard]] iterator end() noexcept {
+        std::ptrdiff_t total_size = distance(std::cbegin(x), std::cend(x));
         return std::next(begin(), std::min(total_size, end_idx) - start_idx);
       }
       [[nodiscard]] const_iterator cend() const noexcept {
-        std::ptrdiff_t total_size = std::distance(std::cbegin(x), std::cend(x));
+        std::ptrdiff_t total_size = distance(std::cbegin(x), std::cend(x));
         return std::next(cbegin(), std::min(total_size, end_idx) - start_idx);
       }
       [[nodiscard]] const_iterator end() const noexcept { return cend(); }
@@ -372,19 +384,19 @@ namespace itertools {
 
       bool operator==(strided const &) const = default;
 
-      iterator begin() noexcept { return {std::begin(x), stride}; }
-      const_iterator cbegin() const noexcept { return {std::cbegin(x), stride}; }
-      const_iterator begin() const noexcept { return cbegin(); }
+      [[nodiscard]] iterator begin() noexcept { return {std::begin(x), stride}; }
+      [[nodiscard]] const_iterator cbegin() const noexcept { return {std::cbegin(x), stride}; }
+      [[nodiscard]] const_iterator begin() const noexcept { return cbegin(); }
 
-      iterator end() noexcept {
-        std::ptrdiff_t end_idx = std::distance(std::cbegin(x), std::cend(x));
+      [[nodiscard]] iterator end() noexcept {
+        std::ptrdiff_t end_idx = distance(std::cbegin(x), std::cend(x));
         return std::next(std::end(x), stride - end_idx % stride);
       }
-      const_iterator cend() const noexcept {
-        std::ptrdiff_t end_idx = std::distance(std::cbegin(x), std::cend(x));
+      [[nodiscard]] const_iterator cend() const noexcept {
+        std::ptrdiff_t end_idx = distance(std::cbegin(x), std::cend(x));
         return std::next(std::cend(x), stride - end_idx % stride);
       }
-      const_iterator end() const noexcept { return cend(); }
+      [[nodiscard]] const_iterator end() const noexcept { return cend(); }
     };
 
   } // namespace details
@@ -457,9 +469,10 @@ namespace itertools {
    * Lazy-product of multiple ranges. This function returns itself a range of tuple<T...>.
    * Iterating over it will yield all combinations of the different range values.
    * Note: The ranges are incremented beginning with the leftmost range.
+   * Note: The length is equal to the minimum of the lengths of all ranges.
    *
    * @tparam T The types of the different ranges
-   * @param ranges The ranges to zip. Note: They have to be of equal length!
+   * @param ranges The ranges to zip.
    */
   template <typename... T>
   details::multiplied<T...> product(T &&...ranges) {
@@ -514,8 +527,8 @@ namespace itertools {
   template <typename R>
   auto make_vector_from_range(R const &r) {
     std::vector<std::decay_t<decltype(*(std::begin(r)))>> vec{}; // decltype returns a &
-    if constexpr (std::is_same_v<decltype(std::cbegin(r)), decltype(std::cend(r))>) {
-      auto total_size = std::distance(std::cbegin(r), std::cend(r));
+    if constexpr(std::is_same_v<decltype(std::cbegin(r)), decltype(std::cend(r))>) {
+      auto total_size = distance(std::cbegin(r), std::cend(r));
       vec.reserve(total_size);
     }
     for (auto const &x : r) vec.emplace_back(x);

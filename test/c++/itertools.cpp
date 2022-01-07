@@ -142,6 +142,25 @@ TEST(Itertools, Multi) {
 
   // Chain enumerate and transform
   for (auto [i, x] : enumerate(transform(V, l))) { std::cout << i << "  [" << std::get<0>(x) << ", " << std::get<1>(x) << "]\n"; }
+
+  // Combine transform and product
+  auto add = [](auto &&p) {
+    auto [v, w] = p;
+    return v + w;
+  };
+  int total = 0;
+  for (auto sum : transform(product(V, V), add)) total += sum;
+  EXPECT_EQ(total, 252);
+
+  // slice and zip
+  for (auto [x1, x2] : slice(zip(V, V), 0, 4)) { EXPECT_EQ(x1, x2); }
+
+  // product and transform
+  // Sum up numbers from 0 to 99 in a complicated way..
+  auto times_ten = [](auto i) { return 10 * i; };
+  total          = 0;
+  for (auto [a, b] : product(range(10), transform(range(10), times_ten))) { total += a + b; }
+  EXPECT_EQ(total, 99 * 100 / 2);
 }
 
 TEST(Itertools, Range) {
