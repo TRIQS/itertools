@@ -262,7 +262,7 @@ namespace itertools {
       using const_iterator = zip_iter<decltype(std::cbegin(std::declval<T &>()))...>;
 
       template <typename... U>
-      zipped(U &&... ranges) : tu{std::forward<U>(ranges)...} {}
+      zipped(U &&...ranges) : tu{std::forward<U>(ranges)...} {}
 
       bool operator==(zipped const &) const = default;
 
@@ -305,7 +305,7 @@ namespace itertools {
       using const_iterator = prod_iter<decltype(std::cbegin(std::declval<T &>()))...>;
 
       template <typename... U>
-      multiplied(U &&... ranges) : tu{std::forward<U>(ranges)...} {}
+      multiplied(U &&...ranges) : tu{std::forward<U>(ranges)...} {}
 
       bool operator==(multiplied const &) const = default;
 
@@ -434,7 +434,7 @@ namespace itertools {
    *          The ranges have to be equal lengths or behaviour is undefined.
    */
   template <typename... R>
-  details::zipped<R...> zip(R &&... ranges) {
+  details::zipped<R...> zip(R &&...ranges) {
     return {std::forward<R>(ranges)...};
   }
 
@@ -449,7 +449,7 @@ namespace itertools {
    * @tparam L Type of the Lambda
    */
   template <typename... T, typename L>
-  auto zip_with(T &&... ranges, L &&lambda) {
+  auto zip_with(T &&...ranges, L &&lambda) {
     return transform(zip(std::forward<T>(ranges)...), [lambda](std::tuple<T...> t) { return std::apply(lambda, t); });
   }
 
@@ -462,7 +462,7 @@ namespace itertools {
    * @param ranges The ranges to zip. Note: They have to be of equal length!
    */
   template <typename... T>
-  details::multiplied<T...> product(T &&... ranges) {
+  details::multiplied<T...> product(T &&...ranges) {
     return {std::forward<T>(ranges)...};
   }
 
@@ -514,7 +514,7 @@ namespace itertools {
   template <typename R>
   auto make_vector_from_range(R const &r) {
     std::vector<std::decay_t<decltype(*(std::begin(r)))>> vec; // decltype returns a &
-    if constexpr(std::is_same_v<decltype(std::cbegin(r)), decltype(std::cend(r))>) {
+    if constexpr (std::is_same_v<decltype(std::cbegin(r)), decltype(std::cend(r))>) {
       auto total_size = std::distance(std::cbegin(r), std::cend(r));
       vec.reserve(total_size);
     }
@@ -631,9 +631,9 @@ namespace itertools {
       [[nodiscard]] bool atEnd() const noexcept { return step > 0 ? pos >= last : pos <= last; }
 
       bool operator==(const_iterator const &other) const noexcept {
-	// EXPECTS(other.last == this->last);
-	// EXPECTS(other.step == this->step);
-	return (other.pos == this->pos) || (other.atEnd() && this->atEnd());
+        // EXPECTS(other.last == this->last);
+        // EXPECTS(other.step == this->step);
+        return (other.pos == this->pos) || (other.atEnd() && this->atEnd());
       }
       bool operator!=(const_iterator const &other) const noexcept { return (!operator==(other)); }
 

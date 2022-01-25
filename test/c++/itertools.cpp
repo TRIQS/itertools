@@ -155,9 +155,9 @@ TEST(Itertools, Range) {
         for (auto i : range(a, b, (a <= b) ? s : -s)) { sum_with_range += i; }
 
         int sum_exact = 0;
-	if (a <= b)
+        if (a <= b)
           for (int i = a; i < b; i += s) { sum_exact += i; }
-	else
+        else
           for (int i = a; i > b; i -= s) { sum_exact += i; }
 
         EXPECT_EQ(sum_with_range, sum_exact);
