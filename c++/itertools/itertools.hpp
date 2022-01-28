@@ -513,7 +513,7 @@ namespace itertools {
 
   template <typename R>
   auto make_vector_from_range(R const &r) {
-    std::vector<std::decay_t<decltype(*(std::begin(r)))>> vec; // decltype returns a &
+    std::vector<std::decay_t<decltype(*(std::begin(r)))>> vec{}; // decltype returns a &
     if constexpr (std::is_same_v<decltype(std::cbegin(r)), decltype(std::cend(r))>) {
       auto total_size = std::distance(std::cbegin(r), std::cend(r));
       vec.reserve(total_size);
