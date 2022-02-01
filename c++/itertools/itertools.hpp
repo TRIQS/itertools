@@ -169,14 +169,14 @@ namespace itertools {
 
     /********************* Product Iterator ********************/
 
-    template <typename sentinel_tuple_t, typename... It>
-    struct prod_iter : iterator_facade<prod_iter<sentinel_tuple_t, It...>, std::tuple<typename std::iterator_traits<It>::value_type...>> {
+    template <typename TupleSentinel, typename... It>
+    struct prod_iter : iterator_facade<prod_iter<TupleSentinel, It...>, std::tuple<typename std::iterator_traits<It>::value_type...>> {
 
       std::tuple<It...> its_begin;
-      sentinel_tuple_t its_end;
+      TupleSentinel its_end;
       std::tuple<It...> its = its_begin;
 
-      prod_iter(std::tuple<It...> its_begin, sentinel_tuple_t its_end) : its_begin(std::move(its_begin)), its_end(std::move(its_end)) {}
+      prod_iter(std::tuple<It...> its_begin, TupleSentinel its_end) : its_begin(std::move(its_begin)), its_end(std::move(its_end)) {}
 
       template <int N>
       void _increment() {
