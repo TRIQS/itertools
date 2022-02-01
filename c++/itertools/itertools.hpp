@@ -67,6 +67,7 @@ namespace itertools {
   template <typename Iter, typename EndIter>
   inline typename std::iterator_traits<Iter>::difference_type distance(Iter first, EndIter last) {
     if constexpr (std::is_same_v<typename std::iterator_traits<Iter>::iterator_category, std::random_access_iterator_tag>) {
+      // Difference should be defined also for the the case that last is a sentinel
       return last - first;
     } else {
       typename std::iterator_traits<Iter>::difference_type r(0);
