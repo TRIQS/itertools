@@ -5,6 +5,8 @@
 itertools is a single-header C++ library that allows, with a simple interface, for the writing of 
 various types of range-based for loops.
 
+A prelimenary reference documentation based on [Doxygen](https://www.doxygen.nl) is provided at [triqs.github.io/itertools](https://triqs.github.io/itertools/latest/).
+
 ## Simple Example
 
 ```c++
