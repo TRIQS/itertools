@@ -86,7 +86,7 @@ namespace itertools {
     return {std::move(it)};
   }
 
-  namespace details {
+  namespace detail {
 
     /********************* Enumerate Iterator ********************/
 
@@ -400,7 +400,7 @@ namespace itertools {
       [[nodiscard]] const_iterator end() const noexcept { return cend(); }
     };
 
-  } // namespace details
+  } // namespace detail
 
   /********************* The range adapting functions ********************/
 
@@ -413,7 +413,7 @@ namespace itertools {
    */
   template <typename T, typename L>
   auto transform(T &&range, L lambda) {
-    return details::transformed<T, L>{std::forward<T>(range), std::move(lambda)};
+    return detail::transformed<T, L>{std::forward<T>(range), std::move(lambda)};
   }
 
   /**
@@ -429,7 +429,7 @@ namespace itertools {
    * @example itertools/enumerate.cpp
    */
   template <typename R>
-  details::enumerated<R> enumerate(R &&range) {
+  detail::enumerated<R> enumerate(R &&range) {
     return {std::forward<R>(range)};
   }
 
@@ -447,7 +447,7 @@ namespace itertools {
    *          The ranges have to be equal lengths or behaviour is undefined.
    */
   template <typename... R>
-  details::zipped<R...> zip(R &&...ranges) {
+  detail::zipped<R...> zip(R &&...ranges) {
     return {std::forward<R>(ranges)...};
   }
 
@@ -476,7 +476,7 @@ namespace itertools {
    * @param ranges The ranges to zip.
    */
   template <typename... T>
-  details::multiplied<T...> product(T &&...ranges) {
+  detail::multiplied<T...> product(T &&...ranges) {
     return {std::forward<T>(ranges)...};
   }
 
@@ -489,7 +489,7 @@ namespace itertools {
    * @param end_idx The index one past the end of the sliced range
    */
   template <typename T>
-  details::sliced<T> slice(T &&range, std::ptrdiff_t start_idx, std::ptrdiff_t end_idx) {
+  detail::sliced<T> slice(T &&range, std::ptrdiff_t start_idx, std::ptrdiff_t end_idx) {
     return {std::forward<T>(range), start_idx, std::max(start_idx, end_idx)};
   }
 
@@ -502,27 +502,27 @@ namespace itertools {
    * @param stride The numer of elements to skip
    */
   template <typename T>
-  details::strided<T> stride(T &&range, std::ptrdiff_t stride) {
+  detail::strided<T> stride(T &&range, std::ptrdiff_t stride) {
     return {std::forward<T>(range), stride};
   }
 
   /********************* Some factory functions ********************/
 
-  namespace details {
+  namespace detail {
     template <typename A, size_t... Is>
     [[gnu::always_inline]] auto make_product_impl(A &arr, std::index_sequence<Is...>) {
       return product(arr[Is]...);
     }
-  } // namespace details
+  } // namespace detail
 
   template <typename T, size_t N>
   auto make_product(std::array<T, N> &arr) {
-    return details::make_product_impl(arr, std::make_index_sequence<N>{});
+    return detail::make_product_impl(arr, std::make_index_sequence<N>{});
   }
 
   template <typename T, size_t N>
   auto make_product(std::array<T, N> const &arr) {
-    return details::make_product_impl(arr, std::make_index_sequence<N>{});
+    return detail::make_product_impl(arr, std::make_index_sequence<N>{});
   }
 
   template <typename R>
@@ -673,21 +673,21 @@ namespace itertools {
     return product(range(Is)...);
   }
 
-  namespace details {
+  namespace detail {
     template <typename Tuple, size_t... Is>
     [[gnu::always_inline]] auto product_range_impl(Tuple const &idx_tpl, std::index_sequence<Is...>) {
       return product_range(std::get<Is>(idx_tpl)...);
     }
-  } // namespace details
+  } // namespace detail
 
   template <typename... Integers, typename EnableIf = std::enable_if_t<(std::is_integral_v<Integers> and ...), int>>
   auto product_range(std::tuple<Integers...> const &idx_tpl) {
-    return details::product_range_impl(idx_tpl, std::make_index_sequence<sizeof...(Integers)>{});
+    return detail::product_range_impl(idx_tpl, std::make_index_sequence<sizeof...(Integers)>{});
   }
 
   template <typename Integer, size_t Rank, typename EnableIf = std::enable_if_t<std::is_integral_v<Integer>, int>>
   auto product_range(std::array<Integer, Rank> const &idx_arr) {
-    return details::product_range_impl(idx_arr, std::make_index_sequence<Rank>{});
+    return detail::product_range_impl(idx_arr, std::make_index_sequence<Rank>{});
   }
 
   /**
