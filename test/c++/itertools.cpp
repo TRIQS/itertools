@@ -183,6 +183,16 @@ TEST(Itertools, Range) {
 
         EXPECT_EQ(sum_with_range, sum_exact);
       }
+
+  EXPECT_EQ(range(1).size(), 1);
+  EXPECT_EQ(range(-10,10,2).size(), 10);
+  EXPECT_EQ(range(10,-10,-2).size(), 10);
+
+  EXPECT_EQ(range().size(), 0);
+  EXPECT_EQ(range(0).size(), 0);
+  EXPECT_EQ(range(-1,0,-3).size(), 0);
+  EXPECT_EQ(range(10,-10,2).size(), 0);
+  EXPECT_EQ(range(-10,10,-2).size(), 0);
 }
 
 TEST(Itertools, Product_Range) {

@@ -612,7 +612,7 @@ namespace itertools {
     [[nodiscard]] long step() const { return step_; }
 
     /// Number of indices in the range
-    [[nodiscard]] long size() const { return std::max(0l, 1 + (last_ - 1 - first_) / step_); }
+    [[nodiscard]] long size() const { return std::max(0l, (last_ + step_ - (step_ > 0 ? 1 : -1) - first_) / step_); }
 
     range operator+(long shift) const { return {first_ + shift, last_ + shift, step_}; }
 
