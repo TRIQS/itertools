@@ -555,12 +555,11 @@ namespace itertools {
     using index_t = long;
 
     /**
-     * Default constructor
+     * Default constructor - Deprecated
      *
-     * range() stands for the whole set of indices in the dimension (like `:` in python)
-     * Example: A(range(), 0) takes the first column of A
+     * Note: For full index range in slicing use range::all
      * */
-    range() = default;
+    [[deprecated("range default construction deprecated. Use range::all for full range in slicing operation")]] range() = default;
 
     /**
      * Constructor
