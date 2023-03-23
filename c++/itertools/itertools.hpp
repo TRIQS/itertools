@@ -22,6 +22,7 @@
 #include <iterator>
 #include <iostream>
 #include <exception>
+#include <optional>
 
 namespace itertools {
 
@@ -121,11 +122,17 @@ namespace itertools {
     struct transform_iter : iterator_facade<transform_iter<Iter, L>, Value> {
 
       Iter it;
-      mutable L lambda;
+      mutable std::optional<L> lambda;
 
       transform_iter(Iter it, L lambda) : it(std::move(it)), lambda(std::move(lambda)) {}
 
       void increment() { ++it; }
+
+      transform_iter& operator=(transform_iter const &other) {
+	lambda.reset();
+	lambda.emplace(other.lambda.value());
+	return *this;
+      }
 
       bool operator==(transform_iter const &other) const { return it == other.it; }
 
@@ -134,7 +141,7 @@ namespace itertools {
         return (it == other.it);
       }
 
-      decltype(auto) dereference() const { return lambda(*it); }
+      decltype(auto) dereference() const { return (*lambda)(*it); }
     };
 
     /********************* Zip Iterator ********************/
