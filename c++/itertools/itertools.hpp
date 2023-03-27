@@ -129,6 +129,7 @@ namespace itertools {
       void increment() { ++it; }
 
       transform_iter& operator=(transform_iter const &other) {
+	it = other.it;
 	lambda.reset();
 	lambda.emplace(other.lambda.value());
 	return *this;
