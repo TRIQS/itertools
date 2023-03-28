@@ -186,26 +186,27 @@ namespace itertools {
       std::tuple<It...> its_begin;
       TupleSentinel its_end;
       std::tuple<It...> its = its_begin;
+      static constexpr long Rank = sizeof...(It);
 
       prod_iter(std::tuple<It...> its_begin, TupleSentinel its_end) : its_begin(std::move(its_begin)), its_end(std::move(its_end)) {}
 
       template <int N>
       void _increment() {
         ++std::get<N>(its);
-        if constexpr (N < sizeof...(It) - 1) {
+        if constexpr (N > 0) {
           if (std::get<N>(its) == std::get<N>(its_end)) {
             std::get<N>(its) = std::get<N>(its_begin);
-            _increment<N + 1>();
+            _increment<N - 1>();
           }
         }
       }
-      void increment() { _increment<0>(); }
+      void increment() { _increment<Rank - 1>(); }
 
       bool operator==(prod_iter const &other) const { return its == other.its; }
 
       template <typename U>
       bool operator==(sentinel_t<U> const &s) const {
-        return (s.it == std::get<sizeof...(It) - 1>(its));
+        return (s.it == std::get<0>(its));
       }
 
       private:
@@ -348,8 +349,8 @@ namespace itertools {
       [[nodiscard]] const_iterator cbegin() const noexcept { return _cbegin(std::index_sequence_for<T...>{}); }
       [[nodiscard]] const_iterator begin() const noexcept { return cbegin(); }
 
-      [[nodiscard]] auto end() noexcept { return make_sentinel(std::end(std::get<sizeof...(T) - 1>(tu))); }
-      [[nodiscard]] auto cend() const noexcept { return make_sentinel(std::cend(std::get<sizeof...(T) - 1>(tu))); }
+      [[nodiscard]] auto end() noexcept { return make_sentinel(std::end(std::get<0>(tu))); }
+      [[nodiscard]] auto cend() const noexcept { return make_sentinel(std::cend(std::get<0>(tu))); }
       [[nodiscard]] auto end() const noexcept { return cend(); }
     };
 

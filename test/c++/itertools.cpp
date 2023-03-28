@@ -161,7 +161,7 @@ TEST(Itertools, Multi) {
   // Sum up numbers from 0 to 99 in a complicated way..
   auto times_ten = [](auto i) { return 10 * i; };
   total          = 0;
-  for (auto [a, b] : product(range(10), transform(range(10), times_ten))) { total += a + b; }
+  for (auto [a, b] : product(transform(range(10), times_ten), range(10))) { total += a + b; }
   EXPECT_EQ(total, 99 * 100 / 2);
 }
 
