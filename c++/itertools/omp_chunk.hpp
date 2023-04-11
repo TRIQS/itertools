@@ -33,7 +33,7 @@ namespace itertools {
     */
   template <typename T>
   auto omp_chunk(T &&range) {
-    auto total_size           = std::distance(std::cbegin(range), std::cend(range));
+    auto total_size           = itertools::distance(std::cbegin(range), std::cend(range));
     auto [start_idx, end_idx] = chunk_range(0, total_size, omp_get_num_threads(), omp_get_thread_num());
     return itertools::slice(std::forward<T>(range), start_idx, end_idx);
   }
