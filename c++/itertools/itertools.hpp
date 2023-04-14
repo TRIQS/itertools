@@ -369,18 +369,17 @@ namespace itertools {
 
       bool operator==(sliced const &) const = default;
 
+      [[nodiscard]] std::ptrdiff_t size() const {
+        std::ptrdiff_t total_size = distance(std::cbegin(x), std::cend(x));
+        return std::min(total_size, end_idx) - start_idx;
+      }
+
       [[nodiscard]] iterator begin() noexcept { return std::next(std::begin(x), start_idx); }
       [[nodiscard]] const_iterator cbegin() const noexcept { return std::next(std::cbegin(x), start_idx); }
       [[nodiscard]] const_iterator begin() const noexcept { return cbegin(); }
 
-      [[nodiscard]] iterator end() noexcept {
-        std::ptrdiff_t total_size = distance(std::cbegin(x), std::cend(x));
-        return std::next(begin(), std::min(total_size, end_idx) - start_idx);
-      }
-      [[nodiscard]] const_iterator cend() const noexcept {
-        std::ptrdiff_t total_size = distance(std::cbegin(x), std::cend(x));
-        return std::next(cbegin(), std::min(total_size, end_idx) - start_idx);
-      }
+      [[nodiscard]] iterator end() noexcept { return std::next(begin(), size()); }
+      [[nodiscard]] const_iterator cend() const noexcept { return std::next(cbegin(), size()); }
       [[nodiscard]] const_iterator end() const noexcept { return cend(); }
     };
 
