@@ -128,6 +128,10 @@ namespace itertools {
 
       void increment() { ++it; }
 
+      transform_iter(transform_iter &&) = default;
+      transform_iter(transform_iter const&) = default;
+      transform_iter& operator=(transform_iter &&other) = default;
+
       transform_iter& operator=(transform_iter const &other) {
 	it = other.it;
 	lambda.reset();
