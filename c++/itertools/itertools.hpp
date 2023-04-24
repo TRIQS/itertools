@@ -99,6 +99,7 @@ namespace itertools {
       Iter it;
       long i = 0;
 
+      enum_iter() = default;
       enum_iter(Iter it) : it(std::move(it)) {}
 
       void increment() {
@@ -124,6 +125,7 @@ namespace itertools {
       Iter it;
       mutable std::optional<L> lambda;
 
+      transform_iter() = default;
       transform_iter(Iter it, L lambda) : it(std::move(it)), lambda(std::move(lambda)) {}
 
       void increment() { ++it; }
@@ -155,6 +157,8 @@ namespace itertools {
     struct zip_iter : iterator_facade<zip_iter<It...>, std::tuple<typename std::iterator_traits<It>::value_type...>> {
 
       std::tuple<It...> its;
+
+      zip_iter() = default;
       zip_iter(std::tuple<It...> its) : its(std::move(its)) {}
 
       private:
@@ -192,6 +196,7 @@ namespace itertools {
       std::tuple<It...> its = its_begin;
       static constexpr long Rank = sizeof...(It);
 
+      prod_iter() = default;
       prod_iter(std::tuple<It...> its_begin, TupleSentinel its_end) : its_begin(std::move(its_begin)), its_end(std::move(its_end)) {}
 
       template <int N>
@@ -231,6 +236,7 @@ namespace itertools {
       Iter it;
       std::ptrdiff_t stride;
 
+      stride_iter() = default;
       stride_iter(Iter it, std::ptrdiff_t stride) : it(it), stride(stride) {
         if (stride <= 0) throw std::runtime_error("strided range requires a positive stride");
       }
