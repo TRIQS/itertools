@@ -70,7 +70,7 @@ namespace itertools {
   template <typename Iter, typename EndIter>
   inline typename std::iterator_traits<Iter>::difference_type distance(Iter first, EndIter last) {
     if constexpr (std::is_same_v<typename std::iterator_traits<Iter>::iterator_category, std::random_access_iterator_tag>) {
-      // Difference should be defined also for the the case that last is a sentinel
+      // Difference should be defined also for the case that last is a sentinel
       return last - first;
     } else {
       typename std::iterator_traits<Iter>::difference_type r(0);
@@ -130,15 +130,17 @@ namespace itertools {
 
       void increment() { ++it; }
 
-      transform_iter(transform_iter &&) = default;
-      transform_iter(transform_iter const&) = default;
-      transform_iter& operator=(transform_iter &&other) = default;
+      transform_iter(transform_iter &&)                 = default;
+      transform_iter(transform_iter const &)            = default;
+      transform_iter &operator=(transform_iter &&other) = default;
 
-      transform_iter& operator=(transform_iter const &other) {
-	it = other.it;
-	lambda.reset();
-	lambda.emplace(other.lambda.value());
-	return *this;
+      transform_iter &operator=(transform_iter const &other) {
+        it = other.it;
+        if (other.lambda.has_value())
+          lambda.emplace(other.lambda.value());
+        else
+          lambda.reset();
+        return *this;
       }
 
       bool operator==(transform_iter const &other) const { return it == other.it; }
@@ -174,8 +176,9 @@ namespace itertools {
 
       template <typename OtherSentinel>
       bool operator==(sentinel_t<OtherSentinel> const &other) const {
-        return [&]<size_t... Is>(std::index_sequence<Is...>) { return ((std::get<Is>(its) == std::get<Is>(other.it)) || ...); }
-        (std::index_sequence_for<It...>{});
+        return [&]<size_t... Is>(std::index_sequence<Is...>) {
+          return ((std::get<Is>(its) == std::get<Is>(other.it)) || ...);
+        }(std::index_sequence_for<It...>{});
       }
 
       template <size_t... Is>
@@ -193,7 +196,7 @@ namespace itertools {
 
       std::tuple<It...> its_begin;
       TupleSentinel its_end;
-      std::tuple<It...> its = its_begin;
+      std::tuple<It...> its      = its_begin;
       static constexpr long Rank = sizeof...(It);
 
       prod_iter() = default;
@@ -548,7 +551,7 @@ namespace itertools {
   template <typename R>
   auto make_vector_from_range(R const &r) {
     std::vector<std::decay_t<decltype(*(std::begin(r)))>> vec{}; // decltype returns a &
-    if constexpr(std::is_same_v<decltype(std::cbegin(r)), decltype(std::cend(r))>) {
+    if constexpr (std::is_same_v<decltype(std::cbegin(r)), decltype(std::cend(r))>) {
       auto total_size = distance(std::cbegin(r), std::cend(r));
       vec.reserve(total_size);
     }
