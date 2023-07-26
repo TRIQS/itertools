@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include <app4triqs/app4triqs.hpp>
+#include <itertools/itertools.hpp>
 
-using namespace app4triqs;
+using namespace itertools;
 
 TEST(Toto, Add) { // NOLINT
 

@@ -1,7 +1,7 @@
 #include <cmath>
-#include "./app4triqs.hpp"
+#include "./itertools.hpp"
 
-namespace app4triqs {
+namespace itertools {
 
   toto &toto::operator+=(toto const &b) {
     this->i += b.i;
@@ -34,4 +34,4 @@ namespace app4triqs {
     return i * int(pow(10, n_digits_j)) + j;
   }
 
-} // namespace app4triqs
+} // namespace itertools
