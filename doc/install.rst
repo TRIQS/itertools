@@ -8,6 +8,8 @@ Install itertools
 Compiling itertools from source
 ===============================
 
+.. note:: To guarantee reproducibility in scientific calculations we strongly recommend the use of a stable `release <https://github.com/TRIQS/itertools/releases>`_ of itertools.
+
 Installation steps
 ------------------
 
@@ -38,7 +40,7 @@ To use a particular version, go into the directory with the sources, and look at
 
 Checkout the version of the code that you want::
 
-     $ git checkout 1.1.0
+     $ git checkout 2.1.0
 
 and follow steps 2 to 4 above to compile the code.
 
@@ -49,14 +51,14 @@ The compilation of ``itertools`` can be configured using CMake-options::
 
     cmake ../itertools.src -DOPTION1=value1 -DOPTION2=value2 ...
 
-+-----------------------------------------------------------------+-----------------------------------------------+
-| Options                                                         | Syntax                                        |
-+=================================================================+===============================================+
-| Specify an installation path other than path_to_triqs           | -DCMAKE_INSTALL_PREFIX=path_to_itertools      |
-+-----------------------------------------------------------------+-----------------------------------------------+
-| Build in Debugging Mode                                         | -DCMAKE_BUILD_TYPE=Debug                      |
-+-----------------------------------------------------------------+-----------------------------------------------+
-| Disable testing (not recommended)                               | -DBuild_Tests=OFF                             |
-+-----------------------------------------------------------------+-----------------------------------------------+
-| Build the documentation                                         | -DBuild_Documentation=ON                      |
-+-----------------------------------------------------------------+-----------------------------------------------+
++-----------------------------------------+-----------------------------------------------+
+| Options                                 | Syntax                                        |
++=========================================+===============================================+
+| Specify an installation path            | -DCMAKE_INSTALL_PREFIX=path_to_itertools      |
++-----------------------------------------+-----------------------------------------------+
+| Build in Debugging Mode                 | -DCMAKE_BUILD_TYPE=Debug                      |
++-----------------------------------------+-----------------------------------------------+
+| Disable testing (not recommended)       | -DBuild_Tests=OFF                             |
++-----------------------------------------+-----------------------------------------------+
+| Build the documentation                 | -DBuild_Documentation=ON                      |
++-----------------------------------------+-----------------------------------------------+

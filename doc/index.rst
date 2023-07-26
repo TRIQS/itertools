@@ -3,15 +3,15 @@
 itertools
 *********
 
-.. sidebar:: itertools 1.1.0
+.. sidebar:: itertools |PROJECT_VERSION|
 
-   This is the homepage of itertools v1.1.0.
+   This is the homepage of itertools |PROJECT_VERSION|.
    For changes see the :ref:`changelog page <changelog>`.
       
       .. image:: _static/logo_github.png
          :width: 75%
          :align: center
-         :target: https://github.com/triqs/app4triqs
+         :target: https://github.com/triqs/itertools
 
 itertools is a single-header C++ library that allows, with a simple interface, for the writing of 
 various types of range-based for loops.
