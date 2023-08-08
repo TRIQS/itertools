@@ -67,8 +67,7 @@ namespace itertools {
     decltype(auto) operator->() const { return operator*(); }
   };
 
-  template <typename Iter, typename EndIter>
-  inline typename std::iterator_traits<Iter>::difference_type distance(Iter first, EndIter last) {
+  template <typename Iter, typename EndIter> inline typename std::iterator_traits<Iter>::difference_type distance(Iter first, EndIter last) {
     if constexpr (std::is_same_v<typename std::iterator_traits<Iter>::iterator_category, std::random_access_iterator_tag>) {
       // Difference should be defined also for the case that last is a sentinel
       return last - first;
@@ -80,21 +79,16 @@ namespace itertools {
   }
 
   // Sentinel_t, used to denote the end of certain ranges
-  template <typename It>
-  struct sentinel_t {
+  template <typename It> struct sentinel_t {
     It it;
   };
-  template <typename It>
-  sentinel_t<It> make_sentinel(It it) {
-    return {std::move(it)};
-  }
+  template <typename It> sentinel_t<It> make_sentinel(It it) { return {std::move(it)}; }
 
   namespace detail {
 
     /********************* Enumerate Iterator ********************/
 
-    template <typename Iter>
-    struct enum_iter : iterator_facade<enum_iter<Iter>, std::pair<long, typename std::iterator_traits<Iter>::value_type>> {
+    template <typename Iter> struct enum_iter : iterator_facade<enum_iter<Iter>, std::pair<long, typename std::iterator_traits<Iter>::value_type>> {
 
       Iter it;
       long i = 0;
@@ -109,10 +103,7 @@ namespace itertools {
 
       bool operator==(enum_iter const &other) const { return it == other.it; }
 
-      template <typename OtherSentinel>
-      bool operator==(sentinel_t<OtherSentinel> const &other) const {
-        return it == other.it;
-      }
+      template <typename OtherSentinel> bool operator==(sentinel_t<OtherSentinel> const &other) const { return it == other.it; }
 
       [[nodiscard]] decltype(auto) dereference() const { return std::tuple<long, decltype(*it)>{i, *it}; }
     };
@@ -145,18 +136,14 @@ namespace itertools {
 
       bool operator==(transform_iter const &other) const { return it == other.it; }
 
-      template <typename OtherSentinel>
-      bool operator==(sentinel_t<OtherSentinel> const &other) const {
-        return (it == other.it);
-      }
+      template <typename OtherSentinel> bool operator==(sentinel_t<OtherSentinel> const &other) const { return (it == other.it); }
 
       decltype(auto) dereference() const { return (*lambda)(*it); }
     };
 
     /********************* Zip Iterator ********************/
 
-    template <typename... It>
-    struct zip_iter : iterator_facade<zip_iter<It...>, std::tuple<typename std::iterator_traits<It>::value_type...>> {
+    template <typename... It> struct zip_iter : iterator_facade<zip_iter<It...>, std::tuple<typename std::iterator_traits<It>::value_type...>> {
 
       std::tuple<It...> its;
 
@@ -164,25 +151,20 @@ namespace itertools {
       zip_iter(std::tuple<It...> its) : its(std::move(its)) {}
 
       private:
-      template <size_t... Is>
-      [[gnu::always_inline]] void increment_all(std::index_sequence<Is...>) {
-        ((void)(++std::get<Is>(its)), ...);
-      }
+      template <size_t... Is> [[gnu::always_inline]] void increment_all(std::index_sequence<Is...>) { ((void)(++std::get<Is>(its)), ...); }
 
       public:
       void increment() { increment_all(std::index_sequence_for<It...>{}); }
 
       bool operator==(zip_iter const &other) const { return its == other.its; }
 
-      template <typename OtherSentinel>
-      bool operator==(sentinel_t<OtherSentinel> const &other) const {
+      template <typename OtherSentinel> bool operator==(sentinel_t<OtherSentinel> const &other) const {
         return [&]<size_t... Is>(std::index_sequence<Is...>) {
           return ((std::get<Is>(its) == std::get<Is>(other.it)) || ...);
         }(std::index_sequence_for<It...>{});
       }
 
-      template <size_t... Is>
-      [[nodiscard]] auto tuple_map_impl(std::index_sequence<Is...>) const {
+      template <size_t... Is> [[nodiscard]] auto tuple_map_impl(std::index_sequence<Is...>) const {
         return std::tuple<decltype(*std::get<Is>(its))...>(*std::get<Is>(its)...);
       }
 
@@ -202,8 +184,7 @@ namespace itertools {
       prod_iter() = default;
       prod_iter(std::tuple<It...> its_begin, TupleSentinel its_end) : its_begin(std::move(its_begin)), its_end(std::move(its_end)) {}
 
-      template <int N>
-      void _increment() {
+      template <int N> void _increment() {
         ++std::get<N>(its);
         if constexpr (N > 0) {
           if (std::get<N>(its) == std::get<N>(its_end)) {
@@ -216,14 +197,10 @@ namespace itertools {
 
       bool operator==(prod_iter const &other) const { return its == other.its; }
 
-      template <typename U>
-      bool operator==(sentinel_t<U> const &s) const {
-        return (s.it == std::get<0>(its));
-      }
+      template <typename U> bool operator==(sentinel_t<U> const &s) const { return (s.it == std::get<0>(its)); }
 
       private:
-      template <size_t... Is>
-      [[gnu::always_inline]] [[nodiscard]] auto tuple_map_impl(std::index_sequence<Is...>) const {
+      template <size_t... Is> [[gnu::always_inline]] [[nodiscard]] auto tuple_map_impl(std::index_sequence<Is...>) const {
         return std::tuple<decltype(*std::get<Is>(its))...>(*std::get<Is>(its)...);
       }
 
@@ -233,8 +210,7 @@ namespace itertools {
 
     /********************* Stride Iterator ********************/
 
-    template <typename Iter>
-    struct stride_iter : iterator_facade<stride_iter<Iter>, typename std::iterator_traits<Iter>::value_type> {
+    template <typename Iter> struct stride_iter : iterator_facade<stride_iter<Iter>, typename std::iterator_traits<Iter>::value_type> {
 
       Iter it;
       std::ptrdiff_t stride;
@@ -253,8 +229,7 @@ namespace itertools {
 
     /********************* The Wrapper Classes representing the adapted ranges ********************/
 
-    template <typename T, typename L>
-    struct transformed {
+    template <typename T, typename L> struct transformed {
       T x;
       L lambda;
 
@@ -270,8 +245,7 @@ namespace itertools {
 
     // ---------------------------------------------
 
-    template <typename T>
-    struct enumerated {
+    template <typename T> struct enumerated {
       T x;
 
       using iterator       = enum_iter<decltype(std::begin(x))>;
@@ -290,27 +264,23 @@ namespace itertools {
 
     // ---------------------------------------------
 
-    template <typename... T>
-    struct zipped {
+    template <typename... T> struct zipped {
       std::tuple<T...> tu; // T can be a ref.
 
       using seq_t          = std::index_sequence_for<T...>;
       using iterator       = zip_iter<decltype(std::begin(std::declval<T &>()))...>;
       using const_iterator = zip_iter<decltype(std::cbegin(std::declval<T &>()))...>;
 
-      template <typename... U>
-      zipped(U &&...ranges) : tu{std::forward<U>(ranges)...} {}
+      template <typename... U> zipped(U &&...ranges) : tu{std::forward<U>(ranges)...} {}
 
       bool operator==(zipped const &) const = default;
 
       private:
       // Apply function to tuple
-      template <typename F, size_t... Is>
-      [[gnu::always_inline]] auto tuple_map(F &&f, std::index_sequence<Is...>) {
+      template <typename F, size_t... Is> [[gnu::always_inline]] auto tuple_map(F &&f, std::index_sequence<Is...>) {
         return std::make_tuple(f(std::get<Is>(tu))...);
       }
-      template <typename F, size_t... Is>
-      [[gnu::always_inline]] auto tuple_map(F &&f, std::index_sequence<Is...>) const {
+      template <typename F, size_t... Is> [[gnu::always_inline]] auto tuple_map(F &&f, std::index_sequence<Is...>) const {
         return std::make_tuple(f(std::get<Is>(tu))...);
       }
 
@@ -334,26 +304,22 @@ namespace itertools {
 
     // ---------------------------------------------
 
-    template <typename... T>
-    struct multiplied {
+    template <typename... T> struct multiplied {
       std::tuple<T...> tu; // T can be a ref.
 
       using iterator       = prod_iter<std::tuple<decltype(std::end(std::declval<T &>()))...>, decltype(std::begin(std::declval<T &>()))...>;
       using const_iterator = prod_iter<std::tuple<decltype(std::cend(std::declval<T &>()))...>, decltype(std::cbegin(std::declval<T &>()))...>;
 
-      template <typename... U>
-      multiplied(U &&...ranges) : tu{std::forward<U>(ranges)...} {}
+      template <typename... U> multiplied(U &&...ranges) : tu{std::forward<U>(ranges)...} {}
 
       bool operator==(multiplied const &) const = default;
 
       private:
-      template <size_t... Is>
-      [[gnu::always_inline]] auto _begin(std::index_sequence<Is...>) {
+      template <size_t... Is> [[gnu::always_inline]] auto _begin(std::index_sequence<Is...>) {
         return iterator{std::make_tuple(std::begin(std::get<Is>(tu))...), std::make_tuple(std::end(std::get<Is>(tu))...)};
       }
 
-      template <size_t... Is>
-      [[gnu::always_inline]] auto _cbegin(std::index_sequence<Is...>) const {
+      template <size_t... Is> [[gnu::always_inline]] auto _cbegin(std::index_sequence<Is...>) const {
         return const_iterator{std::make_tuple(std::cbegin(std::get<Is>(tu))...), std::make_tuple(std::cend(std::get<Is>(tu))...)};
       }
 
@@ -367,13 +333,11 @@ namespace itertools {
       [[nodiscard]] auto end() const noexcept { return cend(); }
     };
 
-    template <typename... T>
-    multiplied(T &&...) -> multiplied<std::decay_t<T>...>;
+    template <typename... T> multiplied(T &&...) -> multiplied<std::decay_t<T>...>;
 
     // ---------------------------------------------
 
-    template <typename T>
-    struct sliced {
+    template <typename T> struct sliced {
       T x;
       std::ptrdiff_t start_idx, end_idx;
 
@@ -398,8 +362,7 @@ namespace itertools {
 
     // ---------------------------------------------
 
-    template <typename T>
-    struct strided {
+    template <typename T> struct strided {
       T x;
       std::ptrdiff_t stride;
 
@@ -434,8 +397,7 @@ namespace itertools {
    * @param range The range that the lambda is applied to
    * @param range The lambda to apply to the range
    */
-  template <typename T, typename L>
-  auto transform(T &&range, L lambda) {
+  template <typename T, typename L> auto transform(T &&range, L lambda) {
     return detail::transformed<T, L>{std::forward<T>(range), std::move(lambda)};
   }
 
@@ -451,10 +413,7 @@ namespace itertools {
    * @param range The range to enumerate
    * @example itertools/enumerate.cpp
    */
-  template <typename R>
-  detail::enumerated<R> enumerate(R &&range) {
-    return {std::forward<R>(range)};
-  }
+  template <typename R> detail::enumerated<R> enumerate(R &&range) { return {std::forward<R>(range)}; }
 
   /**
    * Generate a zip of the ranges (similar to Python zip).
@@ -469,10 +428,7 @@ namespace itertools {
    *     .. warning::
    *          The ranges have to be equal lengths or behaviour is undefined.
    */
-  template <typename... R>
-  detail::zipped<R...> zip(R &&...ranges) {
-    return {std::forward<R>(ranges)...};
-  }
+  template <typename... R> detail::zipped<R...> zip(R &&...ranges) { return {std::forward<R>(ranges)...}; }
 
   /**
    * Generate a zip of the ranges (similar to Python zip).
@@ -484,8 +440,7 @@ namespace itertools {
    * @tparam R Type of the ranges
    * @tparam L Type of the Lambda
    */
-  template <typename... T, typename L>
-  auto zip_with(T &&...ranges, L &&lambda) {
+  template <typename... T, typename L> auto zip_with(T &&...ranges, L &&lambda) {
     return transform(zip(std::forward<T>(ranges)...), [lambda](std::tuple<T...> t) { return std::apply(lambda, t); });
   }
 
@@ -498,10 +453,7 @@ namespace itertools {
    * @tparam T The types of the different ranges
    * @param ranges The ranges to zip.
    */
-  template <typename... T>
-  detail::multiplied<T...> product(T &&...ranges) {
-    return {std::forward<T>(ranges)...};
-  }
+  template <typename... T> detail::multiplied<T...> product(T &&...ranges) { return {std::forward<T>(ranges)...}; }
 
   /**
    * Lazy-slice a range.
@@ -511,8 +463,7 @@ namespace itertools {
    * @param start_idx The index to start the slice at
    * @param end_idx The index one past the end of the sliced range
    */
-  template <typename T>
-  detail::sliced<T> slice(T &&range, std::ptrdiff_t start_idx, std::ptrdiff_t end_idx) {
+  template <typename T> detail::sliced<T> slice(T &&range, std::ptrdiff_t start_idx, std::ptrdiff_t end_idx) {
     return {std::forward<T>(range), start_idx, std::max(start_idx, end_idx)};
   }
 
@@ -524,32 +475,23 @@ namespace itertools {
    * @param range The range to take the subrange of
    * @param stride The numer of elements to skip
    */
-  template <typename T>
-  detail::strided<T> stride(T &&range, std::ptrdiff_t stride) {
-    return {std::forward<T>(range), stride};
-  }
+  template <typename T> detail::strided<T> stride(T &&range, std::ptrdiff_t stride) { return {std::forward<T>(range), stride}; }
 
   /********************* Some factory functions ********************/
 
   namespace detail {
-    template <typename A, size_t... Is>
-    [[gnu::always_inline]] auto make_product_impl(A &arr, std::index_sequence<Is...>) {
+    template <typename A, size_t... Is> [[gnu::always_inline]] auto make_product_impl(A &arr, std::index_sequence<Is...>) {
       return product(arr[Is]...);
     }
   } // namespace detail
 
-  template <typename T, size_t N>
-  auto make_product(std::array<T, N> &arr) {
+  template <typename T, size_t N> auto make_product(std::array<T, N> &arr) { return detail::make_product_impl(arr, std::make_index_sequence<N>{}); }
+
+  template <typename T, size_t N> auto make_product(std::array<T, N> const &arr) {
     return detail::make_product_impl(arr, std::make_index_sequence<N>{});
   }
 
-  template <typename T, size_t N>
-  auto make_product(std::array<T, N> const &arr) {
-    return detail::make_product_impl(arr, std::make_index_sequence<N>{});
-  }
-
-  template <typename R>
-  auto make_vector_from_range(R const &r) {
+  template <typename R> auto make_vector_from_range(R const &r) {
     std::vector<std::decay_t<decltype(*(std::begin(r)))>> vec{}; // decltype returns a &
     if constexpr (std::is_same_v<decltype(std::cbegin(r)), decltype(std::cend(r))>) {
       auto total_size = distance(std::cbegin(r), std::cend(r));
@@ -696,8 +638,7 @@ namespace itertools {
   }
 
   namespace detail {
-    template <typename Tuple, size_t... Is>
-    [[gnu::always_inline]] auto product_range_impl(Tuple const &idx_tpl, std::index_sequence<Is...>) {
+    template <typename Tuple, size_t... Is> [[gnu::always_inline]] auto product_range_impl(Tuple const &idx_tpl, std::index_sequence<Is...>) {
       return product_range(std::get<Is>(idx_tpl)...);
     }
   } // namespace detail
@@ -736,8 +677,7 @@ namespace itertools {
    * @param f
    * The function to apply
    */
-  template <typename F>
-  void foreach (range const &r, F && f) {
+  template <typename F> void foreach (range const &r, F && f) {
     auto i = r.first(), last = r.last(), step = r.step();
     for (; i < last; i += step) f(i);
   }
