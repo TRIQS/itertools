@@ -48,13 +48,12 @@ else()
 endif()
 
 # -- Cpp2Py --
-if(Build_Documentation)
+if(PythonSupport OR (NOT IS_SUBPROJECT AND Build_Documentation))
   external_dependency(Cpp2Py
     GIT_REPO https://github.com/TRIQS/cpp2py
     VERSION 2.0
     GIT_TAG master
     BUILD_ALWAYS
-    EXCLUDE_FROM_ALL
   )
 endif()
 
@@ -67,11 +66,11 @@ external_dependency(GTest
 )
 
 # -- google-bench --
-if(Build_Benchs)
+if(NOT IS_SUBPROJECT AND Build_Benchs AND NOT ASAN AND NOT UBSAN)
   set(BENCHMARK_ENABLE_TESTING OFF CACHE BOOL "")
   external_dependency(google-bench
     GIT_REPO https://github.com/google/benchmark
-    GIT_TAG v1.5.2
+    GIT_TAG main
     BUILD_ALWAYS
     EXCLUDE_FROM_ALL
   )
