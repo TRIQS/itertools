@@ -128,7 +128,7 @@ TEST(Itertools, Make_Product) {
   std::array<range, N> range_arr{range(1), range(2), range(3), range(4)};
 
   int count = 0;
-  for (auto [i, j, k, l] : make_product(range_arr)) ++count;
+  for ([[maybe_unused]] auto [i, j, k, l] : make_product(range_arr)) ++count;
 
   EXPECT_EQ(count, 1 * 2 * 3 * 4);
 }
