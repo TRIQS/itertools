@@ -2,6 +2,38 @@
 
 # Changelog
 
+## Version 1.2.0
+
+This is Version 1.2.0 of Itertools, a single-header library for adapting C++ ranges.
+
+We thank all contributors: Thomas Hahn, Alexander Hampel, Olivier Parcollet, Dylan Simon, Nils Wentzell
+
+Find below an itemized list of changes in this release.
+
+### General
+* Add default constructors to various iterator types
+* Add default move assign/constructor for transformed_iter
+* Add size function for itertools::sliced
+* Use itertools distance in omp_chunk implementation
+* Change loop order in product such that rightmost range is the fastest
+* deprecate range default constructor
+* clang-format all source files
+* Fix compiler warnings
+
+### cmake
+* Add compiler warnings for IntelLLVM (#6)
+* Synchronize deps/CMakeLists.txt with nda
+* Remove redundant PythonSupport check
+* Update Findsanitizer.cmake to include TSAN and MSAN
+* Do not build documentation as subproject
+
+### fixes
+* Fix in transform_iter::operator=
+* Fix copy assignment for transform_iter
+* Fix bug in range(...).size() for negative steps + test
+* Fix bug in itertools::range::size function
+
+
 ## Version 1.1.0
 
 This is Version 1.1.0 of Itertools, a single-header library for adapting C++ ranges.
