@@ -371,18 +371,19 @@ namespace itertools {
 
       bool operator==(strided const &) const = default;
 
+      private:
+      [[nodiscard]] std::ptrdiff_t step() const {
+        auto end_idx = distance(std::cbegin(x), std::cend(x));
+        return (end_idx % stride == 0 ? 0 : stride - end_idx % stride);
+      }
+
+      public:
       [[nodiscard]] iterator begin() noexcept { return {std::begin(x), stride}; }
       [[nodiscard]] const_iterator cbegin() const noexcept { return {std::cbegin(x), stride}; }
       [[nodiscard]] const_iterator begin() const noexcept { return cbegin(); }
 
-      [[nodiscard]] iterator end() noexcept {
-        std::ptrdiff_t end_idx = distance(std::cbegin(x), std::cend(x));
-        return std::next(std::end(x), stride - end_idx % stride);
-      }
-      [[nodiscard]] const_iterator cend() const noexcept {
-        std::ptrdiff_t end_idx = distance(std::cbegin(x), std::cend(x));
-        return std::next(std::cend(x), stride - end_idx % stride);
-      }
+      [[nodiscard]] iterator end() noexcept { return {std::next(std::end(x), step()), stride}; }
+      [[nodiscard]] const_iterator cend() const noexcept { return {std::next(std::cend(x), step()), stride}; }
       [[nodiscard]] const_iterator end() const noexcept { return cend(); }
     };
 
