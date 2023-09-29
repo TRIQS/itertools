@@ -201,6 +201,26 @@ TEST(Itertools, Product_Range) {
   EXPECT_EQ(res, 1000);
 }
 
+TEST(Itertools, Stride) {
+  std::vector<int> V1{0, 1, 2, 3, 4};
+  for (int s = 1; s < 6; ++s) {
+    int i    = 0;
+    int size = 0;
+    for (auto x : stride(V1, s)) {
+      EXPECT_EQ(i, x);
+      i += s;
+      ++size;
+    }
+    EXPECT_EQ(size, (V1.size() - 1) / s + 1);
+  }
+
+  // empty range
+  std::vector<int> V2;
+  int size = 0;
+  for ([[maybe_unused]] auto x : stride(V2, 1)) { ++size; }
+  EXPECT_EQ(size, 0);
+}
+
 int main(int argc, char **argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
