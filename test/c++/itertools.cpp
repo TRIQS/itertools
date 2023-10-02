@@ -203,6 +203,8 @@ TEST(Itertools, Product_Range) {
 
 TEST(Itertools, Stride) {
   std::vector<int> V1{0, 1, 2, 3, 4};
+
+  // simple stride
   for (int s = 1; s < 6; ++s) {
     int i    = 0;
     int size = 0;
@@ -216,9 +218,31 @@ TEST(Itertools, Stride) {
 
   // empty range
   std::vector<int> V2;
-  int size = 0;
-  for ([[maybe_unused]] auto x : stride(V2, 1)) { ++size; }
-  EXPECT_EQ(size, 0);
+  int empty_size = 0;
+  for ([[maybe_unused]] auto x : stride(V2, 2)) { ++empty_size; }
+  EXPECT_EQ(empty_size, 0);
+
+  // stride and product
+  for (int s = 1; s < 6; ++s) {
+    int idx = 0;
+    for (auto [x1, x2] : stride(product(V1, V1), s)) {
+      auto i = idx / static_cast<int>(V1.size());
+      auto j = idx - i * static_cast<int>(V1.size());
+      EXPECT_EQ(x1, i);
+      EXPECT_EQ(x2, j);
+      idx += s;
+    }
+  }
+
+  // zip and stride
+  for (int s = 1; s < 6; ++s) {
+    int i = 0;
+    for (auto [x1, x2] : zip(stride(V1, s), stride(V1, s))) {
+      EXPECT_EQ(x1, i);
+      EXPECT_EQ(x2, i);
+      i += s;
+    }
+  }
 }
 
 int main(int argc, char **argv) {
