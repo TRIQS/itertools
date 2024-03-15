@@ -23,17 +23,18 @@
 namespace itertools {
 
   /**
-    * Function to chunk a range, distributing it uniformly over all OMP threads.
-    *
-    * This range-adapting function should be used inside an omp parallel region
-    *
-    * @tparam T The type of the range
-    *
-    * @param range The range to chunk
-    */
-  template <typename T> auto omp_chunk(T &&range) {
-    auto total_size           = itertools::distance(std::cbegin(range), std::cend(range));
+   * @brief Distribute a range as evenly as possible across all OMP threads.
+   *
+   * @details See chunk_range(std::ptrdiff_t, std::ptrdiff_t, long, long) and slice(R &&, std::ptrdiff_t, std::ptrdiff_t) for more details.
+   *
+   * @tparam R Range type.
+   * @param rg Range to chunk.
+   * @return A detail::sliced range, containing the chunk of the original range that belongs to the current thread.
+   */
+  template <typename R> auto omp_chunk(R &&rg) {
+    auto total_size           = itertools::distance(std::cbegin(rg), std::cend(rg));
     auto [start_idx, end_idx] = chunk_range(0, total_size, omp_get_num_threads(), omp_get_thread_num());
-    return itertools::slice(std::forward<T>(range), start_idx, end_idx);
+    return itertools::slice(std::forward<R>(rg), start_idx, end_idx);
   }
+
 } // namespace itertools
