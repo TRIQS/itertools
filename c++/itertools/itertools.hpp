@@ -980,34 +980,6 @@ namespace itertools {
   template <typename... Rs> [[nodiscard]] detail::zipped<Rs...> zip(Rs &&...rgs) { return {std::forward<Rs>(rgs)...}; }
 
   /**
-   * @brief Combine zip and transform.
-   *
-   * @details The given ranges are first zipped and then transformed with the given callable object. The callable
-   * object is called with the dereferenced iterators of the zipped range, i.e. if N ranges are zipped it needs to
-   * be callable with N arguments. This function returns an iterable lazy object, which can be used in range-based
-   * for loops:
-   * 
-   * @code{.cpp}
-   * for (auto x : zip_with(lambda, rg1, rg2, rg3)) {
-   *   // do something with x
-   * }
-   * @endcode
-   * 
-   * Note that the type of x depends on the return type of the `lambda` function.
-   * 
-   * See also <a href="https://en.cppreference.com/w/cpp/ranges/zip_transform_view">std::ranges::views::zip_transform</a>.
-   *
-   * @tparam Rs Range types.
-   * @tparam F Callable type.
-   * @param rgs Ranges to zip.
-   * @param f Callable to be applied to the zipped range.
-   * @return A zipped range.
-   */
-  template <typename... Rs, typename F> auto zip_with(Rs &&...rgs, F &&f) {
-    return transform(zip(std::forward<Rs>(rgs)...), [&f](std::tuple<Rs...> t) { return std::apply(std::forward<F>(f), t); });
-  }
-
-  /**
    * @brief Lazy-multiply a given number of ranges by forming their cartesian product.
    *
    * @details An arbitrary number of ranges are multiplied together into a cartesian product range. They are traversed in a row-major
