@@ -16,9 +16,9 @@
 
 #pragma once
 
-#include <omp.h>
+#include "./itertools.hpp"
 
-#include <itertools/itertools.hpp>
+#include <omp.h>
 
 namespace itertools {
 
