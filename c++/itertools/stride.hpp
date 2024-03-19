@@ -35,13 +35,14 @@ namespace itertools {
   namespace detail {
 
     /**
+     * @ingroup range_iterators
      * @brief Iterator for a detail::strided range.
-     * 
-     * @details It stores an iterator of the original range as well as a stride. Incrementing advances the original 
+     *
+     * @details It stores an iterator of the original range as well as a stride. Incrementing advances the original
      * iterator by the given stride. Dereferencing simply returns the dereferenced original iterator.
-     * 
+     *
      * See itertools::stride(R &&, std::ptrdiff_t) for more details.
-     * 
+     *
      * @tparam Iter Iterator type.
      */
     template <typename Iter> struct stride_iter : iterator_facade<stride_iter<Iter>, typename std::iterator_traits<Iter>::value_type> {
@@ -56,7 +57,7 @@ namespace itertools {
 
       /**
        * @brief Construct a strided iterator from a given iterator and a given stride.
-       * 
+       *
        * @param it Iterator of the original range.
        * @param stride Stride for advancing the iterator (has to be > 0).
        */
@@ -69,7 +70,7 @@ namespace itertools {
 
       /**
        * @brief Equal-to operator for two detail::stride_iter objects.
-       * 
+       *
        * @param other detail::stride_iter to compare with.
        * @return True, if the original iterators are equal.
        */
@@ -83,10 +84,11 @@ namespace itertools {
     };
 
     /**
+     * @ingroup adapted_ranges
      * @brief Represents a strided range.
-     * 
+     *
      * @details See itertools::stride(R &&, std::ptrdiff_t) for more details.
-     * 
+     *
      * @tparam R Range type.
      */
     template <typename R> struct strided {
@@ -130,7 +132,7 @@ namespace itertools {
 
       /**
        * @brief End of the strided range.
-       * @return detail::stride_iter containing an iterator of the original range end_offset() elements beyond the 
+       * @return detail::stride_iter containing an iterator of the original range end_offset() elements beyond the
        * beginning and the stride.
        */
       [[nodiscard]] iterator end() noexcept { return {std::next(std::begin(rg), end_offset()), stride}; }
@@ -145,31 +147,32 @@ namespace itertools {
   } // namespace detail
 
   /**
+   * @ingroup range_adapting_functions
    * @brief Lazy-stride through a given range.
    *
    * @details Only every Nth element of the original range is taken into account. If the given stride (N) is <= 0, an
    * exception is thrown. This function returns an iterable lazy object, which can be used in range-based for loops:
-   * 
+   *
    * @code{.cpp}
    * std::vector<int> vec { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-   * 
+   *
    * for (auto i : stride(vec, 3)) {
    *   std::cout << i << " ";
    * }
    * std::cout << "\n";
-   * 
+   *
    * for (auto i : stride(vec, 10)) {
    *   std::cout << i << " ";
    * }
    * @endcode
-   * 
+   *
    * Output:
-   * 
+   *
    * ```
    * 1 4 7 10
    * 1
    * ```
-   * 
+   *
    * See also See also <a href="https://en.cppreference.com/w/cpp/ranges/stride_view">std::ranges::views::stride</a>.
    *
    * @tparam R Range type.

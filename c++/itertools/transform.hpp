@@ -35,14 +35,15 @@ namespace itertools {
   namespace detail {
 
     /**
+     * @ingroup range_iterators
      * @brief Iterator for a detail::transformed range.
-     * 
+     *
      * @details It stores an iterator of the original range and a callable object that is used to transform the
-     * elements of the original range. Incrementing simply increments the iterator. Dereferencing returns the 
-     * result of the callable object applied to the dereferenced iterator, i.e. the transformed element. 
-     * 
+     * elements of the original range. Incrementing simply increments the iterator. Dereferencing returns the
+     * result of the callable object applied to the dereferenced iterator, i.e. the transformed element.
+     *
      * See itertools::transform(R &&, F) for more details.
-     * 
+     *
      * @tparam Iter Iterator type.
      * @tparam F Callable type.
      * @tparam Value Return type of the callable.
@@ -60,7 +61,7 @@ namespace itertools {
 
       /**
        * @brief Construct a transformed iterator from a given iterator and callable.
-       * 
+       *
        * @param it Iterator of the original range.
        * @param lambda Callable doing the transformation.
        */
@@ -93,7 +94,7 @@ namespace itertools {
 
       /**
        * @brief Equal-to operator for two detail::transform_iter objects.
-       * 
+       *
        * @param other detail::transform_iter to compare with.
        * @return True, if the original iterators are equal.
        */
@@ -101,7 +102,7 @@ namespace itertools {
 
       /**
        * @brief Equal-to operator for a detail::transform_iter and an itertools::sentinel_t.
-       * 
+       *
        * @tparam SentinelIter Iterator type of the sentinel.
        * @param s itertools::sentinel_t to compare with.
        * @return True, if the original iterator is equal to the iterator stored in the sentinel.
@@ -116,10 +117,11 @@ namespace itertools {
     };
 
     /**
+     * @ingroup adapted_ranges
      * @brief Represents a transformed range.
-     * 
+     *
      * @details See itertools::transform(R &&, F) for more details.
-     * 
+     *
      * @tparam R Range type.
      * @tparam F Callable type.
      */
@@ -158,27 +160,28 @@ namespace itertools {
   } // namespace detail
 
   /**
-   * @brief Lazy-transform a given range by applying a unary callable object to every element of the original range. 
-   * 
+   * @ingroup range_adapting_functions
+   * @brief Lazy-transform a given range by applying a unary callable object to every element of the original range.
+   *
    * @details The value type of the transformed range depends on the return type of the callable.
    * This function returns an iterable lazy object (a detail::transformed range), which can be used in range-based for loops:
-   * 
+   *
    * @code{.cpp}
    * std::list<int> list { 1, 2, 3, 4, 5 };
-   * 
+   *
    * for (auto i : itertools::transform(list, [](int i) { return i * i; })) {
    *   std::cout << i << " ";
    * }
    * @endcode
-   * 
+   *
    * Output:
-   * 
+   *
    * ```
    * 1 4 9 16 25
    * ```
-   *  
+   *
    * See also <a href="https://en.cppreference.com/w/cpp/ranges/transform_view">std::ranges::views::transform</a>.
-   * 
+   *
    * @tparam R Range type.
    * @tparam F Callable type.
    * @param rg Range to transform.

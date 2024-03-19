@@ -27,28 +27,31 @@
 
 namespace itertools {
 
+  /// @cond
   // Forward declaration.
   template <typename Iter, typename Value, typename Tag = std::forward_iterator_tag, typename Reference = Value &,
             typename Difference = std::ptrdiff_t>
   struct iterator_facade;
+  /// @endcond
 
   /**
+   * @ingroup utilities
    * @brief CRTP base class for various iterator types in itertools.
-   * 
-   * @details All iterator types defined in itertools are derived from this class. It uses the 
+   *
+   * @details All iterator types defined in itertools are derived from this class. It uses the
    * <a href="https://en.cppreference.com/w/cpp/iterator/forward_iterator">forward iterator</a>
    * category. Derived classes are required to implement the following member functions:
-   * 
+   *
    * @code{.cpp}
    * // used by operator++() and operator++(int)
    * void increment();
-   * 
+   *
    * // used by operator*() and operator->()
    * value_type [const] [&] dereference() [const];
    * @endcode
-   * 
+   *
    * The `[..]` are optional and depend on the actual iterator type.
-   * 
+   *
    * @tparam Iter Derived iterator type.
    * @tparam Value Value type of the iterator.
    * @tparam Reference Reference type of the iterator.

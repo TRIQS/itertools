@@ -34,12 +34,17 @@
 namespace itertools {
 
   /**
+   * @addtogroup integer_range
+   * @{
+   */
+
+  /**
    * @brief A lazy range of integers that mimics a Python range.
-   * 
+   *
    * @details It stores the first value, the last value (excluded) and the step size between two indices.
-   * By default, the step size is set to 1. This function returns an iterable lazy object, which can be 
+   * By default, the step size is set to 1. This function returns an iterable lazy object, which can be
    * used in range-based for loops:
-   * 
+   *
    * @code{.cpp}
    * for (auto i : range(5)) {
    *   std::cout << i << " ";
@@ -60,15 +65,15 @@ namespace itertools {
    *   std::cout << i << " "; // empty
    * }
    * @endcode
-   * 
+   *
    * Output:
-   * 
+   *
    * ```
-   * 0 1 2 3 4 
-   * -2 -1 0 
+   * 0 1 2 3 4
+   * -2 -1 0
    * 10 8 6 4
    * ```
-   * 
+   *
    * See also <a href="https://en.cppreference.com/w/cpp/ranges/iota_view">std::ranges::views::iota</a>.
    */
   class range {
@@ -83,6 +88,7 @@ namespace itertools {
 
     public:
     /**
+     * @ingroup integer_range
      * @brief Denote a full range at compile-time.
      * @details Can be used for accessing slices of multi-dimensional arrays.
      */
@@ -110,7 +116,7 @@ namespace itertools {
 
     /**
      * @brief Construct a range with a given step size and a given first and last (excluded) value.
-     * 
+     *
      * @details Throws an exception if the step size is zero.
      *
      * @param first First value of the range.
@@ -144,10 +150,10 @@ namespace itertools {
 
     /**
      * @brief Shift the whole range by a given amount.
-     * 
-     * @details Simply adds the given shift to the first and last value of the range, while keeping 
+     *
+     * @details Simply adds the given shift to the first and last value of the range, while keeping
      * the same step size.
-     * 
+     *
      * @param shift Amount to shift the range by.
      * @return Shifted range.
      */
@@ -155,7 +161,7 @@ namespace itertools {
 
     /**
      * @brief Write the range details to std::ostream.
-     * 
+     *
      * @param os std::ostream object.
      * @param rg range object.
      * @return Reference to os.
@@ -219,7 +225,7 @@ namespace itertools {
 
       /**
        * @brief Equal-to operator for two iterators.
-       * 
+       *
        * @param other Iterator to compare with.
        * @return True, if the current values of both iterators are equal or both iterators are at the end of the range.
        */
@@ -229,7 +235,7 @@ namespace itertools {
 
       /**
        * @brief Not-equal-to operator for two iterators.
-       * 
+       *
        * @param other Iterator to compare with.
        * @return True, if the iterators are not equal.
        */
@@ -269,18 +275,18 @@ namespace itertools {
 
   /**
    * @brief Create a cartesian product range of integer ranges from given integers.
-   * 
-   * @details The given integers specify the excluded last values of the individual itertools::range objects. 
+   *
+   * @details The given integers specify the excluded last values of the individual itertools::range objects.
    * Each range starts at 0 and has a step size of 1.
-   * 
+   *
    * @code{.cpp}
    * for (auto [i1, i2] : product_range(2, 3)) {
    *   std::cout << "(" << i1 << ", " << i2 << ")\n";
    * }
    * @endcode
-   * 
+   *
    * Output:
-   * 
+   *
    * ```
    * (0, 0)
    * (0, 1)
@@ -289,7 +295,7 @@ namespace itertools {
    * (1, 1)
    * (1, 2)
    * ```
-   * 
+   *
    * @tparam Is Integer types.
    * @param is Last values of the integer ranges (excluded).
    * @return Product (detail::multiplied) range of integer ranges. See itertools::product and itertools::range.
@@ -298,11 +304,12 @@ namespace itertools {
     return product(range(is)...);
   }
 
+  /// @cond
   namespace detail {
 
     /**
      * @brief Helper function to create a product range of integer ranges from a tuple or an array.
-     * 
+     *
      * @tparam T Tuple or array type.
      * @param idxs Tuple or array containing the excluded last values of the itertools::range objects.
      * @return Product (detail::multiplied) range of integer ranges.
@@ -312,21 +319,22 @@ namespace itertools {
     }
 
   } // namespace detail
+  /// @endcond
 
   /**
    * @brief Create a cartesian product range of integer ranges from a tuple of integers.
-   * 
-   * @details The integers in the given tuple specify the excluded last values of the individual itertools::range objects. 
+   *
+   * @details The integers in the given tuple specify the excluded last values of the individual itertools::range objects.
    * Each range starts at 0 and has a step size of 1.
-   * 
+   *
    * @code{.cpp}
    * for (auto [i1, i2] : product_range(std::make_tuple(2, 3))) {
    *   std::cout << "(" << i1 << ", " << i2 << ")\n";
    * }
    * @endcode
-   * 
+   *
    * Output:
-   * 
+   *
    * ```
    * (0, 0)
    * (0, 1)
@@ -335,7 +343,7 @@ namespace itertools {
    * (1, 1)
    * (1, 2)
    * ```
-   * 
+   *
    * @tparam Is Integer types.
    * @param idx_tpl Tuple containing the excluded last values of the integer ranges.
    * @return Product (detail::multiplied) range of integer ranges. See itertools::product and itertools::range.
@@ -347,18 +355,18 @@ namespace itertools {
 
   /**
    * @brief Create a cartesian product range of integer ranges from an array of integers.
-   * 
-   * @details The integers in the given array specify the excluded last values of the individual itertools::range objects. 
+   *
+   * @details The integers in the given array specify the excluded last values of the individual itertools::range objects.
    * Each range starts at 0 and has a step size of 1.
-   * 
+   *
    * @code{.cpp}
    * for (auto [i1, i2] : product_range(std::array{2, 3})) {
    *   std::cout << "(" << i1 << ", " << i2 << ")\n";
    * }
    * @endcode
-   * 
+   *
    * Output:
-   * 
+   *
    * ```
    * (0, 0)
    * (0, 1)
@@ -367,7 +375,7 @@ namespace itertools {
    * (1, 1)
    * (1, 2)
    * ```
-   * 
+   *
    * @tparam I Integer type.
    * @tparam N Number of elements in the array.
    * @param idx_arr Array containing the excluded last values of the integer ranges.
@@ -380,16 +388,16 @@ namespace itertools {
 
   /**
    * @brief Apply a function to every element of an integer itertools::range.
-   * 
+   *
    * @code{.cpp}
    * // print out the first 10 squares
-   * itertools::foreach(itertools::range(1, 11), [](int i) { 
-   *   std::cout << i * i << " "; 
+   * itertools::foreach(itertools::range(1, 11), [](int i) {
+   *   std::cout << i * i << " ";
    * });
    * @endcode
-   * 
+   *
    * Output:
-   * 
+   *
    * ```
    * 1 4 9 16 25 36 49 64 81 100
    * ```
@@ -402,6 +410,8 @@ namespace itertools {
     auto i = rg.first(), last = rg.last(), step = rg.step();
     for (; i < last; i += step) std::forward<F>(f)(i);
   }
+
+  /** @} */
 
 } // namespace itertools
 

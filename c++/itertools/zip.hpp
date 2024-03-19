@@ -35,13 +35,14 @@ namespace itertools {
   namespace detail {
 
     /**
+     * @ingroup range_iterators
      * @brief Iterator for a detail::zipped range.
-     * 
+     *
      * @details It stores iterators of the original ranges in a tuple. Incrementing simply increments each iterator
      * individually. Dereferencing returns a tuple containing the results of dereferencing each iterator.
-     * 
+     *
      * See itertools::zip(Rs &&...rgs) for more details.
-     * 
+     *
      * @tparam Iters Iterator types.
      */
     template <typename... Iters>
@@ -68,7 +69,7 @@ namespace itertools {
 
       /**
        * @brief Equal-to operator for two detail::zip_iter objects.
-       * 
+       *
        * @param other detail::zip_iter to compare with.
        * @return True, if all original iterators are equal.
        */
@@ -76,10 +77,10 @@ namespace itertools {
 
       /**
        * @brief Equal-to operator for a detail::zip_iter and an itertools::sentinel_t.
-       * 
+       *
        * @details Only one of the iterators has to be equal to the corresponding iterator of the sentinel. In case
        * the original ranges have different lengths, the detail::zipped range should have the length of the shortest range.
-       * 
+       *
        * @tparam SentinelIter Iterator type of the sentinel.
        * @param s itertools::sentinel_t to compare with.
        * @return True, if one of the original iterators is equal to the corresponding iterator of the sentinel.
@@ -108,10 +109,11 @@ namespace itertools {
     };
 
     /**
+     * @ingroup adapted_ranges
      * @brief Represents a zipped range.
-     * 
+     *
      * @details See itertools::zip(Rs &&...rgs) for more details.
-     * 
+     *
      * @tparam Rs Range types.
      */
     template <typename... Rs> struct zipped {
@@ -129,7 +131,7 @@ namespace itertools {
 
       /**
        * @brief Construct a zipped range from the given ranges.
-       * 
+       *
        * @tparam Us Range types.
        * @param rgs Ranges to zip.
        */
@@ -142,7 +144,7 @@ namespace itertools {
       /**
        * @brief Helper function that applies a given callable to each range in the stored tuple and returns a
        * new tuple with the results.
-       * 
+       *
        * @tparam F Callable type.
        * @param f Callable object.
        * @return Tuple containing the mapped tuple elements after applying the callable.
@@ -193,32 +195,33 @@ namespace itertools {
   } // namespace detail
 
   /**
+   * @ingroup range_adapting_functions
    * @brief Lazy-zip ranges together (similar to Python's zip).
    *
-   * @details An arbitrary number of ranges are zipped together into a tuple. The zipped range will have as many 
-   * elements as the shortest given range. This function returns an iterable lazy object, which can be used in 
+   * @details An arbitrary number of ranges are zipped together into a tuple. The zipped range will have as many
+   * elements as the shortest given range. This function returns an iterable lazy object, which can be used in
    * range-based for loops:
-   * 
+   *
    * @code{.cpp}
    * std::vector<int> v1 { 1, 2, 3 };
    * std::vector<char> v2 { 'a', 'b', 'c', 'd', 'e' };
-   * 
+   *
    * for (auto [i1, i2] : zip(v1, v1)) {
    *   std::cout << "(" << i1 << ", " << i2 << ") ";
    * }
-   * 
+   *
    * for (auto [i1, i2, c3] : zip(v1, v1, v2)) {
    *   std::cout << "(" << i1 << ", " << i2 << ", " << c3 << ") ";
    * }
    * @endcode
-   * 
+   *
    * Output:
-   * 
+   *
    * ```
-   * (1, 1) (2, 2) (3, 3) 
-   * (1, 1, a) (2, 2, b) (3, 3, c) 
+   * (1, 1) (2, 2) (3, 3)
+   * (1, 1, a) (2, 2, b) (3, 3, c)
    * ```
-   * 
+   *
    * See also <a href="https://en.cppreference.com/w/cpp/ranges/zip_view">std::ranges::views::zip</a>.
    *
    * @tparam Rs Range types.
