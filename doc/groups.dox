@@ -1,0 +1,53 @@
+/**
+ * @defgroup range_adapting_functions Range adapting functions
+ * @brief Range adapting functions take one or more existing ranges and return lazy @ref adapted_ranges that
+ * can be iterated over.
+ *
+ * @details Lazy means that new elements are produced on the fly whenever they are needed instead of being precomputed
+ * when the range is created.
+ */
+
+/**
+ * @defgroup adapted_ranges Adapted ranges
+ * @brief Adapted ranges are returned by the range adapting functions and can be iterated over using one of the
+ * @ref range_iterators.
+ *
+ * @details In most cases, the user will never have to create or modify an adapted range directly.
+ * Instead, it is recommended to simply use the provided @ref range_adapting_functions.
+ */
+
+/**
+ * @defgroup range_iterators Range iterators
+ * @brief Range iterators are internally used by the library to iterate over @ref adapted_ranges.
+ *
+ * @details In general, there should be no need for users to deal with range iterators directly.
+ * Instead, it is recommended to use range-based for loops, e.g.
+ * ```cpp
+ * for (auto [idx, val] : itertools::enumerate(some_range)) {
+ *   // do something with the index and the value of the range
+ * }
+ * ```
+ * vs. the traditional for loops, e.g.
+ * ```cpp
+ * auto enum_range = itertools::enumerate(some_range);
+ * for (auto it = enum_range.begin(); it != enum_range.end(); ++it) {
+ *   // do something with the iterator
+ * }
+ * ```
+ */
+
+/**
+ * @defgroup integer_range Integer range
+ * @brief An integer range is similar to a Python `range`.
+ *
+ * @details It is defined by a start value, an end value and a step size such that the i-th value of the range is given by
+ * `start + i * step`.
+ */
+
+/**
+ * @defgroup utilities Utilities
+ * @brief Utilities are mostly internal implementation details and should not concern everyday users.
+ *
+ * @details The only functions the might be intersting to some users are: @ref itertools::chunk_range "chunk_range",
+ * @ref itertools::make_vector_from_range "make_vector_from_range" and @ref itertools::omp_chunk "omp_chunk".
+ */

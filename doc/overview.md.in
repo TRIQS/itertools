@@ -1,0 +1,90 @@
+@mainpage Overview
+
+[TOC]
+
+[![build](https://github.com/TRIQS/itertools/workflows/build/badge.svg?branch=unstable)](https://github.com/TRIQS/itertools/actions?query=workflow%3Abuild)
+
+> This is the homepage of **TRIQS/itertools @PROJECT_VERSION@**. The source code can be found on [GitHub](https://github.com/TRIQS/itertools).
+
+
+```cpp
+#include <itertools/itertools.hpp>
+#include <vector>
+
+using namespace itertools;
+
+int main() {
+
+  // ===== Integer ranges =====
+
+  for(int i: range(10)) { /* 0, 1, .., 9 */ }
+
+  for(int i: range(2, 10, 2)) { /* 2, 4, 6, 8 */ }
+
+  for (auto [i, j] : product_range(5, 5)) {
+    /* (0, 0), (0, 1), .. (0, 4),
+       (1, 0), (1, 2), .. (1, 4),
+       ...
+       (4, 0), (4, 2), .. (4, 4) */
+  }
+
+  // ===== Adapted ranges =====
+
+  std::vector<char> Vc{'a', 'b', 'c'};
+
+  for (auto [i, c] : enumerate(Vc)) {
+    /* (0, 'a'), (1, 'b'), (2, 'c') */
+  }
+
+  std::vector<double> Vd{2.0, 4.0, 1.0};
+
+  for (auto [c, d] : zip(Vc, Vd)) {
+    /* ('a', 2.0), ('b', 4.0), ('c', 1.0) */
+  }
+
+  for (auto [c, d] : product(Vc, Vd)) {
+    /* ('a', 2.0), ('a', 4.0), ('a', 1.0),
+       ('b', 2.0), ('b', 4.0), ('b', 1.0),
+       ('c', 2.0), ('c', 4.0), ('c', 1.0) */
+  }
+
+  for (auto x : transform(Vd, [](auto d){ return d * d; })) {
+    /* 4.0, 16.0, 1.0 */
+  }
+
+}
+```
+
+**itertools** defines a small subset of the ranges and views from [std::ranges](https://en.cppreference.com/w/cpp/ranges).
+The main purpose of the library is to provide lazy ranges
+* that can be iterated over in range-based for loops (see example above) and
+* that can be used to make lazy views of multidimensional arrays
+    ```cpp
+    #include <nda/nda.hpp>
+
+    int main() {
+      // create a 10 x 10 matrix
+      auto A = nda::matrix<int>::rand(10, 10);
+
+      // create a view on the 5 x 10 submatrix consisting of every other row
+      auto sub_A = A(nda::range(0, 10, 2), nda::range::all);
+    }
+    ```
+    Visit [TRIQS/nda](https://github.com/TRIQS/nda) for more details.
+
+Note that nearly all of the functionality (and much more) of **itertools** is also provided by [std::ranges](https://en.cppreference.com/w/cpp/ranges)
+or Eric Niebler's [range-v3](https://github.com/ericniebler/range-v3) library.
+We therefore recommend to use one of those, if you have a choice.
+
+@section start Where to start?
+
+The @ref installation section tells you how to get the library and make it available on your system.
+
+@ref integration explains how to integrate **itertools** in your own C++ code.
+
+Then, you can start with the @ref examples section to get an overview of the library's features and how
+it compares with `std::ranges`.
+
+Furthermore, we provide a detailed reference @ref documentation to answer your questions.
+
+If you experience any problem with the library, you can post an @ref issues "Issue" on GitHub.

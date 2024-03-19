@@ -34,14 +34,15 @@ namespace itertools {
   namespace detail {
 
     /**
+     * @ingroup range_iterators
      * @brief Iterator for a detail::enumerated range.
-     * 
+     *
      * @details It stores an iterator of the original range and an index. Incrementing advances the iterator
-     * and the index by 1. Dereferencing returns a std::pair consisting of the current index and the current 
+     * and the index by 1. Dereferencing returns a std::pair consisting of the current index and the current
      * dereferenced value of the original iterator.
-     * 
+     *
      * See itertools::enumerate(R &&) for more details.
-     * 
+     *
      * @tparam Iter Iterator type.
      */
     template <typename Iter> struct enum_iter : iterator_facade<enum_iter<Iter>, std::pair<long, typename std::iterator_traits<Iter>::value_type>> {
@@ -68,7 +69,7 @@ namespace itertools {
 
       /**
        * @brief Equal-to operator for two detail::enum_iter objects.
-       * 
+       *
        * @param other detail::enum_iter to compare with.
        * @return True, if the original iterators are equal.
        */
@@ -76,7 +77,7 @@ namespace itertools {
 
       /**
        * @brief Equal-to operator for a detail::enum_iter and an itertools::sentinel_t.
-       * 
+       *
        * @tparam SentinelIter Iterator type of the sentinel.
        * @param s itertools::sentinel_t to compare with.
        * @return True, if the original iterator is equal to the iterator stored in the sentinel.
@@ -91,10 +92,11 @@ namespace itertools {
     };
 
     /**
+     * @ingroup adapted_ranges
      * @brief Represents an enumerated range.
-     * 
+     *
      * @details See itertools::enumerate(R &&) for more details.
-     * 
+     *
      * @tparam R Range type.
      */
     template <typename R> struct enumerated {
@@ -138,28 +140,29 @@ namespace itertools {
   } // namespace detail
 
   /**
+   * @ingroup range_adapting_functions
    * @brief Lazy-enumerate a given range (similar to Python's enumerate).
-   * 
-   * @details Each element in the original range is assigned an index, starting from zero. This function 
+   *
+   * @details Each element in the original range is assigned an index, starting from zero. This function
    * returns an iterable lazy object (a detail::enumerated range), which iterates over tuples consisting of the
    * index and the value of the dereferenced iterator of the original range:
-   * 
+   *
    * @code{.cpp}
    * std::vector<char> vec { 'a', 'b', 'c' };
-   * 
+   *
    * for (auto [idx, val] : enumerate(vec)) {
    *   std::cout << "(" << idx << ", " << val << ")\n";
    * }
    * @endcode
-   * 
+   *
    * Output:
-   * 
+   *
    * ```
    * (0, a)
    * (1, b)
    * (2, c)
    * ```
-   * 
+   *
    * See also <a href="https://en.cppreference.com/w/cpp/ranges/enumerate_view">std::ranges::views::enumerate</a>.
    *
    * @tparam R Range type.

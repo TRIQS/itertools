@@ -14,6 +14,11 @@
 //
 // Authors: Olivier Parcollet, Nils Wentzell
 
+/**
+ * @file
+ * @brief Provides utilities to distribute a range across OMP threads.
+ */
+
 #pragma once
 
 #include "./itertools.hpp"
@@ -23,6 +28,7 @@
 namespace itertools {
 
   /**
+   * @ingroup utilities
    * @brief Distribute a range as evenly as possible across all OMP threads.
    *
    * @details See chunk_range(std::ptrdiff_t, std::ptrdiff_t, long, long) and slice(R &&, std::ptrdiff_t, std::ptrdiff_t) for more details.

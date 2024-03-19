@@ -34,10 +34,11 @@ namespace itertools {
   namespace detail {
 
     /**
+     * @ingroup adapted_ranges
      * @brief Represents a sliced range.
-     * 
+     *
      * @details See itertools::slice(R &&, std::ptrdiff_t, std::ptrdiff_t) for more details.
-     * 
+     *
      * @tparam R Range type.
      */
     template <typename R> struct sliced {
@@ -96,39 +97,40 @@ namespace itertools {
   } // namespace detail
 
   /**
+   * @ingroup range_adapting_functions
    * @brief Lazy-slice a given range.
    *
    * @details Only the part of the given range between the `start_idx` and the `end_idx` is taken into account.
    * If `end_idx` is bigger than the size of the original range, the slice ends at the end of the original range.
-   * If `end_idx` is smaller than `start_idx`, the slice is empty. Note that the behaviour is undefined if 
-   * `start_idx` is smaller than zero. This function returns an iterable lazy object, which can be used in 
+   * If `end_idx` is smaller than `start_idx`, the slice is empty. Note that the behaviour is undefined if
+   * `start_idx` is smaller than zero. This function returns an iterable lazy object, which can be used in
    * range-based for loops:
-   * 
+   *
    * @code{.cpp}
    * std::array<int, 5> arr { 1, 2, 3, 4, 5 };
-   * 
-   * for (auto i : slice(arr, 1, 3)) { 
+   *
+   * for (auto i : slice(arr, 1, 3)) {
    *     std::cout << i << " ";
    * }
    * std::cout << "\n";
-   * 
-   * for (auto i : slice(arr, 3, 7)) { 
+   *
+   * for (auto i : slice(arr, 3, 7)) {
    *     std::cout << i << " ";
    * }
    * std::cout << "\n";
-   * 
-   * for (auto i : slice(arr, 4, 3)) { 
+   *
+   * for (auto i : slice(arr, 4, 3)) {
    *     std::cout << i << " "; // empty slice
    * }
    * @endcode
-   * 
+   *
    * Output:
-   * 
+   *
    * ```
-   * 2 3 
+   * 2 3
    * 4 5
    * ```
-   * 
+   *
    * @tparam R Range type.
    * @param rg Range to be sliced.
    * @param start_idx Index where the slice starts.

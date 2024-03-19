@@ -31,11 +31,16 @@
 namespace itertools {
 
   /**
+   * @addtogroup utilities
+   * @{
+   */
+
+  /**
    * @brief Calculate the distance between two iterators.
-   * 
-   * @details It is similar to <a href="https://en.cppreference.com/w/cpp/iterator/distance">std::distance</a>, 
+   *
+   * @details It is similar to <a href="https://en.cppreference.com/w/cpp/iterator/distance">std::distance</a>,
    * except that it can be used for two different iterator types, e.g. in case one of them is a const iterator.
-   * 
+   *
    * @tparam Iter1 Iterator type #1.
    * @tparam Iter2 Iterator type #2.
    * @param first Iterator #1.
@@ -56,7 +61,7 @@ namespace itertools {
 
   /**
    * @brief Create a vector from a range.
-   * 
+   *
    * @tparam R Range type.
    * @param rg Range.
    * @return std::vector<T> containing the elements of the range, where T denotes the value type of the range.
@@ -74,10 +79,10 @@ namespace itertools {
 
   /**
    * @brief Given an integer range `[first, last)`, divide it as equally as possible into N chunks.
-   * 
-   * @details It is intended to divide a range among different processes. If the size of the range is not 
+   *
+   * @details It is intended to divide a range among different processes. If the size of the range is not
    * divisible by N without a remainder, i.e. `r = (last - first) % N`, then the first `r` chunks have one more element.
-   * 
+   *
    * @param first First value of the range.
    * @param last Last value of the range (excluded).
    * @param n_chunks Number of chunks to divide the range into.
@@ -93,6 +98,8 @@ namespace itertools {
     else
       return {first + n_large_nodes + rank * chunk_size, first + n_large_nodes + (rank + 1) * chunk_size};
   }
+
+  /** @} */
 
 } // namespace itertools
 
