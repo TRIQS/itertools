@@ -632,14 +632,14 @@ CASE_SENSE_NAMES       = SYSTEM
 # scope will be hidden.
 # The default value is: NO.
 
-HIDE_SCOPE_NAMES       = NO
+HIDE_SCOPE_NAMES       = YES
 
 # If the HIDE_COMPOUND_REFERENCE tag is set to NO (default) then doxygen will
 # append additional text to a page's title, such as Class Reference. If set to
 # YES the compound reference will be hidden.
 # The default value is: NO.
 
-HIDE_COMPOUND_REFERENCE = NO
+HIDE_COMPOUND_REFERENCE = YES
 
 # If the SHOW_HEADERFILE tag is set to YES then the documentation for a class
 # will show which file needs to be included to use the class.
@@ -939,7 +939,7 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@/Changelog.md \
+INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@/ChangeLog.md \
                          @CMAKE_CURRENT_SOURCE_DIR@/documentation.md \
                          @CMAKE_CURRENT_SOURCE_DIR@/ex1.md \
                          @CMAKE_CURRENT_SOURCE_DIR@/examples.md \
