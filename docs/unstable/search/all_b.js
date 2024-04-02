@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['i_0',['i',['../structitertools_1_1detail_1_1enum__iter.html#a139066bd9e344a8daae82c5ca919fffe',1,'itertools::detail::enum_iter']]],
+  ['in_20c_20projects_1',['Integration in C++ projects',['../integration.html',1,'']]],
+  ['increment_2',['increment',['../structitertools_1_1detail_1_1enum__iter.html#aeb2624c7a86b765725fd80cd426e147d',1,'itertools::detail::enum_iter::increment()'],['../structitertools_1_1detail_1_1prod__iter.html#aeb2624c7a86b765725fd80cd426e147d',1,'itertools::detail::prod_iter::increment()'],['../structitertools_1_1detail_1_1stride__iter.html#aeb2624c7a86b765725fd80cd426e147d',1,'itertools::detail::stride_iter::increment()'],['../structitertools_1_1detail_1_1transform__iter.html#aeb2624c7a86b765725fd80cd426e147d',1,'itertools::detail::transform_iter::increment()'],['../structitertools_1_1detail_1_1zip__iter.html#aeb2624c7a86b765725fd80cd426e147d',1,'itertools::detail::zip_iter::increment()']]],
+  ['index_5ft_3',['index_t',['../classitertools_1_1range.html#af2d2b24d5192aa0ab0566631c8e152e4',1,'itertools::range']]],
+  ['installation_4',['Installation',['../installation.html',1,'']]],
+  ['installation_20steps_5',['Installation steps',['../installation.html#install_steps',1,'']]],
+  ['integer_20range_6',['Integer range',['../group__integer__range.html',1,'Integer range'],['../documentation.html#autotoc_md13',1,'Integer range']]],
+  ['integration_20in_20c_20projects_7',['Integration in C++ projects',['../integration.html',1,'']]],
+  ['issues_8',['Issues',['../issues.html',1,'']]],
+  ['it_9',['it',['../structitertools_1_1detail_1_1enum__iter.html#ae58cf25874cd6258fc3d41eab1511bcc',1,'itertools::detail::enum_iter::it'],['../structitertools_1_1sentinel__t.html#ae58cf25874cd6258fc3d41eab1511bcc',1,'itertools::sentinel_t::it'],['../structitertools_1_1detail_1_1stride__iter.html#ae58cf25874cd6258fc3d41eab1511bcc',1,'itertools::detail::stride_iter::it'],['../structitertools_1_1detail_1_1transform__iter.html#ae58cf25874cd6258fc3d41eab1511bcc',1,'itertools::detail::transform_iter::it']]],
+  ['iterator_10',['iterator',['../structitertools_1_1detail_1_1enumerated.html#acd4476d0af05634bc995563f5a4b9d01',1,'itertools::detail::enumerated::iterator'],['../structitertools_1_1detail_1_1multiplied.html#ad7ad13f275aabe4d21d8265d51affe18',1,'itertools::detail::multiplied::iterator'],['../structitertools_1_1detail_1_1sliced.html#a1f801ec543ea44ea6f613a3cb64cf800',1,'itertools::detail::sliced::iterator'],['../structitertools_1_1detail_1_1strided.html#adb5cecf6acc50b14b33b3ab7082bdd95',1,'itertools::detail::strided::iterator'],['../structitertools_1_1detail_1_1transformed.html#ab3d10e70baaeac78e76b7abae7e2cf76',1,'itertools::detail::transformed::iterator'],['../structitertools_1_1detail_1_1zipped.html#ab7c4228442427d5bfc8b154413142e25',1,'itertools::detail::zipped::iterator']]],
+  ['iterator_5fcategory_11',['iterator_category',['../structitertools_1_1iterator__facade_3_01Iter_00_01Value_00_01std_1_1forward__iterator__tag_00_01Reference_00_01Difference_01_4.html#a6b137a24d9328a60aef01d0f938cf0c3',1,'itertools::iterator_facade&lt; Iter, Value, std::forward_iterator_tag, Reference, Difference &gt;::iterator_category'],['../structitertools_1_1range_1_1const__iterator.html#a6b137a24d9328a60aef01d0f938cf0c3',1,'itertools::range::const_iterator::iterator_category']]],
+  ['iterator_5ffacade_2ehpp_12',['iterator_facade.hpp',['../iterator__facade_8hpp.html',1,'']]],
+  ['iterator_5ffacade_3c_20iter_2c_20value_2c_20std_3a_3aforward_5fiterator_5ftag_2c_20reference_2c_20difference_20_3e_13',['iterator_facade&lt; Iter, Value, std::forward_iterator_tag, Reference, Difference &gt;',['../structitertools_1_1iterator__facade_3_01Iter_00_01Value_00_01std_1_1forward__iterator__tag_00_01Reference_00_01Difference_01_4.html',1,'itertools']]],
+  ['iterators_14',['Range iterators',['../group__range__iterators.html',1,'']]],
+  ['iterators_15',['Range iterators',['../documentation.html#autotoc_md12',1,'']]],
+  ['itertools_2ehpp_16',['itertools.hpp',['../itertools_8hpp.html',1,'']]],
+  ['its_17',['its',['../structitertools_1_1detail_1_1prod__iter.html#a0c0481a1d45d9b65ab85760d75a519b5',1,'itertools::detail::prod_iter::its'],['../structitertools_1_1detail_1_1zip__iter.html#a0c0481a1d45d9b65ab85760d75a519b5',1,'itertools::detail::zip_iter::its']]],
+  ['its_5fbegin_18',['its_begin',['../structitertools_1_1detail_1_1prod__iter.html#a3684bd27aca1dc90c515230bbe44e71f',1,'itertools::detail::prod_iter']]],
+  ['its_5fend_19',['its_end',['../structitertools_1_1detail_1_1prod__iter.html#ab165b7cd00de5cdc3b83a24dbdb527fe',1,'itertools::detail::prod_iter']]]
+];
