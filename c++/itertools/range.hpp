@@ -304,7 +304,6 @@ namespace itertools {
     return product(range(is)...);
   }
 
-  /// @cond
   namespace detail {
 
     // Helper function to create a product range of integer ranges from a tuple or an array.
@@ -313,7 +312,6 @@ namespace itertools {
     }
 
   } // namespace detail
-  /// @endcond
 
   /**
    * @brief Create a cartesian product range of integer ranges from a tuple of integers.
