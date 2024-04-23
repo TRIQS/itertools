@@ -32,123 +32,121 @@
 
 namespace itertools {
 
-  namespace detail {
+  /**
+   * @ingroup range_iterators
+   * @brief Iterator for a itertools::strided range.
+   *
+   * @details It stores an iterator of the original range as well as a stride. Incrementing advances the original
+   * iterator by the given stride. Dereferencing simply returns the dereferenced original iterator.
+   *
+   * See itertools::stride(R &&, std::ptrdiff_t) for more details.
+   *
+   * @tparam Iter Iterator type.
+   */
+  template <typename Iter> struct stride_iter : iterator_facade<stride_iter<Iter>, typename std::iterator_traits<Iter>::value_type> {
+    /// Iterator of the original range.
+    Iter it;
+
+    /// Number of elements in the original range to skip when incrementing the iterator.
+    std::ptrdiff_t stride{1};
+
+    /// Default constructor.
+    stride_iter() = default;
 
     /**
-     * @ingroup range_iterators
-     * @brief Iterator for a detail::strided range.
+     * @brief Construct a strided iterator from a given iterator and a given stride.
      *
-     * @details It stores an iterator of the original range as well as a stride. Incrementing advances the original
-     * iterator by the given stride. Dereferencing simply returns the dereferenced original iterator.
-     *
-     * See itertools::stride(R &&, std::ptrdiff_t) for more details.
-     *
-     * @tparam Iter Iterator type.
+     * @param it Iterator of the original range.
+     * @param stride Stride for advancing the iterator (has to be > 0).
      */
-    template <typename Iter> struct stride_iter : iterator_facade<stride_iter<Iter>, typename std::iterator_traits<Iter>::value_type> {
-      /// Iterator of the original range.
-      Iter it;
+    stride_iter(Iter it, std::ptrdiff_t stride) : it(it), stride(stride) {
+      if (stride <= 0) throw std::runtime_error("The itertools::strided range requires a positive stride");
+    }
 
-      /// Number of elements in the original range to skip when incrementing the iterator.
-      std::ptrdiff_t stride{1};
-
-      /// Default constructor.
-      stride_iter() = default;
-
-      /**
-       * @brief Construct a strided iterator from a given iterator and a given stride.
-       *
-       * @param it Iterator of the original range.
-       * @param stride Stride for advancing the iterator (has to be > 0).
-       */
-      stride_iter(Iter it, std::ptrdiff_t stride) : it(it), stride(stride) {
-        if (stride <= 0) throw std::runtime_error("The itertools::detail::strided range requires a positive stride");
-      }
-
-      /// Increment the iterator by advancing the original iterator by the stride.
-      void increment() { std::advance(it, stride); }
-
-      /**
-       * @brief Equal-to operator for two detail::stride_iter objects.
-       *
-       * @param other detail::stride_iter to compare with.
-       * @return True, if the original iterators are equal.
-       */
-      [[nodiscard]] bool operator==(stride_iter const &other) const { return it == other.it; }
-
-      /**
-       * @brief Dereference the iterator.
-       * @return Dereferenced value of the original iterator.
-       */
-      [[nodiscard]] decltype(auto) dereference() const { return *it; }
-    };
+    /// Increment the iterator by advancing the original iterator by the stride.
+    void increment() { std::advance(it, stride); }
 
     /**
-     * @ingroup adapted_ranges
-     * @brief Represents a strided range.
+     * @brief Equal-to operator for two itertools::stride_iter objects.
      *
-     * @details See itertools::stride(R &&, std::ptrdiff_t) for more details.
-     *
-     * @tparam R Range type.
+     * @param other itertools::stride_iter to compare with.
+     * @return True, if the original iterators are equal.
      */
-    template <typename R> struct strided {
-      /// Original range.
-      R rg;
+    [[nodiscard]] bool operator==(stride_iter const &other) const { return it == other.it; }
 
-      /// Number of elements in the original range to skip when incrementing the iterator.
-      std::ptrdiff_t stride;
+    /**
+     * @brief Dereference the iterator.
+     * @return Dereferenced value of the original iterator.
+     */
+    [[nodiscard]] decltype(auto) dereference() const { return *it; }
+  };
 
-      /// Iterator type of the strided range.
-      using iterator = stride_iter<decltype(std::begin(rg))>;
+  /**
+   * @ingroup adapted_ranges
+   * @brief Represents a strided range.
+   *
+   * @details See itertools::stride(R &&, std::ptrdiff_t) for more details.
+   *
+   * @tparam R Range type.
+   */
+  template <typename R> struct strided {
+    /// Original range.
+    R rg;
 
-      /// Const iterator type of the strided range.
-      using const_iterator = stride_iter<decltype(std::cbegin(rg))>;
+    /// Number of elements in the original range to skip when incrementing the iterator.
+    std::ptrdiff_t stride;
 
-      /// Default equal-to operator.
-      [[nodiscard]] bool operator==(strided const &) const = default;
+    /// Iterator type of the strided range.
+    using iterator = stride_iter<decltype(std::begin(rg))>;
 
-      private:
-      // Helper function to calculate the index of the end iterator.
-      [[nodiscard]] std::ptrdiff_t end_offset() const {
-        auto size = distance(std::cbegin(rg), std::cend(rg));
-        return (size == 0) ? 0 : ((size - 1) / stride + 1) * stride;
-      }
+    /// Const iterator type of the strided range.
+    using const_iterator = stride_iter<decltype(std::cbegin(rg))>;
 
-      public:
-      /**
-       * @brief Beginning of the strided range.
-       * @return detail::stride_iter containing the begin iterator of the original range and the stride.
-       */
-      [[nodiscard]] iterator begin() noexcept { return {std::begin(rg), stride}; }
+    /// Default equal-to operator.
+    [[nodiscard]] bool operator==(strided const &) const = default;
 
-      /// Const version of begin().
-      [[nodiscard]] const_iterator cbegin() const noexcept { return {std::cbegin(rg), stride}; }
+    private:
+    // Helper function to calculate the index of the end iterator.
+    [[nodiscard]] std::ptrdiff_t end_offset() const {
+      auto size = distance(std::cbegin(rg), std::cend(rg));
+      return (size == 0) ? 0 : ((size - 1) / stride + 1) * stride;
+    }
 
-      /// Const overload of begin().
-      [[nodiscard]] const_iterator begin() const noexcept { return cbegin(); }
+    public:
+    /**
+     * @brief Beginning of the strided range.
+     * @return itertools::stride_iter containing the begin iterator of the original range and the stride.
+     */
+    [[nodiscard]] iterator begin() noexcept { return {std::begin(rg), stride}; }
 
-      /**
-       * @brief End of the strided range.
-       * @return detail::stride_iter containing an iterator of the original range end_offset() elements beyond the
-       * beginning and the stride.
-       */
-      [[nodiscard]] iterator end() noexcept { return {std::next(std::begin(rg), end_offset()), stride}; }
+    /// Const version of begin().
+    [[nodiscard]] const_iterator cbegin() const noexcept { return {std::cbegin(rg), stride}; }
 
-      /// Const version of end().
-      [[nodiscard]] const_iterator cend() const noexcept { return {std::next(std::cbegin(rg), end_offset()), stride}; }
+    /// Const overload of begin().
+    [[nodiscard]] const_iterator begin() const noexcept { return cbegin(); }
 
-      /// Const overload of end().
-      [[nodiscard]] const_iterator end() const noexcept { return cend(); }
-    };
+    /**
+     * @brief End of the strided range.
+     * @return itertools::stride_iter containing an iterator of the original range end_offset() elements beyond the
+     * beginning and the stride.
+     */
+    [[nodiscard]] iterator end() noexcept { return {std::next(std::begin(rg), end_offset()), stride}; }
 
-  } // namespace detail
+    /// Const version of end().
+    [[nodiscard]] const_iterator cend() const noexcept { return {std::next(std::cbegin(rg), end_offset()), stride}; }
+
+    /// Const overload of end().
+    [[nodiscard]] const_iterator end() const noexcept { return cend(); }
+  };
 
   /**
    * @ingroup range_adapting_functions
    * @brief Lazy-stride through a given range.
    *
    * @details Only every Nth element of the original range is taken into account. If the given stride (N) is <= 0, an
-   * exception is thrown. This function returns an iterable lazy object, which can be used in range-based for loops:
+   * exception is thrown.
+   *
+   * This function returns an iterable lazy object, which can be used in range-based for loops:
    *
    * @code{.cpp}
    * std::vector<int> vec { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
@@ -175,9 +173,9 @@ namespace itertools {
    * @tparam R Range type.
    * @param rg Original range.
    * @param stride Number of elements to skip when incrementing.
-   * @return A detail::strided range.
+   * @return A itertools::strided range.
    */
-  template <typename R> [[nodiscard]] detail::strided<R> stride(R &&rg, std::ptrdiff_t stride) { return {std::forward<R>(rg), stride}; }
+  template <typename R> [[nodiscard]] strided<R> stride(R &&rg, std::ptrdiff_t stride) { return {std::forward<R>(rg), stride}; }
 
 } // namespace itertools
 

@@ -42,25 +42,26 @@ namespace itertools {
    * @brief A lazy range of integers that mimics a Python range.
    *
    * @details It stores the first value, the last value (excluded) and the step size between two indices.
-   * By default, the step size is set to 1. This function returns an iterable lazy object, which can be
-   * used in range-based for loops:
+   * By default, the step size is set to 1.
+   *
+   * This function returns an iterable lazy object, which can be used in range-based for loops:
    *
    * @code{.cpp}
    * for (auto i : range(5)) {
    *   std::cout << i << " ";
    * }
    * std::cout << "\n";
-
+   *
    * for (auto i : range(-2, 1)) {
    *   std::cout << i << " ";
    * }
    * std::cout << "\n";
-
+   *
    * for (auto i : range(10, 3, -2)) {
    *   std::cout << i << " ";
    * }
    * std::cout << "\n";
-
+   *
    * for (auto i : range(0, 10, -1)) {
    *   std::cout << i << " "; // empty
    * }
@@ -298,7 +299,7 @@ namespace itertools {
    *
    * @tparam Is Integer types.
    * @param is Last values of the integer ranges (excluded).
-   * @return Product (detail::multiplied) range of integer ranges. See itertools::product and itertools::range.
+   * @return Product (itertools::multiplied) range of integer ranges. See itertools::product and itertools::range.
    */
   template <typename... Is, typename EnableIf = std::enable_if_t<(std::is_integral_v<Is> and ...), int>> [[nodiscard]] auto product_range(Is... is) {
     return product(range(is)...);
@@ -338,7 +339,7 @@ namespace itertools {
    *
    * @tparam Is Integer types.
    * @param idx_tpl Tuple containing the excluded last values of the integer ranges.
-   * @return Product (detail::multiplied) range of integer ranges. See itertools::product and itertools::range.
+   * @return Product (itertools::multiplied) range of integer ranges. See itertools::product and itertools::range.
    */
   template <typename... Is, typename EnableIf = std::enable_if_t<(std::is_integral_v<Is> and ...), int>>
   [[nodiscard]] auto product_range(std::tuple<Is...> const &idx_tpl) {
@@ -371,7 +372,7 @@ namespace itertools {
    * @tparam I Integer type.
    * @tparam N Number of elements in the array.
    * @param idx_arr Array containing the excluded last values of the integer ranges.
-   * @return Product (detail::multiplied) range of integer ranges. See itertools::product and itertools::range.
+   * @return Product (itertools::multiplied) range of integer ranges. See itertools::product and itertools::range.
    */
   template <typename I, size_t N, typename EnableIf = std::enable_if_t<std::is_integral_v<I>, int>>
   [[nodiscard]] auto product_range(std::array<I, N> const &idx_arr) {

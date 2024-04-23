@@ -35,12 +35,12 @@ Instead, it is recommended to simply use the provided @ref range_adapting_functi
 
 The following adapted ranges are defined in **itertools**:
 
-* @ref itertools::detail::enumerated "enumerated"
-* @ref itertools::detail::multiplied "multiplied"
-* @ref itertools::detail::sliced "sliced"
-* @ref itertools::detail::strided "strided"
-* @ref itertools::detail::transformed "transformed"
-* @ref itertools::detail::zipped "zipped"
+* @ref itertools::enumerated "enumerated"
+* @ref itertools::multiplied "multiplied"
+* @ref itertools::sliced "sliced"
+* @ref itertools::strided "strided"
+* @ref itertools::transformed "transformed"
+* @ref itertools::zipped "zipped"
 
 ## Range iterators
 
@@ -62,11 +62,11 @@ for (auto it = enum_range.begin(); it != enum_range.end(); ++it) {
 
 The following range iterators are defined in **itertools**:
 
-* @ref itertools::detail::enum_iter "enum_iter"
-* @ref itertools::detail::prod_iter "prod_iter"
-* @ref itertools::detail::stride_iter "stride_iter"
-* @ref itertools::detail::transform_iter "transform_iter"
-* @ref itertools::detail::zip_iter "zip_iter"
+* @ref itertools::enum_iter "enum_iter"
+* @ref itertools::prod_iter "prod_iter"
+* @ref itertools::stride_iter "stride_iter"
+* @ref itertools::transform_iter "transform_iter"
+* @ref itertools::zip_iter "zip_iter"
 
 ## Integer range
 
