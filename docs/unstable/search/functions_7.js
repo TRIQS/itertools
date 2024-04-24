@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['last_0',['last',['../classitertools_1_1range.html#ac10695d44360766931c40804a4cb2974',1,'itertools::range']]]
+  ['last_0',['last',['../classitertools_1_1range.html#a8719b3bea5288e9aec56d5f9db6a84a3',1,'itertools::range']]]
 ];
