@@ -1,19 +1,11 @@
 var searchData=
 [
-  ['sentinel_2ehpp_0',['sentinel.hpp',['../sentinel_8hpp.html',1,'']]],
-  ['sentinel_5ft_1',['sentinel_t',['../structitertools_1_1sentinel__t.html',1,'itertools']]],
-  ['seq_5ft_2',['seq_t',['../structitertools_1_1zipped.html#afe12040435cceafd666c55f9c9eeabcb',1,'itertools::zipped']]],
-  ['size_3',['size',['../classitertools_1_1range.html#aeba034794b1c57fe30955d7a25828bf6',1,'itertools::range::size()'],['../structitertools_1_1sliced.html#a1280441e4c50a65c7bec14c43c290399',1,'itertools::sliced::size()']]],
-  ['slice_4',['slice',['../group__range__adapting__functions.html#ga8606dedf82c28b101ab2f4e68cbb03df',1,'itertools']]],
-  ['slice_2ehpp_5',['slice.hpp',['../slice_8hpp.html',1,'']]],
-  ['sliced_6',['sliced',['../structitertools_1_1sliced.html',1,'itertools']]],
-  ['start_7',['Where to start?',['../index.html#start',1,'']]],
-  ['start_5fidx_8',['start_idx',['../structitertools_1_1sliced.html#adcc7e72aeac6afe16bcfc664314c51a2',1,'itertools::sliced']]],
-  ['std_3a_3aranges_9',['Example 1: Comparison with std::ranges',['../ex1.html',1,'']]],
-  ['step_10',['step',['../structitertools_1_1range_1_1const__iterator.html#a3d824edc03026beed595b36a55fe573e',1,'itertools::range::const_iterator::step'],['../classitertools_1_1range.html#aba2e1e67f13f6faa70417f84677f8371',1,'itertools::range::step()']]],
-  ['steps_11',['Installation steps',['../installation.html#install_steps',1,'']]],
-  ['stride_12',['stride',['../structitertools_1_1stride__iter.html#a06d7312af8380a2be790695b4ecb7398',1,'itertools::stride_iter::stride'],['../structitertools_1_1strided.html#a8c18467677243f2d0ad127435a5a3000',1,'itertools::strided::stride'],['../group__range__adapting__functions.html#ga8bb200d4915be2b7b621a261a693a3ed',1,'itertools::stride()']]],
-  ['stride_2ehpp_13',['stride.hpp',['../stride_8hpp.html',1,'']]],
-  ['stride_5fiter_14',['stride_iter',['../structitertools_1_1stride__iter.html',1,'itertools::stride_iter&lt; Iter &gt;'],['../structitertools_1_1stride__iter.html#a3d9490a825ffe8a237694390b591b6f4',1,'itertools::stride_iter::stride_iter()=default'],['../structitertools_1_1stride__iter.html#a4073823d97eb35dcfad39f35ab73b934',1,'itertools::stride_iter::stride_iter(Iter it, std::ptrdiff_t stride)']]],
-  ['strided_15',['strided',['../structitertools_1_1strided.html',1,'itertools']]]
+  ['range_0',['range',['../group__integer__range.html',1,'Integer range'],['../documentation.html#autotoc_md17',1,'Integer range'],['../classitertools_1_1range.html',1,'itertools::range'],['../classitertools_1_1range.html#a74ba266a769b2f6e69032e3eecbbcc77',1,'itertools::range::range()=default'],['../classitertools_1_1range.html#a7dfddfd34ad1c34b55101ba2101dd7af',1,'itertools::range::range(long first, long last) noexcept'],['../classitertools_1_1range.html#a083109ed16887b9aadd3a0a5a712f80f',1,'itertools::range::range(long first, long last, long step)'],['../classitertools_1_1range.html#a9db3a7a695fc7bbcd88b7489706685c1',1,'itertools::range::range(long last)']]],
+  ['range_20adapting_20functions_1',['Range adapting functions',['../group__range__adapting__functions.html',1,'Range adapting functions'],['../documentation.html#autotoc_md14',1,'Range adapting functions']]],
+  ['range_20iterators_2',['Range iterators',['../group__range__iterators.html',1,'Range iterators'],['../documentation.html#autotoc_md16',1,'Range iterators']]],
+  ['range_2ehpp_3',['range.hpp',['../range_8hpp.html',1,'']]],
+  ['ranges_4',['ranges',['../group__adapted__ranges.html',1,'Adapted ranges'],['../documentation.html#autotoc_md15',1,'Adapted ranges']]],
+  ['rank_5',['Rank',['../structitertools_1_1prod__iter.html#a1fbdfd0e9b33ecabe246f2ffc792791a',1,'itertools::prod_iter']]],
+  ['reference_6',['reference',['../structitertools_1_1iterator__facade_3_01Iter_00_01Value_00_01std_1_1forward__iterator__tag_00_01Reference_00_01Difference_01_4.html#afdbcd6d73c6e6588a1d794ad03e5d504',1,'itertools::iterator_facade&lt; Iter, Value, std::forward_iterator_tag, Reference, Difference &gt;::reference'],['../structitertools_1_1range_1_1const__iterator.html#ae6a9c0c7d2c1d29ef5a485d4d9e62d2d',1,'itertools::range::const_iterator::reference']]],
+  ['rg_7',['rg',['../structitertools_1_1enumerated.html#ad9196a4706a5e7d37cc38ca61fa3ccab',1,'itertools::enumerated::rg'],['../structitertools_1_1sliced.html#a6298f9a639b9a7d01a5e04ed87dd074b',1,'itertools::sliced::rg'],['../structitertools_1_1strided.html#a7a42bef7c4377136634318274d738c50',1,'itertools::strided::rg'],['../structitertools_1_1transformed.html#a03b2325e6874dc7dcdb00af2a3509dad',1,'itertools::transformed::rg']]]
 ];

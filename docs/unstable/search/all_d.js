@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['make_5fproduct_0',['make_product',['../group__range__adapting__functions.html#ga34543490b6dce9a46e242a94b7e8ce5f',1,'itertools::make_product(std::array&lt; R, N &gt; &amp;arr)'],['../group__range__adapting__functions.html#gad74d740a044d4e3270a761ef86283c27',1,'itertools::make_product(std::array&lt; R, N &gt; const &amp;arr)']]],
-  ['make_5fsentinel_1',['make_sentinel',['../group__utilities.html#ga2bcae3ad6688c43e435a36735a7beaf4',1,'itertools']]],
-  ['make_5fvector_5ffrom_5frange_2',['make_vector_from_range',['../group__utilities.html#gac3cbb11dc94b6bbe8949fc7eadb1e801',1,'itertools']]],
-  ['multiplied_3',['multiplied',['../structitertools_1_1multiplied.html',1,'itertools::multiplied&lt; Rs &gt;'],['../structitertools_1_1multiplied.html#a2aea2db1b7579e7c1290e0e4c5ebbb70',1,'itertools::multiplied::multiplied()']]]
+  ['lambda_0',['lambda',['../structitertools_1_1transform__iter.html#a53af0def93d7124ce4b009ea141df510',1,'itertools::transform_iter::lambda'],['../structitertools_1_1transformed.html#a4f131b23ac05b35690e284473800f02c',1,'itertools::transformed::lambda']]],
+  ['last_1',['last',['../structitertools_1_1range_1_1const__iterator.html#ab8ace17b2ced993ede1184113af89055',1,'itertools::range::const_iterator::last'],['../classitertools_1_1range.html#a8719b3bea5288e9aec56d5f9db6a84a3',1,'itertools::range::last()']]],
+  ['list_2',['Deprecated List',['../deprecated.html',1,'']]]
 ];

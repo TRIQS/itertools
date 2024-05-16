@@ -1,4 +1,10 @@
 var searchData=
 [
-  ['begin_0',['begin',['../structitertools_1_1enumerated.html#a3711a897da346ba0626114a4f06c9af8',1,'itertools::enumerated::begin() noexcept'],['../structitertools_1_1enumerated.html#a1ea96f9f23609fb8758fa4de732b499a',1,'itertools::enumerated::begin() const noexcept'],['../structitertools_1_1multiplied.html#aa682a06785905ff0eaabadd59d4bd8c4',1,'itertools::multiplied::begin() noexcept'],['../structitertools_1_1multiplied.html#af26460fab90bb889fec46b50561e6fc2',1,'itertools::multiplied::begin() const noexcept'],['../classitertools_1_1range.html#af64f8926795ad7ac462b1f0774ada5c0',1,'itertools::range::begin()'],['../structitertools_1_1sliced.html#a100381a6dbf300fb58c08065a13e68a0',1,'itertools::sliced::begin() noexcept'],['../structitertools_1_1sliced.html#afe66702064ebdbf9335c86765d18f0bf',1,'itertools::sliced::begin() const noexcept'],['../structitertools_1_1strided.html#a25aa66ab1458ef449183c22a674cefb9',1,'itertools::strided::begin() noexcept'],['../structitertools_1_1strided.html#a0d383e556631e0760ea5c83b661c02c5',1,'itertools::strided::begin() const noexcept'],['../structitertools_1_1transformed.html#a9e611468299da18cc2fee85f61b2f4b6',1,'itertools::transformed::begin()'],['../structitertools_1_1zipped.html#ac62f22afc19a10a1b53b4a8b2d265b33',1,'itertools::zipped::begin() noexcept'],['../structitertools_1_1zipped.html#a2f3ace55e979c7d907d666893d85406f',1,'itertools::zipped::begin() const noexcept']]]
+  ['adapted_20ranges_0',['Adapted ranges',['../group__adapted__ranges.html',1,'Adapted ranges'],['../documentation.html#autotoc_md15',1,'Adapted ranges']]],
+  ['adapting_20functions_1',['adapting functions',['../group__range__adapting__functions.html',1,'Range adapting functions'],['../documentation.html#autotoc_md14',1,'Range adapting functions']]],
+  ['add_5fsubdirectory_2',['add_subdirectory',['../integration.html#add_sub',1,'']]],
+  ['all_3',['all',['../classitertools_1_1range.html#a01ea72771b21561112235c5c9226c58e',1,'itertools::range']]],
+  ['all_5ft_4',['all_t',['../structitertools_1_1range_1_1all__t.html',1,'itertools::range']]],
+  ['api_20documentation_5',['API Documentation',['../documentation.html',1,'']]],
+  ['atend_6',['atEnd',['../structitertools_1_1range_1_1const__iterator.html#a6c30c5a3dc476908795d8984c97db85b',1,'itertools::range::const_iterator']]]
 ];

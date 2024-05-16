@@ -112,18 +112,18 @@ $(function(){initNavTree('documentation.html',''); initResizable(true); });
 </div><!--header-->
 <div class="contents">
 <div class="toc"><h3>Table of Contents</h3>
-<ul><ul><li class="level2"><a href="#autotoc_md10">Range adapting functions</a></li>
-<li class="level2"><a href="#autotoc_md11">Adapted ranges</a></li>
-<li class="level2"><a href="#autotoc_md12">Range iterators</a></li>
-<li class="level2"><a href="#autotoc_md13">Integer range</a></li>
-<li class="level2"><a href="#autotoc_md14">Utilities</a></li>
+<ul><ul><li class="level2"><a href="#autotoc_md14">Range adapting functions</a></li>
+<li class="level2"><a href="#autotoc_md15">Adapted ranges</a></li>
+<li class="level2"><a href="#autotoc_md16">Range iterators</a></li>
+<li class="level2"><a href="#autotoc_md17">Integer range</a></li>
+<li class="level2"><a href="#autotoc_md18">Utilities</a></li>
 </ul>
 </ul>
 </div>
 <div class="textblock"><p>The following provides a detailed reference documentation grouped into logical units.</p>
 <p>For most users of the library it should be sufficient to either use one of the <a class="el" href="group__range__adapting__functions.html">Range adapting functions</a> or an <a class="el" href="group__integer__range.html">Integer range</a>.</p>
 <p>If you are looking for a specific function, class, etc., try using the search bar in the top left corner.</p>
-<h2><a class="anchor" id="autotoc_md10"></a>
+<h2><a class="anchor" id="autotoc_md14"></a>
 Range adapting functions</h2>
 <p><a class="el" href="group__range__adapting__functions.html">Range adapting functions</a> take one or more existing ranges and return lazy <a class="el" href="group__adapted__ranges.html">Adapted ranges</a> that can be iterated over. Lazy means that new elements are produced on the fly whenever they are needed instead of being precomputed when the range is created.</p>
 <p>The following range adpating functions are available in <b>itertools</b>:</p>
@@ -136,7 +136,7 @@ Range adapting functions</h2>
 <li><a class="el" href="group__range__adapting__functions.html#ga388ed2a77ff553f7df5a239771c4c281">transform</a></li>
 <li><a class="el" href="group__range__adapting__functions.html#gabc2b2378848df2fb7cd9888b5a8f6127">zip</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md11"></a>
+<h2><a class="anchor" id="autotoc_md15"></a>
 Adapted ranges</h2>
 <p><a class="el" href="group__adapted__ranges.html">Adapted ranges</a> are returned by the range adapting functions and can be iterated over using one of the <a class="el" href="group__range__iterators.html">Range iterators</a>. In most cases, the user will never have to create or modify an adapted range directly. Instead, it is recommended to simply use the provided <a class="el" href="group__range__adapting__functions.html">Range adapting functions</a>.</p>
 <p>The following adapted ranges are defined in <b>itertools</b>:</p>
@@ -148,7 +148,7 @@ Adapted ranges</h2>
 <li><a class="el" href="structitertools_1_1transformed.html">transformed</a></li>
 <li><a class="el" href="structitertools_1_1zipped.html">zipped</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md12"></a>
+<h2><a class="anchor" id="autotoc_md16"></a>
 Range iterators</h2>
 <p><a class="el" href="group__range__iterators.html">Range iterators</a> are internally used by the library to iterate over <a class="el" href="group__adapted__ranges.html">Adapted ranges</a>. In general, there should be no need for users to deal with range iterators directly. Instead, it is recommended to use range-based for loops, e.g. </p><div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keyword">auto</span> [idx, val] : itertools::enumerate(some_range)) {</div>
 <div class="line">    <span class="comment">// do something with the index and the value of the range</span></div>
@@ -166,7 +166,7 @@ Range iterators</h2>
 <li><a class="el" href="structitertools_1_1transform__iter.html">transform_iter</a></li>
 <li><a class="el" href="structitertools_1_1zip__iter.html">zip_iter</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md13"></a>
+<h2><a class="anchor" id="autotoc_md17"></a>
 Integer range</h2>
 <p>An <a class="el" href="group__integer__range.html">Integer range</a> is similar to a Python <code>range</code>. It is defined by a start value, an end value and a step size such that the i-th value of the range is given by <code>start + i * step</code>.</p>
 <p>The following classes and functions related to integer ranges are defined in <b>itertools</b>:</p>
@@ -175,7 +175,7 @@ Integer range</h2>
 <li><a class="el" href="group__integer__range.html#ga213010794c184175aa29fa9b520b163c">foreach</a></li>
 <li><a class="el" href="group__integer__range.html#gac1b835b5787ccc1e2734690d63e6825d">product_range</a></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md14"></a>
+<h2><a class="anchor" id="autotoc_md18"></a>
 Utilities</h2>
 <p><a class="el" href="group__utilities.html">Utilities</a> are mostly internal implementation details and should not concern everyday users. The only functions the might be intersting to some users are: <a class="el" href="group__utilities.html#gabb91b8815600796bd9da1fe9ada77dc7">chunk_range</a>, <a class="el" href="group__utilities.html#gac3cbb11dc94b6bbe8949fc7eadb1e801">make_vector_from_range</a> and <a class="el" href="group__utilities.html#gae21b1ebaf3fdab236d7744093243bfdf">omp_chunk</a>.</p>
 <p>The following utilities are defined in <b>itertools</b>:</p>

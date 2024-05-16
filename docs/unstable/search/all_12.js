@@ -1,10 +1,19 @@
 var searchData=
 [
-  ['the_20examples_0',['Compiling the examples',['../examples.html#compiling',1,'']]],
-  ['to_20start_1',['Where to start?',['../index.html#start',1,'']]],
-  ['transform_2',['transform',['../group__range__adapting__functions.html#ga388ed2a77ff553f7df5a239771c4c281',1,'itertools']]],
-  ['transform_2ehpp_3',['transform.hpp',['../transform_8hpp.html',1,'']]],
-  ['transform_5fiter_4',['transform_iter',['../structitertools_1_1transform__iter.html',1,'itertools::transform_iter&lt; Iter, F, Value &gt;'],['../structitertools_1_1transform__iter.html#a50182b878a9d2fdd404abab9940c759e',1,'itertools::transform_iter::transform_iter()=default'],['../structitertools_1_1transform__iter.html#a0b5f85fd3b4595ec0806326a40f2a64c',1,'itertools::transform_iter::transform_iter(Iter it, F lambda)'],['../structitertools_1_1transform__iter.html#a9dfbff0d907ef0056bc9c7aaa42962d3',1,'itertools::transform_iter::transform_iter(transform_iter &amp;&amp;)=default'],['../structitertools_1_1transform__iter.html#a850485cea3aff0777d3663e283705b74',1,'itertools::transform_iter::transform_iter(transform_iter const &amp;)=default']]],
-  ['transformed_5',['transformed',['../structitertools_1_1transformed.html',1,'itertools']]],
-  ['tu_6',['tu',['../structitertools_1_1multiplied.html#a098d5d633db6ee2ec0463207d8229c02',1,'itertools::multiplied::tu'],['../structitertools_1_1zipped.html#a5f6c21f235321caf34d3842f19999c95',1,'itertools::zipped::tu']]]
+  ['sentinel_2ehpp_0',['sentinel.hpp',['../sentinel_8hpp.html',1,'']]],
+  ['sentinel_5ft_1',['sentinel_t',['../structitertools_1_1sentinel__t.html',1,'itertools']]],
+  ['seq_5ft_2',['seq_t',['../structitertools_1_1zipped.html#afe12040435cceafd666c55f9c9eeabcb',1,'itertools::zipped']]],
+  ['size_3',['size',['../classitertools_1_1range.html#aeba034794b1c57fe30955d7a25828bf6',1,'itertools::range::size()'],['../structitertools_1_1sliced.html#a1280441e4c50a65c7bec14c43c290399',1,'itertools::sliced::size()']]],
+  ['slice_4',['slice',['../group__range__adapting__functions.html#ga8606dedf82c28b101ab2f4e68cbb03df',1,'itertools']]],
+  ['slice_2ehpp_5',['slice.hpp',['../slice_8hpp.html',1,'']]],
+  ['sliced_6',['sliced',['../structitertools_1_1sliced.html',1,'itertools']]],
+  ['start_7',['Where to start?',['../index.html#start',1,'']]],
+  ['start_5fidx_8',['start_idx',['../structitertools_1_1sliced.html#adcc7e72aeac6afe16bcfc664314c51a2',1,'itertools::sliced']]],
+  ['std_3a_3aranges_9',['Example 1: Comparison with std::ranges',['../ex1.html',1,'']]],
+  ['step_10',['step',['../structitertools_1_1range_1_1const__iterator.html#a3d824edc03026beed595b36a55fe573e',1,'itertools::range::const_iterator::step'],['../classitertools_1_1range.html#aba2e1e67f13f6faa70417f84677f8371',1,'itertools::range::step()']]],
+  ['steps_11',['Installation steps',['../installation.html#install_steps',1,'']]],
+  ['stride_12',['stride',['../structitertools_1_1stride__iter.html#a06d7312af8380a2be790695b4ecb7398',1,'itertools::stride_iter::stride'],['../structitertools_1_1strided.html#a8c18467677243f2d0ad127435a5a3000',1,'itertools::strided::stride'],['../group__range__adapting__functions.html#ga8bb200d4915be2b7b621a261a693a3ed',1,'itertools::stride()']]],
+  ['stride_2ehpp_13',['stride.hpp',['../stride_8hpp.html',1,'']]],
+  ['stride_5fiter_14',['stride_iter',['../structitertools_1_1stride__iter.html',1,'itertools::stride_iter&lt; Iter &gt;'],['../structitertools_1_1stride__iter.html#a3d9490a825ffe8a237694390b591b6f4',1,'itertools::stride_iter::stride_iter()=default'],['../structitertools_1_1stride__iter.html#a4073823d97eb35dcfad39f35ab73b934',1,'itertools::stride_iter::stride_iter(Iter it, std::ptrdiff_t stride)']]],
+  ['strided_15',['strided',['../structitertools_1_1strided.html',1,'itertools']]]
 ];
