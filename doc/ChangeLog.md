@@ -1,5 +1,32 @@
 @page changelog Changelog
 
+## Version 1.3.0
+
+This is Version 1.3.0 of Itertools, a single-header library for adapting C++ ranges.
+
+We thank all contributors: Thomas Hahn, Alexander Hampel, Henri Menke, Nils Wentzell
+
+Find below an itemized list of changes in this release.
+
+### General
+* Clean up detail namespace to consistently contain implementation details
+* Improve test coverage and clean up tests
+* Split itertools.hpp into multiple header files
+* Remove unused zip_with function
+* Fix for combination of product and stride
+* Fix strided range and add corresponding test
+
+### doc
+* Add documentation to the C++ source code files
+* Remove any sphinx related files and switch to doxygen to generate documentation
+* Build and deploy documentation with GitHub Actions
+
+### cmake
+* Remove python and cpp2py dependencies
+* Use GNUInstallDirs in install commands
+* Set policy CMP0144 to new
+
+
 ## Version 1.2.0
 
 This is Version 1.2.0 of Itertools, a single-header library for adapting C++ ranges.
