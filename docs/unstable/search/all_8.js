@@ -7,6 +7,6 @@ var searchData=
   ['enumerate_2ehpp_4',['enumerate.hpp',['../enumerate_8hpp.html',1,'']]],
   ['enumerated_5',['enumerated',['../structitertools_1_1enumerated.html',1,'itertools']]],
   ['example_201_3a_20comparison_20with_20std_3a_3aranges_6',['Example 1: Comparison with std::ranges',['../ex1.html',1,'']]],
-  ['examples_7',['Compiling the examples',['../examples.html#compiling',1,'']]],
-  ['examples_8',['Examples',['../examples.html',1,'']]]
+  ['examples_7',['Examples',['../examples.html',1,'']]],
+  ['examples_8',['Compiling the examples',['../examples.html#compiling',1,'']]]
 ];
