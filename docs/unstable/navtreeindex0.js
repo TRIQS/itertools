@@ -63,7 +63,7 @@ var NAVTREEINDEX0 =
 "stride_8hpp_source.html":[4,5,0,8],
 "structitertools_1_1enum__iter.html":[4,2,0],
 "structitertools_1_1enumerated.html":[4,1,0],
-"structitertools_1_1iterator__facade_3_01Iter_00_01Value_00_01std_1_1forward__iterator__tag_00_01Reference_00_01Difference_01_4.html":[4,4,2],
+"structitertools_1_1iterator__facade_3_01_iter_00_01_value_00_01std_1_1forward__iterator__tag_00_c4a3be75e34f84b08f8513fb3abb97f6.html":[4,4,2],
 "structitertools_1_1multiplied.html":[4,1,1],
 "structitertools_1_1prod__iter.html":[4,2,1],
 "structitertools_1_1range_1_1all__t.html":[4,3,1,0],

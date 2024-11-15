@@ -80,7 +80,7 @@ var NAVTREE =
       [ "Utilities", "group__utilities.html", [
         [ "chunk_range", "group__utilities.html#gabb91b8815600796bd9da1fe9ada77dc7", null ],
         [ "distance", "group__utilities.html#gac075e63f5924e0d2bd1a3d85f3f9e362", null ],
-        [ "iterator_facade", "structitertools_1_1iterator__facade_3_01Iter_00_01Value_00_01std_1_1forward__iterator__tag_00_01Reference_00_01Difference_01_4.html", null ],
+        [ "iterator_facade", "structitertools_1_1iterator__facade_3_01_iter_00_01_value_00_01std_1_1forward__iterator__tag_00_c4a3be75e34f84b08f8513fb3abb97f6.html", null ],
         [ "make_sentinel", "group__utilities.html#ga2bcae3ad6688c43e435a36735a7beaf4", null ],
         [ "make_vector_from_range", "group__utilities.html#gac3cbb11dc94b6bbe8949fc7eadb1e801", null ],
         [ "omp_chunk", "group__utilities.html#gae21b1ebaf3fdab236d7744093243bfdf", null ],

@@ -69,7 +69,7 @@ var menudata={children:[
 {text:"Utilities",url:"group__utilities.html",children:[
 {text:"chunk_range",url:"group__utilities.html#gabb91b8815600796bd9da1fe9ada77dc7"},
 {text:"distance",url:"group__utilities.html#gac075e63f5924e0d2bd1a3d85f3f9e362"},
-{text:"iterator_facade",url:"structitertools_1_1iterator__facade_3_01Iter_00_01Value_00_01std_1_1forward__iterator__tag_00_01Reference_00_01Difference_01_4.html"},
+{text:"iterator_facade",url:"structitertools_1_1iterator__facade_3_01_iter_00_01_value_00_01std_1_1forward__iterator__tag_00_c4a3be75e34f84b08f8513fb3abb97f6.html"},
 {text:"make_sentinel",url:"group__utilities.html#ga2bcae3ad6688c43e435a36735a7beaf4"},
 {text:"make_vector_from_range",url:"group__utilities.html#gac3cbb11dc94b6bbe8949fc7eadb1e801"},
 {text:"omp_chunk",url:"group__utilities.html#gae21b1ebaf3fdab236d7744093243bfdf"},

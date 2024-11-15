@@ -127,23 +127,25 @@ $(function(){initNavTree('itertools_8hpp_source.html',''); initResizable(true); 
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">//</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="comment">// Authors: Thomas Hahn, Olivier Parcollet, Nils Wentzell, chuffa</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="comment">/**</span></div>
-<div class="line"><span class="lineno">   18</span><span class="comment"> * @file</span></div>
-<div class="line"><span class="lineno">   19</span><span class="comment"> * @brief Provides a small subset of the ranges and views from [std::ranges](https://en.cppreference.com/w/cpp/ranges).</span></div>
-<div class="line"><span class="lineno">   20</span><span class="comment"> */</span></div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#</span><span class="preprocessor">ifndef</span> <span class="preprocessor">_ITERTOOLS_HPP</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#</span><span class="preprocessor">define</span> <span class="preprocessor">_ITERTOOLS_HPP</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#ifndef _ITERTOOLS_HPP</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#define _ITERTOOLS_HPP</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;./enumerate.hpp&quot;</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;./product.hpp&quot;</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;./range.hpp&quot;</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;./slice.hpp&quot;</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;./stride.hpp&quot;</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;./transform.hpp&quot;</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#</span><span class="preprocessor">include</span> <span class="preprocessor">&quot;./zip.hpp&quot;</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;<a class="code" href="enumerate_8hpp.html">./enumerate.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="product_8hpp.html">./product.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="range_8hpp.html">./range.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="slice_8hpp.html">./slice.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="stride_8hpp.html">./stride.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="transform_8hpp.html">./transform.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;<a class="code" href="zip_8hpp.html">./zip.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#</span><span class="preprocessor">endif</span> <span class="comment">// _ITERTOOLS_HPP_</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#endif </span><span class="comment">// _ITERTOOLS_HPP_</span></div>
+<div class="ttc" id="aenumerate_8hpp_html"><div class="ttname"><a href="enumerate_8hpp.html">enumerate.hpp</a></div><div class="ttdoc">Provides a range adapting function for enumerating a given range/view.</div></div>
+<div class="ttc" id="aproduct_8hpp_html"><div class="ttname"><a href="product_8hpp.html">product.hpp</a></div><div class="ttdoc">Provides a range adapting function for multiplying a given number of ranges/views (cartesian product)...</div></div>
+<div class="ttc" id="arange_8hpp_html"><div class="ttname"><a href="range_8hpp.html">range.hpp</a></div><div class="ttdoc">Provides an integer range similar to Python's range.</div></div>
+<div class="ttc" id="aslice_8hpp_html"><div class="ttname"><a href="slice_8hpp.html">slice.hpp</a></div><div class="ttdoc">Provides a range adapting function for slicing a given range/view.</div></div>
+<div class="ttc" id="astride_8hpp_html"><div class="ttname"><a href="stride_8hpp.html">stride.hpp</a></div><div class="ttdoc">Provides a range adapting function for striding through a given range/view.</div></div>
+<div class="ttc" id="atransform_8hpp_html"><div class="ttname"><a href="transform_8hpp.html">transform.hpp</a></div><div class="ttdoc">Provides a range adapting function for transforming a given range/view.</div></div>
+<div class="ttc" id="azip_8hpp_html"><div class="ttname"><a href="zip_8hpp.html">zip.hpp</a></div><div class="ttdoc">Provides a range adapting function for zipping a given number of ranges/views.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

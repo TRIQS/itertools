@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['pointer_0',['pointer',['../structitertools_1_1iterator__facade_3_01Iter_00_01Value_00_01std_1_1forward__iterator__tag_00_01Reference_00_01Difference_01_4.html#a50468fadfdc2199607589d41d5514518',1,'itertools::iterator_facade&lt; Iter, Value, std::forward_iterator_tag, Reference, Difference &gt;::pointer'],['../structitertools_1_1range_1_1const__iterator.html#a68b1f6470780ade5d23c403da941b9b8',1,'itertools::range::const_iterator::pointer']]],
+  ['pointer_0',['pointer',['../structitertools_1_1iterator__facade_3_01_iter_00_01_value_00_01std_1_1forward__iterator__tag_00_c4a3be75e34f84b08f8513fb3abb97f6.html#a50468fadfdc2199607589d41d5514518',1,'itertools::iterator_facade&lt; Iter, Value, std::forward_iterator_tag, Reference, Difference &gt;::pointer'],['../structitertools_1_1range_1_1const__iterator.html#a68b1f6470780ade5d23c403da941b9b8',1,'itertools::range::const_iterator::pointer']]],
   ['pos_1',['pos',['../structitertools_1_1range_1_1const__iterator.html#a8aa56ef49d3022fe29a0a1efa7c84c9e',1,'itertools::range::const_iterator']]],
   ['print_20hpp_2',['print.hpp',['../examples.html#print_header',1,'']]],
   ['prod_5fiter_3',['prod_iter',['../structitertools_1_1prod__iter.html',1,'itertools::prod_iter&lt; EndIters, Iters &gt;'],['../structitertools_1_1prod__iter.html#a8dc1b500b12d91179f9a83f98080c8d9',1,'itertools::prod_iter::prod_iter()=default'],['../structitertools_1_1prod__iter.html#a6afb1323ffdd01c7052c0c1226c7b5bf',1,'itertools::prod_iter::prod_iter(std::tuple&lt; Iters... &gt; its_begin, EndIters its_end)']]],
