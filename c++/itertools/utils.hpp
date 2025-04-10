@@ -64,7 +64,7 @@ namespace itertools {
    *
    * @tparam R Range type.
    * @param rg Range.
-   * @return std::vector<T> containing the elements of the range, where T denotes the value type of the range.
+   * @return `std::vector<T>` containing the elements of the range, where T denotes the value type of the range.
    */
   template <typename R> [[nodiscard]] auto make_vector_from_range(R const &rg) {
     std::vector<std::decay_t<decltype(*(std::begin(rg)))>> vec{};
@@ -80,14 +80,15 @@ namespace itertools {
   /**
    * @brief Given an integer range `[first, last)`, divide it as equally as possible into N chunks.
    *
-   * @details It is intended to divide a range among different processes. If the size of the range is not
-   * divisible by N without a remainder, i.e. `r = (last - first) % N`, then the first `r` chunks have one more element.
+   * @details It is intended to divide a range among different processes. If the size of the range is not divisible by
+   * \f$ N \f$ without a remainder, i.e. `r = (last - first) % N`, then the first `r` chunks have one more element.
    *
    * @param first First value of the range.
    * @param last Last value of the range (excluded).
    * @param n_chunks Number of chunks to divide the range into.
    * @param rank Rank of the calling process.
-   * @return Pair of indices specifying the first and last (excluded) value of the chunk assigned to the calling process.
+   * @return Pair of indices specifying the first and last (excluded) value of the chunk assigned to the calling
+   * process.
    */
   [[nodiscard]] inline std::pair<std::ptrdiff_t, std::ptrdiff_t> chunk_range(std::ptrdiff_t first, std::ptrdiff_t last, long n_chunks, long rank) {
     auto total_size    = last - first;
