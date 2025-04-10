@@ -44,8 +44,8 @@ namespace itertools {
   /**
    * @brief A lazy range of integers that mimics a Python range.
    *
-   * @details It stores the first value, the last value (excluded) and the step size between two indices.
-   * By default, the step size is set to 1.
+   * @details It stores the first value, the last value (excluded) and the step size between two indices. By default,
+   * the step size is set to 1.
    *
    * This function returns an iterable lazy object, which can be used in range-based for loops:
    *
@@ -163,9 +163,9 @@ namespace itertools {
     [[nodiscard]] range operator+(long shift) const { return {first_ + shift, last_ + shift, step_}; }
 
     /**
-     * @brief Write the range details to std::ostream.
+     * @brief Write the range details to `std::ostream`.
      *
-     * @param os std::ostream object.
+     * @param os `std::ostream` object.
      * @param rg range object.
      * @return Reference to os.
      */
