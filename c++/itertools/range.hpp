@@ -116,7 +116,7 @@ namespace itertools {
      * @param first First value of the range.
      * @param last Last value of the range (excluded).
      */
-    range(long first, long last) noexcept : first_(first), last_(last) {}
+    range(std::integral auto first, std::integral auto last) noexcept : first_(first), last_(last) {}
 
     /**
      * @brief Construct a range with a given step size and a given first and last (excluded) value.
@@ -127,7 +127,7 @@ namespace itertools {
      * @param last Last value of the range (excluded).
      * @param step Number of integers between two elements of the range.
      */
-    range(long first, long last, long step) : first_(first), last_(last), step_(step) {
+    range(std::integral auto first, std::integral auto last, std::integral auto step) : first_(first), last_(last), step_(step) {
       if (step_ == 0) throw std::runtime_error("Step-size cannot be zero in construction of integer range");
     }
 
@@ -135,7 +135,7 @@ namespace itertools {
      * @brief Construct a range with a step size of 1, a first value set to 0 and a given last value (excluded).
      * @param last Last value of the range (excluded).
      */
-    explicit range(long last) : range(0, last, 1) {}
+    explicit range(std::integral auto last) : range(0, last, 1) {}
 
     /// Default equal-to operator.
     [[nodiscard]] bool operator==(range const &) const = default;
