@@ -26,6 +26,9 @@
 
 #include <algorithm>
 #include <array>
+#include <cassert>
+#include <compare>
+#include <concepts>
 #include <iostream>
 #include <iterator>
 #include <stdexcept>
@@ -152,8 +155,7 @@ namespace itertools {
     /**
      * @brief Shift the whole range by a given amount.
      *
-     * @details Simply adds the given shift to the first and last value of the range, while keeping
-     * the same step size.
+     * @details Simply adds the given shift to the first and last value of the range, while keeping the same step size.
      *
      * @param shift Amount to shift the range by.
      * @return Shifted range.
@@ -177,9 +179,6 @@ namespace itertools {
       /// Current value.
       long pos;
 
-      /// Last value of the range (excluded).
-      long last;
-
       /// Step size.
       long step;
 
@@ -187,7 +186,7 @@ namespace itertools {
       using value_type = long;
 
       /// Iterator category.
-      using iterator_category = std::forward_iterator_tag;
+      using iterator_category = std::random_access_iterator_tag;
 
       /// Pointer type.
       using pointer = value_type *;
@@ -200,7 +199,7 @@ namespace itertools {
 
       /**
        * @brief Pre-increment operator increments the current value by the step size.
-       * @return Reference to the incremented iterator.
+       * @return Reference to `this` iterator.
        */
       const_iterator &operator++() noexcept {
         pos += step;
@@ -209,76 +208,166 @@ namespace itertools {
 
       /**
        * @brief Post-increment operator increments the current value by the step size.
-       * @return Copy of the iterator before incrementing.
+       * @return Copy of `this` iterator before incrementing.
        */
       const_iterator operator++(int) noexcept {
-        const_iterator c = *this;
-        pos += step;
-        return c;
+        const_iterator tmp = *this;
+        ++*this;
+        return tmp;
       }
 
       /**
-       * @brief Has the iterator reached the end of the range?
-       * @return True, if the current value of the iterator is >= the last value of the range for positive step size or
-       * if the current value of the iterator is <= the last value of the range for negative step size.
+       * @brief Pre-decrement operator decrements the current value by the step size.
+       * @return Reference to `this` iterator.
        */
-      [[nodiscard]] bool atEnd() const noexcept { return step > 0 ? pos >= last : pos <= last; }
+      const_iterator &operator--() noexcept {
+        pos -= step;
+        return *this;
+      }
+
+      /**
+       * @brief Post-decrement operator decrements the current value by the step size.
+       * @return Copy of `this` iterator before decrementing.
+       */
+      const_iterator operator--(int) noexcept {
+        const_iterator tmp = *this;
+        --*this;
+        return tmp;
+      }
+
+      /**
+       * @brief Three-way comparison operator for two iterators.
+       *
+       * @param rhs Right hand side iterator to compare with.
+       * @return If the step size is > 0, it returns the result of a three-way comparison of their current values.
+       * Otherwise, it three-way compares their negative values.
+       */
+      std::strong_ordering operator<=>(const_iterator const &rhs) const noexcept { return (step > 0 ? pos <=> rhs.pos : -pos <=> -rhs.pos); }
 
       /**
        * @brief Equal-to operator for two iterators.
        *
        * @param other Iterator to compare with.
-       * @return True, if the current values of both iterators are equal or both iterators are at the end of the range.
+       * @return True, if the current values of both iterators are equal.
        */
-      [[nodiscard]] bool operator==(const_iterator const &other) const noexcept {
-        return (other.pos == this->pos) || (other.atEnd() && this->atEnd());
-      }
-
-      /**
-       * @brief Not-equal-to operator for two iterators.
-       *
-       * @param other Iterator to compare with.
-       * @return True, if the iterators are not equal.
-       */
-      [[nodiscard]] bool operator!=(const_iterator const &other) const noexcept { return (!operator==(other)); }
+      [[nodiscard]] bool operator==(const_iterator const &other) const noexcept { return pos == other.pos; }
 
       /**
        * @brief Dereference operator.
-       * @return Current value of the iterator.
+       * @return Current value of `this` iterator.
        */
       [[nodiscard]] long operator*() const noexcept { return pos; }
 
       /**
        * @brief Member access operator.
-       * @return Current value of the iterator.
+       * @return Current value of `this` iterator.
        */
       [[nodiscard]] long operator->() const noexcept { return operator*(); }
+
+      /**
+       * @brief Addition assignment operator.
+       * @param n Number of steps to add to the current value.
+       * @return Reference to `this` iterator with its current value increased by the step size multiplied by \f$ n \f$.
+       */
+      const_iterator &operator+=(difference_type n) noexcept {
+        pos += n * step;
+        return *this;
+      }
+
+      /**
+       * @brief Addition operator for an iterator and an integer.
+       * @param n Number of steps to add to the current value.
+       * @return Copy of `this` object with its current value increased by the step size multiplied by \f$ n \f$.
+       */
+      [[nodiscard]] const_iterator operator+(difference_type n) const noexcept { return {.pos = pos + n * step, .step = step}; }
+
+      /**
+       * @brief Addition operator for an integer and an iterator.
+       * @param n Number of steps to add to the current value of the iterator.
+       * @param it Iterator.
+       * @return Copy of the given iterator with its current value increased by the step size multiplied by \f$ n \f$.
+       */
+      [[nodiscard]] friend const_iterator operator+(difference_type n, const_iterator it) noexcept {
+        return {.pos = it.pos + n * it.step, .step = it.step};
+      }
+
+      /**
+       * @brief Subtraction assignment operator.
+       * @param n Number of steps to subtract from the current value.
+       * @return Reference to `this` iterator with its current value decreased by the step size multiplied by \f$ n \f$.
+       */
+      const_iterator &operator-=(difference_type n) noexcept {
+        pos -= n * step;
+        return *this;
+      }
+
+      /**
+       * @brief Subtraction operator for an iterator and an integer.
+       * @param n Number of steps to subtract from the current value.
+       * @return Copy of `this` iterator with its current value decreased by the step size multiplied by \f$ n \f$.
+       */
+      [[nodiscard]] const_iterator operator-(difference_type n) const noexcept { return {.pos = pos - n * step, .step = step}; }
+
+      /**
+       * @brief Get the distance between two iterators.
+       * @param rhs Right-hand side iterator.
+       * @return Number of steps between the two iterators.
+       */
+      [[nodiscard]] difference_type operator-(const_iterator const &rhs) const noexcept { return (pos - rhs.pos) / step; }
+
+      /**
+       * @brief Subscript operator.
+       * @param n Number of steps to add to the current value.
+       * @return Current value increased by the step size multiplied by \f$ n \f$.
+       */
+      [[nodiscard]] value_type operator[](difference_type n) const noexcept { return pos + n * step; }
     };
+
+    /// Reverse const iterator type for itertools::range.
+    using const_reverse_iterator = std::reverse_iterator<range::const_iterator>;
 
     /**
      * @brief Beginning of the integer range.
      * @return Iterator with its current value set to the first value of the range.
      */
-    [[nodiscard]] const_iterator cbegin() const noexcept { return {first_, last_, step_}; }
+    [[nodiscard]] const_iterator cbegin() const noexcept { return {.pos = first_, .step = step_}; }
 
     /// The same as cbegin().
-    [[nodiscard]] const_iterator begin() const noexcept { return {first_, last_, step_}; }
+    [[nodiscard]] const_iterator begin() const noexcept { return {.pos = first_, .step = step_}; }
+
+    /**
+     * @brief Beginning of the integer range in reverse order.
+     * @return Reverse iterator initialized with end().
+     */
+    [[nodiscard]] const_reverse_iterator crbegin() const noexcept { return const_reverse_iterator{end()}; }
+
+    /// The same as crbegin().
+    [[nodiscard]] const_reverse_iterator rbegin() const noexcept { return const_reverse_iterator{end()}; }
 
     /**
      * @brief End of the range.
-     * @return Iterator with its current value set to the excluded last value of the range.
+     * @return Iterator with its current value set to first() + step() * size().
      */
-    [[nodiscard]] const_iterator cend() const noexcept { return {last_, last_, step_}; }
+    [[nodiscard]] const_iterator cend() const noexcept { return {.pos = first_ + step_ * size(), .step = step_}; }
 
     /// The same as cend().
-    [[nodiscard]] const_iterator end() const noexcept { return {last_, last_, step_}; }
+    [[nodiscard]] const_iterator end() const noexcept { return {.pos = first_ + step_ * size(), .step = step_}; }
+
+    /**
+     * @brief End of the range in reverse order.
+     * @return Reverse iterator initialized with begin().
+     */
+    [[nodiscard]] const_reverse_iterator crend() const noexcept { return const_reverse_iterator{begin()}; }
+
+    /// The same as crend().
+    [[nodiscard]] const_reverse_iterator rend() const noexcept { return const_reverse_iterator{begin()}; }
   };
 
   /**
    * @brief Create a cartesian product range of integer ranges from given integers.
    *
-   * @details The given integers specify the excluded last values of the individual itertools::range objects.
-   * Each range starts at 0 and has a step size of 1.
+   * @details The given integers specify the excluded last values of the individual itertools::range objects. Each range
+   * starts at 0 and has a step size of 1.
    *
    * @code{.cpp}
    * for (auto [i1, i2] : product_range(2, 3)) {
@@ -317,8 +406,8 @@ namespace itertools {
   /**
    * @brief Create a cartesian product range of integer ranges from a tuple of integers.
    *
-   * @details The integers in the given tuple specify the excluded last values of the individual itertools::range objects.
-   * Each range starts at 0 and has a step size of 1.
+   * @details The integers in the given tuple specify the excluded last values of the individual itertools::range
+   * objects. Each range starts at 0 and has a step size of 1.
    *
    * @code{.cpp}
    * for (auto [i1, i2] : product_range(std::make_tuple(2, 3))) {
@@ -349,8 +438,8 @@ namespace itertools {
   /**
    * @brief Create a cartesian product range of integer ranges from an array of integers.
    *
-   * @details The integers in the given array specify the excluded last values of the individual itertools::range objects.
-   * Each range starts at 0 and has a step size of 1.
+   * @details The integers in the given array specify the excluded last values of the individual itertools::range
+   * objects. Each range starts at 0 and has a step size of 1.
    *
    * @code{.cpp}
    * for (auto [i1, i2] : product_range(std::array{2, 3})) {

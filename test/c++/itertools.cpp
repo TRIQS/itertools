@@ -30,7 +30,7 @@ using namespace itertools;
 // A non-copyable integer.
 struct non_copyable_int {
   int i;
-  non_copyable_int(int u) : i(u){};
+  non_copyable_int(int u) : i(u) {};
   non_copyable_int(non_copyable_int const &) = delete;
   non_copyable_int(non_copyable_int &&)      = default;
 
@@ -287,6 +287,85 @@ TEST(Itertools, CombinationOfRangeAdaptingFunctions) {
       EXPECT_EQ(x2, i);
       i += s;
     }
+  }
+}
+
+// Test random access concept.
+static_assert(std::ranges::random_access_range<itertools::range>);
+static_assert(std::ranges::random_access_range<itertools::sliced<itertools::range>>);
+
+TEST(Itertools, RangeComparisons) {
+  auto check_comparisons = [](auto &&rg) {
+    auto check_ordering = [](auto &&it, auto &&it2) {
+      EXPECT_TRUE(it < it2);
+      EXPECT_TRUE(it <= it2);
+      EXPECT_TRUE(it2 > it);
+      EXPECT_TRUE(it2 >= it);
+    };
+    auto it  = rg.begin();
+    auto it2 = rg.end();
+    EXPECT_TRUE(it == rg.begin());
+    EXPECT_TRUE(it2 == rg.end());
+    EXPECT_TRUE(it != it2);
+    check_ordering(it, it2);
+    for (; it != it2; ++it, --it2) check_ordering(it, it2);
+    EXPECT_TRUE(it == it2);
+    for (; it != rg.end(); it++);
+    for (; it2 != rg.begin(); it2--);
+    EXPECT_TRUE(it == rg.end());
+    EXPECT_TRUE(it2 == rg.begin());
+    EXPECT_TRUE(it != it2);
+    check_ordering(it2, it);
+  };
+  check_comparisons(range(10));
+  check_comparisons(range(10, 22, 2));
+  check_comparisons(range(0, -10, -1));
+  check_comparisons(range(22, 10, -2));
+}
+
+TEST(Itertools, RangeRandomAccessOperations) {
+  auto check_ops = [](auto &&rg) {
+    auto it_begin  = rg.begin();
+    auto it_end    = rg.end();
+    auto it        = rg.begin();
+    auto it_rbegin = rg.rbegin();
+    auto it_rend   = rg.rend();
+    auto it_r      = rg.rbegin();
+    for (int i = 0; i < rg.size(); ++i, ++it, ++it_r) {
+      // forward iterator
+      EXPECT_EQ(it_begin[i], *it);
+      EXPECT_EQ(it_begin + i, it);
+      EXPECT_EQ(i + it_begin, it);
+      EXPECT_EQ(it_end - (rg.size() - i), it);
+      EXPECT_EQ(it - it_begin, i);
+      EXPECT_EQ(it_end - it, rg.size() - i);
+
+      auto it_tmp = it_begin;
+      it_tmp += i;
+      EXPECT_EQ(it_tmp, it);
+      it_tmp = it_end;
+      it_tmp -= rg.size() - i;
+      EXPECT_EQ(it_tmp, it);
+
+      // reverse iterator
+      EXPECT_EQ(it_rbegin[i], *it_r);
+      EXPECT_EQ(it_rbegin + i, it_r);
+      EXPECT_EQ(i + it_rbegin, it_r);
+      EXPECT_EQ(it_rend - (rg.size() - i), it_r);
+      EXPECT_EQ(it_r - it_rbegin, i);
+      EXPECT_EQ(it_rend - it_r, rg.size() - i);
+
+      auto it_tmp_r = it_rbegin;
+      it_tmp_r += i;
+      EXPECT_EQ(it_tmp_r, it_r);
+      it_tmp_r = it_rend;
+      it_tmp_r -= rg.size() - i;
+      EXPECT_EQ(it_tmp_r, it_r);
+    }
+  };
+  for (int i = 1; i < 10; ++i) {
+    check_ops(range{0, 10, i});
+    check_ops(range{10, 0, -i});
   }
 }
 
