@@ -212,7 +212,7 @@ namespace itertools {
        */
       const_iterator operator++(int) noexcept {
         const_iterator tmp = *this;
-        ++*this;
+        pos += step;
         return tmp;
       }
 
@@ -231,7 +231,7 @@ namespace itertools {
        */
       const_iterator operator--(int) noexcept {
         const_iterator tmp = *this;
-        --*this;
+        pos -= step;
         return tmp;
       }
 
@@ -242,7 +242,9 @@ namespace itertools {
        * @return If the step size is > 0, it returns the result of a three-way comparison of their current values.
        * Otherwise, it three-way compares their negative values.
        */
-      std::strong_ordering operator<=>(const_iterator const &rhs) const noexcept { return (step > 0 ? pos <=> rhs.pos : -pos <=> -rhs.pos); }
+      [[nodiscard]] std::strong_ordering operator<=>(const_iterator const &rhs) const noexcept {
+        return (step > 0 ? pos <=> rhs.pos : -pos <=> -rhs.pos);
+      }
 
       /**
        * @brief Equal-to operator for two iterators.
@@ -287,9 +289,7 @@ namespace itertools {
        * @param it Iterator.
        * @return Copy of the given iterator with its current value increased by the step size multiplied by \f$ n \f$.
        */
-      [[nodiscard]] friend const_iterator operator+(difference_type n, const_iterator it) noexcept {
-        return {.pos = it.pos + n * it.step, .step = it.step};
-      }
+      [[nodiscard]] friend const_iterator operator+(difference_type n, const_iterator it) noexcept { return it + n; }
 
       /**
        * @brief Subtraction assignment operator.
@@ -321,7 +321,8 @@ namespace itertools {
        * @return Current value increased by the step size multiplied by \f$ n \f$.
        */
       [[nodiscard]] value_type operator[](difference_type n) const noexcept { return pos + n * step; }
-    };
+
+    }; // end struct const_iterator
 
     /// Reverse const iterator type for itertools::range.
     using const_reverse_iterator = std::reverse_iterator<range::const_iterator>;
