@@ -15,5 +15,7 @@ var searchData=
   ['stride_12',['stride',['../structitertools_1_1stride__iter.html#a06d7312af8380a2be790695b4ecb7398',1,'itertools::stride_iter::stride'],['../structitertools_1_1strided.html#a8c18467677243f2d0ad127435a5a3000',1,'itertools::strided::stride'],['../group__range__adapting__functions.html#ga8bb200d4915be2b7b621a261a693a3ed',1,'itertools::stride()']]],
   ['stride_2ehpp_13',['stride.hpp',['../stride_8hpp.html',1,'']]],
   ['stride_5fiter_14',['stride_iter',['../structitertools_1_1stride__iter.html',1,'itertools::stride_iter&lt; Iter &gt;'],['../structitertools_1_1stride__iter.html#a3d9490a825ffe8a237694390b591b6f4',1,'itertools::stride_iter::stride_iter()=default'],['../structitertools_1_1stride__iter.html#a4073823d97eb35dcfad39f35ab73b934',1,'itertools::stride_iter::stride_iter(Iter it, std::ptrdiff_t stride)']]],
-  ['strided_15',['strided',['../structitertools_1_1strided.html',1,'itertools']]]
+  ['stride_5fiter_3c_20decltype_28std_3a_3abegin_28rg_29_29_3e_15',['stride_iter&lt; decltype(std::begin(rg))&gt;',['../structitertools_1_1stride__iter.html',1,'itertools']]],
+  ['stride_5fiter_3c_20decltype_28std_3a_3acbegin_28rg_29_29_3e_16',['stride_iter&lt; decltype(std::cbegin(rg))&gt;',['../structitertools_1_1stride__iter.html',1,'itertools']]],
+  ['strided_17',['strided',['../structitertools_1_1strided.html',1,'itertools']]]
 ];

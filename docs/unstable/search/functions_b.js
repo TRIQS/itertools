@@ -1,4 +1,8 @@
 var searchData=
 [
-  ['range_0',['range',['../classitertools_1_1range.html#a74ba266a769b2f6e69032e3eecbbcc77',1,'itertools::range::range()=default'],['../classitertools_1_1range.html#a7dfddfd34ad1c34b55101ba2101dd7af',1,'itertools::range::range(long first, long last) noexcept'],['../classitertools_1_1range.html#a083109ed16887b9aadd3a0a5a712f80f',1,'itertools::range::range(long first, long last, long step)'],['../classitertools_1_1range.html#a9db3a7a695fc7bbcd88b7489706685c1',1,'itertools::range::range(long last)']]]
+  ['size_0',['size',['../classitertools_1_1range.html#aeba034794b1c57fe30955d7a25828bf6',1,'itertools::range::size()'],['../structitertools_1_1sliced.html#a1280441e4c50a65c7bec14c43c290399',1,'itertools::sliced::size()']]],
+  ['slice_1',['slice',['../group__range__adapting__functions.html#ga8606dedf82c28b101ab2f4e68cbb03df',1,'itertools']]],
+  ['step_2',['step',['../classitertools_1_1range.html#aba2e1e67f13f6faa70417f84677f8371',1,'itertools::range']]],
+  ['stride_3',['stride',['../group__range__adapting__functions.html#ga8bb200d4915be2b7b621a261a693a3ed',1,'itertools']]],
+  ['stride_5fiter_4',['stride_iter',['../structitertools_1_1stride__iter.html#a3d9490a825ffe8a237694390b591b6f4',1,'itertools::stride_iter::stride_iter()=default'],['../structitertools_1_1stride__iter.html#a4073823d97eb35dcfad39f35ab73b934',1,'itertools::stride_iter::stride_iter(Iter it, std::ptrdiff_t stride)']]]
 ];

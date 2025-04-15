@@ -12,5 +12,8 @@ var searchData=
   ['comparison_20with_20std_3a_3aranges_9',['Example 1: Comparison with std::ranges',['../ex1.html',1,'']]],
   ['compiling_20the_20examples_10',['Compiling the examples',['../examples.html#compiling',1,'']]],
   ['const_5fiterator_11',['const_iterator',['../structitertools_1_1range_1_1const__iterator.html',1,'itertools::range::const_iterator'],['../structitertools_1_1enumerated.html#ad491266d1ff629f40407181a25605250',1,'itertools::enumerated::const_iterator'],['../structitertools_1_1multiplied.html#acd463fa4c78e47fd74be0b2d1af71a5b',1,'itertools::multiplied::const_iterator'],['../structitertools_1_1sliced.html#a3eff8166e5732d9530bc111b084013ca',1,'itertools::sliced::const_iterator'],['../structitertools_1_1strided.html#a097a6e892243b8449c3b3e793f2e9371',1,'itertools::strided::const_iterator'],['../structitertools_1_1transformed.html#af10dacce53a53a9974e9e41dcf1bb17d',1,'itertools::transformed::const_iterator'],['../structitertools_1_1zipped.html#a2521a36bc1c5ebabf4354ae238468cd5',1,'itertools::zipped::const_iterator']]],
-  ['custom_20cmake_20options_12',['Custom CMake options',['../installation.html#cmake_options',1,'']]]
+  ['const_5freverse_5fiterator_12',['const_reverse_iterator',['../classitertools_1_1range.html#acf12ca39b6ea57ca386c9cc2c34e0240',1,'itertools::range']]],
+  ['crbegin_13',['crbegin',['../classitertools_1_1range.html#a4005942010f84fe8bd900360e6a49695',1,'itertools::range']]],
+  ['crend_14',['crend',['../classitertools_1_1range.html#af25b6691f1127cd6056710d7728a7823',1,'itertools::range']]],
+  ['custom_20cmake_20options_15',['Custom CMake options',['../installation.html#cmake_options',1,'']]]
 ];

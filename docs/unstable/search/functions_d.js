@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['transform_0',['transform',['../group__range__adapting__functions.html#ga388ed2a77ff553f7df5a239771c4c281',1,'itertools']]],
-  ['transform_5fiter_1',['transform_iter',['../structitertools_1_1transform__iter.html#a50182b878a9d2fdd404abab9940c759e',1,'itertools::transform_iter::transform_iter()=default'],['../structitertools_1_1transform__iter.html#a0b5f85fd3b4595ec0806326a40f2a64c',1,'itertools::transform_iter::transform_iter(Iter it, F lambda)'],['../structitertools_1_1transform__iter.html#a9dfbff0d907ef0056bc9c7aaa42962d3',1,'itertools::transform_iter::transform_iter(transform_iter &amp;&amp;)=default'],['../structitertools_1_1transform__iter.html#a850485cea3aff0777d3663e283705b74',1,'itertools::transform_iter::transform_iter(transform_iter const &amp;)=default']]]
+  ['zip_0',['zip',['../group__range__adapting__functions.html#gabc2b2378848df2fb7cd9888b5a8f6127',1,'itertools']]],
+  ['zip_5fiter_1',['zip_iter',['../structitertools_1_1zip__iter.html#aed29660715f3f6bcf2ca6eac45dd401a',1,'itertools::zip_iter::zip_iter()=default'],['../structitertools_1_1zip__iter.html#a6f8d9bec62ad5810cc84bcaeb68e0e72',1,'itertools::zip_iter::zip_iter(std::tuple&lt; Iters... &gt; its)']]],
+  ['zipped_2',['zipped',['../structitertools_1_1zipped.html#a2beda0130207a7ea5b9b196d72d570c3',1,'itertools::zipped']]]
 ];

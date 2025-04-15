@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['prod_5fiter_0',['prod_iter',['../structitertools_1_1prod__iter.html#a8dc1b500b12d91179f9a83f98080c8d9',1,'itertools::prod_iter::prod_iter()=default'],['../structitertools_1_1prod__iter.html#a6afb1323ffdd01c7052c0c1226c7b5bf',1,'itertools::prod_iter::prod_iter(std::tuple&lt; Iters... &gt; its_begin, EndIters its_end)']]],
-  ['product_1',['product',['../group__range__adapting__functions.html#ga3cbed960baa79809b205793deaef9ef2',1,'itertools']]],
-  ['product_5frange_2',['product_range',['../group__integer__range.html#gac1b835b5787ccc1e2734690d63e6825d',1,'itertools::product_range(Is... is)'],['../group__integer__range.html#ga526c4fb0f2d4b697f06111c22932f89a',1,'itertools::product_range(std::tuple&lt; Is... &gt; const &amp;idx_tpl)'],['../group__integer__range.html#ga91ba247d7950e80d3148271518e8ddfb',1,'itertools::product_range(std::array&lt; I, N &gt; const &amp;idx_arr)']]]
+  ['range_0',['range',['../classitertools_1_1range.html#a74ba266a769b2f6e69032e3eecbbcc77',1,'itertools::range::range()=default'],['../classitertools_1_1range.html#a479ae029af01cfed0dfc81e964e5f702',1,'itertools::range::range(std::integral auto first, std::integral auto last) noexcept'],['../classitertools_1_1range.html#a78aa0177492685fb5346519c932a5f23',1,'itertools::range::range(std::integral auto first, std::integral auto last, std::integral auto step)'],['../classitertools_1_1range.html#ae687872d315369aa9353ebba6ba5bbfd',1,'itertools::range::range(std::integral auto last)']]],
+  ['rbegin_1',['rbegin',['../classitertools_1_1range.html#a25acb30d01e6e168b42f8f2f0db4dd6e',1,'itertools::range']]],
+  ['rend_2',['rend',['../classitertools_1_1range.html#afb133c245d6b192ed88327dcb1d66035',1,'itertools::range']]]
 ];
