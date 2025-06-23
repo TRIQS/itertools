@@ -1,7 +1,12 @@
 var searchData=
 [
-  ['in_20c_20projects_0',['Integration in C++ projects',['../integration.html',1,'']]],
-  ['installation_1',['Installation',['../installation.html',1,'']]],
-  ['integration_20in_20c_20projects_2',['Integration in C++ projects',['../integration.html',1,'']]],
-  ['issues_3',['Issues',['../issues.html',1,'']]]
+  ['c_2020_0',['c++20',['../changelog.html#autotoc_md11',1,'']]],
+  ['c_20projects_1',['Integration in C++ projects',['../integration.html',1,'']]],
+  ['changelog_2',['Changelog',['../changelog.html',1,'']]],
+  ['cmake_3',['CMake',['../integration.html#cmake',1,'']]],
+  ['cmake_4',['cmake',['../changelog.html#autotoc_md3',1,'cmake'],['../changelog.html#autotoc_md6',1,'cmake'],['../changelog.html#autotoc_md12',1,'cmake']]],
+  ['cmake_20options_5',['Custom CMake options',['../installation.html#cmake_options',1,'']]],
+  ['comparison_20with_20std_3a_3aranges_6',['Example 1: Comparison with std::ranges',['../ex1.html',1,'']]],
+  ['compiling_20the_20examples_7',['Compiling the examples',['../examples.html#compiling',1,'']]],
+  ['custom_20cmake_20options_8',['Custom CMake options',['../installation.html#cmake_options',1,'']]]
 ];

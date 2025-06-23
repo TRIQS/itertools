@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['overview_0',['Overview',['../index.html',1,'']]]
+  ['example_201_3a_20comparison_20with_20std_3a_3aranges_0',['Example 1: Comparison with std::ranges',['../ex1.html',1,'']]],
+  ['examples_1',['Examples',['../examples.html',1,'']]],
+  ['examples_2',['Compiling the examples',['../examples.html#compiling',1,'']]]
 ];

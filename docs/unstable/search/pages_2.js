@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['c_20projects_0',['Integration in C++ projects',['../integration.html',1,'']]],
-  ['changelog_1',['Changelog',['../changelog.html',1,'']]],
-  ['comparison_20with_20std_3a_3aranges_2',['Example 1: Comparison with std::ranges',['../ex1.html',1,'']]]
+  ['2_200_0',['Version 1.2.0',['../changelog.html#autotoc_md4',1,'']]],
+  ['20_1',['c++20',['../changelog.html#autotoc_md11',1,'']]]
 ];

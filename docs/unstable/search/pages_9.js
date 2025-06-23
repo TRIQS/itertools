@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['std_3a_3aranges_0',['Example 1: Comparison with std::ranges',['../ex1.html',1,'']]]
+  ['general_0',['General',['../changelog.html#autotoc_md1',1,'General'],['../changelog.html#autotoc_md5',1,'General'],['../changelog.html#autotoc_md9',1,'General']]]
 ];
