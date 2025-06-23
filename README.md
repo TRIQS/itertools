@@ -58,3 +58,13 @@ int main(){
 ```
 
 For further examples we refer the users to our [tests](https://github.com/TRIQS/itertools/tree/unstable/test/c++).
+
+## Support
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" width="20%" srcset="doc/_static/CCQ-dark.png">
+  <img alt="Flatiron Center for Computational Quantum Physics logo." width="20%" src="doc/_static/CCQ.png">
+</picture>
+
+TRIQS/itertools is supported by the Flatiron Institute, a division of the Simons Foundation.
+
