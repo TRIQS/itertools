@@ -76,8 +76,8 @@ namespace itertools {
     /**
      * @brief Equal-to operator for a itertools::zip_iter and an itertools::sentinel_t.
      *
-     * @details Only one of the iterators has to be equal to the corresponding iterator of the sentinel. In case
-     * the original ranges have different lengths, the itertools::zipped range should have the length of the shortest range.
+     * @details Only one of the iterators has to be equal to the corresponding iterator of the sentinel. In case the 
+     * original ranges have different lengths, the itertools::zipped range should have the length of the shortest range.
      *
      * @tparam SentinelIter Iterator type of the sentinel.
      * @param s itertools::sentinel_t to compare with.

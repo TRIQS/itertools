@@ -31,7 +31,8 @@ namespace itertools {
    * @ingroup utilities
    * @brief Distribute a range as evenly as possible across all OMP threads.
    *
-   * @details See chunk_range(std::ptrdiff_t, std::ptrdiff_t, long, long) and slice(R &&, std::ptrdiff_t, std::ptrdiff_t) for more details.
+   * @details See chunk_range(std::ptrdiff_t, std::ptrdiff_t, long, long) and slice(R &&, std::ptrdiff_t, 
+   * std::ptrdiff_t) for more details.
    *
    * @tparam R Range type.
    * @param rg Range to chunk.

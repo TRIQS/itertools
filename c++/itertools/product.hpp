@@ -42,9 +42,9 @@ namespace itertools {
    * - `its_end` contains the end iterators of all ranges
    * - `its` contains the current iterators of all ranges
    *
-   * Incrementing is done from right to left, i.e. the iterator of the last range is incremented first.
-   * Once an iterator reaches the end of its range, it is reset to the beginning and the iterator of the
-   * previous range is incremented once.
+   * Incrementing is done from right to left, i.e. the iterator of the last range is incremented first. Once an iterator 
+   * reaches the end of its range, it is reset to the beginning and the iterator of the previous range is incremented 
+   * once.
    *
    * Dereferencing returns a tuple containing the results of dereferencing each iterator.
    *
@@ -185,7 +185,8 @@ namespace itertools {
 
     /**
      * @brief End of the product range.
-     * @return itertools::sentinel_t containing the end iterator of the first original range, i.e. `std::end(std::get<0>(tu))`.
+     * @return itertools::sentinel_t containing the end iterator of the first original range, i.e. 
+     * `std::end(std::get<0>(tu))`.
      */
     [[nodiscard]] auto end() noexcept { return make_sentinel(std::end(std::get<0>(tu))); }
 
@@ -382,9 +383,11 @@ namespace itertools {
   /**
    * @brief Lazy-multiply a given number of ranges by forming their cartesian product.
    *
-   * @details An arbitrary number of ranges are multiplied together into a cartesian product range.
-   * They are traversed such that the last range is traversed the fastest (see the example below).
+   * @details An arbitrary number of ranges are multiplied together into a cartesian product range. They are traversed 
+   * such that the last range is traversed the fastest (see the example below). 
+   * 
    * The number of elements in a product range is equal to the product of the sizes of the given ranges.
+   * 
    * This function returns an iterable lazy object, which can be used in range-based for loops:
    *
    * @code{.cpp}
@@ -407,7 +410,8 @@ namespace itertools {
    * (3, b)
    * ```
    *
-   * See also <a href="https://en.cppreference.com/w/cpp/ranges/cartesian_product_view">std::ranges::views::cartesian_product</a>.
+   * See also <a href="https://en.cppreference.com/w/cpp/ranges/cartesian_product_view">
+   * std::ranges::views::cartesian_product</a>.
    *
    * @tparam Rs Range types.
    * @param rgs Ranges to be used.

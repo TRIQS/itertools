@@ -38,8 +38,8 @@ namespace itertools {
   /**
    * @brief Calculate the distance between two iterators.
    *
-   * @details It is similar to <a href="https://en.cppreference.com/w/cpp/iterator/distance">std::distance</a>,
-   * except that it can be used for two different iterator types, e.g. in case one of them is a const iterator.
+   * @details It is similar to <a href="https://en.cppreference.com/w/cpp/iterator/distance">std::distance</a>, except 
+   * that it can be used for two different iterator types, e.g. in case one of them is a const iterator.
    *
    * @tparam Iter1 Iterator type #1.
    * @tparam Iter2 Iterator type #2.
@@ -87,7 +87,7 @@ namespace itertools {
    * @param last Last value of the range (excluded).
    * @param n_chunks Number of chunks to divide the range into.
    * @param rank Rank of the calling process.
-   * @return Pair of indices specifying the first and last (excluded) value of the chunk assigned to the calling
+   * @return Pair of indices specifying the first and last (excluded) value of the chunk assigned to the calling 
    * process.
    */
   [[nodiscard]] inline std::pair<std::ptrdiff_t, std::ptrdiff_t> chunk_range(std::ptrdiff_t first, std::ptrdiff_t last, long n_chunks, long rank) {

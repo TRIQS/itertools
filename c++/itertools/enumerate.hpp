@@ -35,9 +35,9 @@ namespace itertools {
    * @ingroup range_iterators
    * @brief Iterator for an itertools::enumerated range.
    *
-   * @details It stores an iterator of the original range and an index. Incrementing advances the iterator
-   * and the index by 1. Dereferencing returns a std::pair consisting of the current index and the current
-   * dereferenced value of the original iterator.
+   * @details It stores an iterator of the original range and an index. Incrementing advances the iterator and the index 
+   * by 1. Dereferencing returns a `std::pair` consisting of the current index and the current dereferenced value of the 
+   * original iterator.
    *
    * See itertools::enumerate(R &&) for more details.
    *
@@ -139,9 +139,9 @@ namespace itertools {
    * @ingroup range_adapting_functions
    * @brief Lazy-enumerate a given range (similar to Python's enumerate).
    *
-   * @details Each element in the original range is assigned an index, starting from zero. This function
-   * returns an iterable lazy object (a itertools::enumerated range), which iterates over tuples consisting
-   * of the index and the value of the dereferenced iterator of the original range:
+   * @details Each element in the original range is assigned an index, starting from zero. This function returns an 
+   * iterable lazy object (a itertools::enumerated range), which iterates over tuples consisting of the index and the 
+   * value of the dereferenced iterator of the original range:
    *
    * @code{.cpp}
    * std::vector<char> vec { 'a', 'b', 'c' };

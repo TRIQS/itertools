@@ -36,9 +36,9 @@ namespace itertools {
    * @ingroup range_iterators
    * @brief Iterator for a itertools::transformed range.
    *
-   * @details It stores an iterator of the original range and a callable object that is used to transform the
-   * elements of the original range. Incrementing simply increments the iterator. Dereferencing returns the
-   * result of the callable object applied to the dereferenced iterator, i.e. the transformed element.
+   * @details It stores an iterator of the original range and a callable object that is used to transform the elements 
+   * of the original range. Incrementing simply increments the iterator. Dereferencing returns the result of the 
+   * callable object applied to the dereferenced iterator, i.e. the transformed element.
    *
    * See itertools::transform(R &&, F) for more details.
    *
@@ -161,7 +161,8 @@ namespace itertools {
    *
    * @details The value type of the transformed range depends on the return type of the callable.
    *
-   * This function returns an iterable lazy object (a itertools::transformed range), which can be used in range-based for loops:
+   * This function returns an iterable lazy object (a itertools::transformed range), which can be used in range-based 
+   * for loops:
    *
    * @code{.cpp}
    * std::list<int> list { 1, 2, 3, 4, 5 };

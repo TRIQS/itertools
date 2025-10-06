@@ -96,10 +96,12 @@ namespace itertools {
    * @ingroup range_adapting_functions
    * @brief Lazy-slice a given range.
    *
-   * @details Only the part of the given range between the `start_idx` and the `end_idx` is taken into account.
-   * If `end_idx` is bigger than the size of the original range, the slice ends at the end of the original range.
-   * If `end_idx` is smaller than `start_idx`, the slice is empty. Note that the behaviour is undefined if
-   * `start_idx` is smaller than zero.
+   * @details Only the part of the given range between the `start_idx` and the `end_idx` is taken into account:
+   * 
+   * - If `end_idx` is bigger than the size of the original range, the slice ends at the end of the original range. 
+   * - If `end_idx` is smaller than `start_idx`, the slice is empty. 
+   * 
+   * @note The behaviour is undefined if `start_idx` is smaller than zero.
    *
    * This function returns an iterable lazy object, which can be used in range-based for loops:
    *
