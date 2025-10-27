@@ -31,7 +31,7 @@ include (FetchContent)
 FetchContent_Declare(
   itertools
   GIT_REPOSITORY https://github.com/TRIQS/itertools.git
-  GIT_TAG        1.2.x
+  GIT_TAG        2.0.x
 )
 FetchContent_MakeAvailable(itertools)
 
@@ -73,7 +73,7 @@ $ source path_to_install_dir/share/itertools/itertoolsvars.sh
 
 @subsection add_sub add_subdirectory
 
-You can also integrate **itertools** into our CMake project by placing the entire source tree in a subdirectory and call `add_subdirectory()`:
+You can also integrate **itertools** into your CMake project by placing the entire source tree in a subdirectory and call `add_subdirectory()`:
 
 ```cmake
 cmake_minimum_required(VERSION 3.20)

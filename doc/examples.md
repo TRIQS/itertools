@@ -7,10 +7,11 @@
 @section compiling Compiling the examples
 
 All examples have been compiled on a MacBook Pro with an Apple M2 Max chip.
-At the point of writing this documentation only gcc-13 has implemented the required `std::ranges` for some of the examples.
-We therefore used gcc 13.2.0 together with cmake 3.27.2.
+At the point of writing this documentation only gcc has implemented the required `std::ranges` for some of the examples.
+We therefore used gcc 15.2.0 together with cmake 4.1.2.
 
-Assuming that the actual example code is in a file `main.cpp` and that the `print.hpp` (see below) is in the same directory, the following generic `CMakeLists.txt` should work for all examples:
+Assuming that the actual example code is in a file `main.cpp` and that the `print.hpp` (see below) is in the same 
+directory, the following generic `CMakeLists.txt` should work for all examples:
 
 ```cmake
 cmake_minimum_required(VERSION 3.20)
@@ -22,12 +23,11 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # fetch itertools from github
-set(Build_Tests OFF CACHE BOOL "" FORCE)
 include (FetchContent)
 FetchContent_Declare(
   itertools
   GIT_REPOSITORY https://github.com/TRIQS/itertools.git
-  GIT_TAG        1.2.x
+  GIT_TAG        2.0.x
 )
 FetchContent_MakeAvailable(itertools)
 
