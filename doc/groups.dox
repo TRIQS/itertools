@@ -45,6 +45,14 @@
  */
 
 /**
+ * @defgroup sorting Sorting
+ * @brief Functions to sort ranges.
+ *
+ * @details We provide alternatives to @p std::sort that keep track of the
+ * number of swaps that have to be performed to put a range into a sorted order.
+ */
+
+/**
  * @defgroup utilities Utilities
  * @brief Utilities are mostly internal implementation details and should not concern everyday users.
  *

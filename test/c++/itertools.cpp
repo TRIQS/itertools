@@ -19,9 +19,11 @@
 
 #include <algorithm>
 #include <array>
+#include <forward_list>
 #include <list>
 #include <iostream>
 #include <numeric>
+#include <random>
 #include <utility>
 #include <vector>
 
@@ -367,6 +369,66 @@ TEST(Itertools, RangeRandomAccessOperations) {
     check_ops(range{0, 10, i});
     check_ops(range{10, 0, -i});
   }
+}
+
+inline static std::default_random_engine &randint_engine() {
+  static thread_local std::default_random_engine eng{std::random_device{}()};
+  return eng;
+}
+
+template <typename T> inline static T randint(T a, T b) {
+  static_assert(std::is_integral<T>::value && sizeof(T) > 1, "The type must be an integer!");
+  return std::uniform_int_distribution<T>(a, b)(randint_engine());
+}
+
+TEST(Itertools, BubbleSort) {
+  // Create a vector of random length and fill it with random numbers.
+  std::forward_list<int> test1;
+  for (auto _ : range(randint(0, 100))) { test1.push_front(randint(-1000, 1000)); }
+  std::forward_list<int> test2 = test1; // Make a copy, sorting is in-place
+
+  bubble_sort(test1.begin(), test1.end());
+  test2.sort();
+  for (auto [lhs, rhs] : zip(test1, test2)) { EXPECT_EQ(lhs, rhs); }
+
+  bubble_sort(test1.begin(), test1.end(), std::greater{});
+  test2.sort(std::greater{});
+  for (auto [lhs, rhs] : zip(test1, test2)) { EXPECT_EQ(lhs, rhs); }
+}
+
+TEST(Itertools, BubbleSortSwaps) {
+  std::vector<int> test1 = {100, 2, 3, 56, 200, 3, -52, 3, 3, 99, 33, 177, -199};
+  std::vector<int> test2 = test1; // Make a copy, sorting is in-place
+
+  std::size_t swaps = bubble_sort(test1.begin(), test1.end());
+  std::sort(test2.begin(), test2.end());
+  for (auto [lhs, rhs] : zip(test1, test2)) { EXPECT_EQ(lhs, rhs); }
+  EXPECT_EQ(swaps, 37);
+}
+
+TEST(Itertools, InsertionSort) {
+  // Create a vector of random length and fill it with random numbers.
+  std::vector<int> test1(randint(0, 100));
+  for (auto &e : test1) { e = randint(-1000, 1000); }
+  std::vector<int> test2 = test1; // Make a copy, sorting is in-place
+
+  insertion_sort(test1.begin(), test1.end());
+  std::sort(test2.begin(), test2.end());
+  for (auto [lhs, rhs] : zip(test1, test2)) { EXPECT_EQ(lhs, rhs); }
+
+  insertion_sort(test1.begin(), test1.end(), std::greater{});
+  std::sort(test2.begin(), test2.end(), std::greater{});
+  for (auto [lhs, rhs] : zip(test1, test2)) { EXPECT_EQ(lhs, rhs); }
+}
+
+TEST(Itertools, InsertionSortSwaps) {
+  std::vector<int> test1 = {100, 2, 3, 56, 200, 3, -52, 3, 3, 99, 33, 177, -199};
+  std::vector<int> test2 = test1; // Make a copy, sorting is in-place
+
+  std::size_t swaps = insertion_sort(test1.begin(), test1.end());
+  std::sort(test2.begin(), test2.end());
+  for (auto [lhs, rhs] : zip(test1, test2)) { EXPECT_EQ(lhs, rhs); }
+  EXPECT_EQ(swaps, 37);
 }
 
 int main(int argc, char **argv) {
