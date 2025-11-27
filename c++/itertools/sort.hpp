@@ -1,0 +1,148 @@
+// Copyright (c) 2024 Simons Foundation
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0.txt
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+// Authors: Thomas Hahn, Olivier Parcollet, Nils Wentzell, chuffa
+
+/**
+ * @file
+ * @brief Provides functions for sorting ranges.
+ */
+
+#ifndef _ITERTOOLS_SORT_HPP
+#define _ITERTOOLS_SORT_HPP
+
+#include <algorithm>
+#include <cstddef>
+#include <functional>
+#include <iterator>
+#include <ranges>
+#include <utility>
+
+namespace itertools {
+
+  /**
+   * @addtogroup sorting
+   * @{
+   */
+
+  /**
+   * @brief Bubble sort elements in the given range.
+   *
+   * @details Sort the elements in the range `[first, last)` in the order prescribed by the comparison function `comp`.
+   * The underlying sorting algorithm is a stable bubble sort, i.e. already sorted elements will not be swapped. The
+   * number of swaps necessary to get the elements into sorted order is recorded and returned.
+   *
+   * Computational complexity: \f$ \mathcal{O}(n^2) \f$.
+   *
+   * This function is eager and puts the range in sorted order.
+   *
+   * @tparam ForwardIt Forward iterator type.
+   * @tparam Compare Comparison function type.
+   * @param first Forward iterator to the first element of the range.
+   * @param last Forward iterator to the element after the last of the range.
+   * @param comp Comparison function callable with two dereferenced iterators.
+   * @return Number of swaps necessary to sort the range.
+   */
+  template <std::forward_iterator ForwardIt, typename Compare = std::less<>>
+  std::size_t bubble_sort(ForwardIt first, ForwardIt last, Compare comp = {}) {
+    std::size_t n_swaps = 0;
+
+    for (auto unsorted_end = last; first != unsorted_end;) {
+      auto last_swap = first;
+      for (auto curr = first, next = std::next(first); next != unsorted_end; ++curr, ++next) {
+        if (comp(*next, *curr)) {
+          std::iter_swap(next, curr);
+          last_swap = next;
+          ++n_swaps;
+        }
+      }
+      unsorted_end = last_swap; // Everything after last_swap is now in final position
+    }
+
+    return n_swaps;
+  }
+
+  /**
+   * @brief Insertion sort elements in the given range.
+   *
+   * @details Sort the elements in the range `[first, last)` in the order prescribed by the comparison function `comp`.
+   * The underlying sorting algorithm is a stable insertion sort, i.e. already sorted elements will not be swapped. The
+   * number of swaps necessary to get the elements into sorted order is recorded and returned.
+   *
+   * Computational complexity: \f$ \mathcal{O}(n^2) \f$.
+   *
+   * This function is eager and puts the range in sorted order.
+   *
+   * @tparam BidirIt Bidirectional iterator type.
+   * @tparam Compare Comparison function type.
+   * @param first Bidirectional iterator to the first element of the range.
+   * @param last Bidirectional iterator to the element after the last of the range.
+   * @param comp Comparison function callable with two dereferenced iterators.
+   * @return Number of swaps necessary to sort the range.
+   */
+  template <std::bidirectional_iterator BidirIt, typename Compare = std::less<>>
+  std::size_t insertion_sort(BidirIt first, BidirIt last, Compare comp = {}) {
+    if (first == last) return 0;
+
+    std::size_t n_swaps = 0;
+
+    for (auto unsorted_begin = std::next(first); unsorted_begin != last; ++unsorted_begin) {
+      for (auto curr = unsorted_begin; curr != first; --curr) {
+        auto prev = std::prev(curr);
+        if (!comp(*curr, *prev)) break;
+        std::iter_swap(prev, curr);
+        ++n_swaps;
+      }
+    }
+
+    return n_swaps;
+  }
+
+  /**
+   * @brief Bubble sort elements in the given range.
+   *
+   * @details See itertools::bubble_sort for more details.
+   *
+   * @tparam Range Forward range type.
+   * @tparam Compare Comparison function type.
+   * @param rng A forward range to sort.
+   * @param comp Comparison function callable with two dereferenced iterators.
+   * @return Number of swaps necessary to sort the range.
+   */
+  template <std::ranges::forward_range Range, typename Compare = std::less<>>
+  std::size_t bubble_sort(Range &&rng, Compare comp = {}) { // NOLINT (ranges need not be forwarded)
+    return bubble_sort(std::ranges::begin(rng), std::ranges::end(rng), comp);
+  }
+
+  /**
+   * @brief Insertion sort elements in the given range.
+   *
+   * @details See itertools::insertion_sort for more details.
+   *
+   * @tparam Range Bidirectional range type.
+   * @tparam Compare Comparison function type.
+   * @param rng A bidirectional range to sort.
+   * @param comp Comparison function callable with two dereferenced iterators.
+   * @return Number of swaps necessary to sort the range.
+   */
+  template <std::ranges::bidirectional_range Range, typename Compare = std::less<>>
+  std::size_t insertion_sort(Range &&rng, Compare comp = {}) { // NOLINT (ranges need not be forwarded)
+    return insertion_sort(std::ranges::begin(rng), std::ranges::end(rng), comp);
+  }
+
+  /** @} */
+
+} // namespace itertools
+
+#endif // _ITERTOOLS_SORT_HPP

@@ -27,6 +27,7 @@
 #include "./range.hpp"
 #include "./slice.hpp"
 #include "./stride.hpp"
+#include "./sort.hpp"
 #include "./transform.hpp"
 #include "./zip.hpp"
 

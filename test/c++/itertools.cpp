@@ -19,9 +19,11 @@
 
 #include <algorithm>
 #include <array>
+#include <forward_list>
 #include <list>
 #include <iostream>
 #include <numeric>
+#include <random>
 #include <utility>
 #include <vector>
 
@@ -288,6 +290,74 @@ TEST(Itertools, CombinationOfRangeAdaptingFunctions) {
       i += s;
     }
   }
+}
+
+// Create and fill a container with random size in [0,n] with random integers in [a,b].
+template <typename C> auto random_int_range(std::size_t n, int a, int b) {
+  static std::default_random_engine eng{std::random_device{}()};
+  auto cont = C(std::uniform_int_distribution<std::size_t>(0, n)(eng));
+  std::ranges::generate(cont, [&]() { return std::uniform_int_distribution<typename C::value_type>(a, b)(eng); });
+  return cont;
+}
+
+TEST(Itertools, BubbleSort) {
+  // std::less, int range
+  auto l1     = random_int_range<std::forward_list<int>>(100, -1000, 1000);
+  auto l1_std = l1;
+  bubble_sort(l1.begin(), l1.end());
+  l1_std.sort();
+  EXPECT_EQ(l1, l1_std);
+
+  // std::greater, size_t range
+  auto l2     = random_int_range<std::forward_list<std::size_t>>(100, 5, 77);
+  auto l2_std = l2;
+  bubble_sort(l2, std::greater{});
+  l2_std.sort(std::greater{});
+  EXPECT_EQ(l2, l2_std);
+}
+
+TEST(Itertools, BubbleSortSwaps) {
+  auto v1     = std::vector<int>{100, 2, 3, 56, 200, 3, -52, 3, 3, 99, 33, 177, -199};
+  auto v1_std = v1;
+  auto swaps  = bubble_sort(v1);
+  std::ranges::sort(v1_std);
+  EXPECT_EQ(v1, v1_std);
+  EXPECT_EQ(swaps, 37);
+
+  auto v2     = std::vector<long>{1, 2, 3};
+  auto swaps2 = bubble_sort(v2.begin(), v2.end(), std::greater{});
+  EXPECT_EQ(v2, std::vector<long>({3, 2, 1}));
+  EXPECT_EQ(swaps2, 3);
+}
+
+TEST(Itertools, InsertionSort) {
+  // std::less, int range
+  auto v1     = random_int_range<std::list<int>>(100, -1000, 1000);
+  auto v1_std = v1;
+  insertion_sort(v1.begin(), v1.end());
+  v1_std.sort();
+  EXPECT_EQ(v1, v1_std);
+
+  // std::greater, size_t range
+  auto v2     = random_int_range<std::list<std::size_t>>(100, 5, 77);
+  auto v2_std = v2;
+  insertion_sort(v2, std::greater{});
+  v2_std.sort(std::greater{});
+  EXPECT_EQ(v2, v2_std);
+}
+
+TEST(Itertools, InsertionSortSwaps) {
+  auto v1     = std::vector<int>{100, 2, 3, 56, 200, 3, -52, 3, 3, 99, 33, 177, -199};
+  auto v1_std = v1;
+  auto swaps  = insertion_sort(v1);
+  std::ranges::sort(v1_std);
+  EXPECT_EQ(v1, v1_std);
+  EXPECT_EQ(swaps, 37);
+
+  auto v2     = std::vector<long>{1, 2, 3};
+  auto swaps2 = insertion_sort(v2.begin(), v2.end(), std::greater{});
+  EXPECT_EQ(v2, std::vector<long>({3, 2, 1}));
+  EXPECT_EQ(swaps2, 3);
 }
 
 int main(int argc, char **argv) {

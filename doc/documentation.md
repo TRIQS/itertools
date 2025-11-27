@@ -80,6 +80,16 @@ The following classes and functions related to integer ranges are defined in **i
 * @ref itertools::foreach "foreach"
 * @ref itertools::product_range "product_range"
 
+## Sorting
+
+We provide alternatives to `std::sort` that keep track of the number of swaps
+that have to be performed to put a range into a sorted order.
+
+The following @ref sorting functions are defined in **itertools**:
+
+* @ref itertools::bubble_sort "bubble_sort"
+* @ref itertools::insertion_sort "insertion_sort"
+
 ## Utilities
 
 @ref utilities are mostly internal implementation details and should not concern everyday users.
