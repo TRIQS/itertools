@@ -22,29 +22,33 @@
 #ifndef _ITERTOOLS_SORT_HPP
 #define _ITERTOOLS_SORT_HPP
 
-#include <algorithm>  // for iter_swap
-#include <cstddef>    // for size_t
-#include <functional> // for less
-#include <iterator>   // for forward_iterator, prev, random_access_iterator
+#include <algorithm>
+#include <cstddef>
+#include <functional>
+#include <iterator>
 
 namespace itertools {
 
   /**
-   * @ingroup sorting
-   * @brief Bubble sort
+   * @addtogroup sorting
+   * @{
+   */
+
+  /**
+   * @brief Bubble sort elements in the given range.
    *
-   * @details Sort the elements in the range [@p first, @p last) in the order
-   * prescribed by the comparison function @p comp. The underlying sorting
-   * algorithm is bubble sort. The sorting is stable, i.e. already sorted
-   * elements will not be swapped. The number of swaps necessary to get the
-   * elements into sorted order is recorded and returned.
+   * @details Sort the elements in the range `[first, last)` in the order prescribed by the comparison function `comp`.
+   * The underlying sorting algorithm is a stable bubble sort, i.e. already sorted elements will not be swapped. The
+   * number of swaps necessary to get the elements into sorted order is recorded and returned.
    *
-   * Computational complexity: \f$\mathcal{O}(n^2)\f$
+   * Computational complexity: \f$ \mathcal{O}(n^2) \f$.
    *
    * This function is eager and puts the range in sorted order.
    *
-   * @param first Forward iterator for the first element of the range.
-   * @param last Forward iterator for the element \a after the last of the range.
+   * @tparam ForwardIt Forward iterator type.
+   * @tparam Compare Comparison function type.
+   * @param first Forward iterator to the first element of the range.
+   * @param last Forward iterator to the element after the last of the range.
    * @param comp Comparison function callable with two dereferenced iterators.
    * @return Number of swaps necessary to sort the range.
    */
@@ -66,21 +70,20 @@ namespace itertools {
   }
 
   /**
-   * @ingroup sorting
-   * @brief Insertion sort
+   * @brief Insertion sort elements in the given range.
    *
-   * @details Sort the elements in the range [@p first, @p last) in the order
-   * prescribed by the comparison function @p comp. The underlying sorting
-   * algorithm is insertion sort. The sorting is stable, i.e. already sorted
-   * elements will not be swapped. The number of swaps necessary to get the
-   * elements into sorted order is recorded and returned.
+   * @details Sort the elements in the range `[first, last)` in the order prescribed by the comparison function `comp`.
+   * The underlying sorting algorithm is a stable insertion sort, i.e. already sorted elements will not be swapped. The
+   * number of swaps necessary to get the elements into sorted order is recorded and returned.
    *
-   * Computational complexity: \f$\mathcal{O}(n^2)\f$
+   * Computational complexity: \f$ \mathcal{O}(n^2) \f$.
    *
    * This function is eager and puts the range in sorted order.
    *
-   * @param first Random-access iterator for the first element of the range.
-   * @param last Random-access iterator for the element \a after the last of the range.
+   * @tparam BidirIt Bidirectional iterator type.
+   * @tparam Compare Comparison function type.
+   * @param first Bidirectional iterator to the first element of the range.
+   * @param last Bidirectional iterator to the element after the last of the range.
    * @param comp Comparison function callable with two dereferenced iterators.
    * @return Number of swaps necessary to sort the range.
    */
@@ -96,6 +99,8 @@ namespace itertools {
     }
     return swaps;
   }
+
+  /** @} */
 
 } // namespace itertools
 

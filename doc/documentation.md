@@ -85,7 +85,7 @@ The following classes and functions related to integer ranges are defined in **i
 We provide alternatives to `std::sort` that keep track of the number of swaps
 that have to be performed to put a range into a sorted order.
 
-The following sorting functions are defined in **itertools**:
+The following @ref sorting functions are defined in **itertools**:
 
 * @ref itertools::bubble_sort "bubble_sort"
 * @ref itertools::insertion_sort "insertion_sort"
