@@ -148,18 +148,7 @@ namespace itertools {
    *
    * This function returns an iterable lazy object, which can be used in range-based for loops:
    *
-   * @code{.cpp}
-   * std::vector<int> vec { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-   *
-   * for (auto i : stride(vec, 3)) {
-   *   std::cout << i << " ";
-   * }
-   * std::cout << "\n";
-   *
-   * for (auto i : stride(vec, 10)) {
-   *   std::cout << i << " ";
-   * }
-   * @endcode
+   * @include doc_stride.cpp
    *
    * Output:
    *

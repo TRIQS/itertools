@@ -390,14 +390,7 @@ namespace itertools {
    * 
    * This function returns an iterable lazy object, which can be used in range-based for loops:
    *
-   * @code{.cpp}
-   * std::vector<int> v1 { 1, 2, 3 };
-   * std::vector<char> v2 { 'a', 'b' };
-   *
-   * for (auto [i, c] : product(v1, v2)) {
-   *   std::cout << "(" << i << ", " << c << ")\n";
-   * }
-   * @endcode
+   * @include doc_product.cpp
    *
    * Output:
    *

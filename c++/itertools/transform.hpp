@@ -164,13 +164,7 @@ namespace itertools {
    * This function returns an iterable lazy object (a itertools::transformed range), which can be used in range-based 
    * for loops:
    *
-   * @code{.cpp}
-   * std::list<int> list { 1, 2, 3, 4, 5 };
-   *
-   * for (auto i : itertools::transform(list, [](int i) { return i * i; })) {
-   *   std::cout << i << " ";
-   * }
-   * @endcode
+   * @include doc_transform.cpp
    *
    * Output:
    *

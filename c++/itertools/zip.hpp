@@ -189,18 +189,7 @@ namespace itertools {
    *
    * This function returns an iterable lazy object, which can be used in range-based for loops:
    *
-   * @code{.cpp}
-   * std::vector<int> v1 { 1, 2, 3 };
-   * std::vector<char> v2 { 'a', 'b', 'c', 'd', 'e' };
-   *
-   * for (auto [i1, i2] : zip(v1, v1)) {
-   *   std::cout << "(" << i1 << ", " << i2 << ") ";
-   * }
-   *
-   * for (auto [i1, i2, c3] : zip(v1, v1, v2)) {
-   *   std::cout << "(" << i1 << ", " << i2 << ", " << c3 << ") ";
-   * }
-   * @endcode
+   * @include doc_zip.cpp
    *
    * Output:
    *

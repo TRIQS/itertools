@@ -143,13 +143,7 @@ namespace itertools {
    * iterable lazy object (a itertools::enumerated range), which iterates over tuples consisting of the index and the 
    * value of the dereferenced iterator of the original range:
    *
-   * @code{.cpp}
-   * std::vector<char> vec { 'a', 'b', 'c' };
-   *
-   * for (auto [idx, val] : enumerate(vec)) {
-   *   std::cout << "(" << idx << ", " << val << ")\n";
-   * }
-   * @endcode
+   * @include doc_enumerate.cpp
    *
    * Output:
    *

@@ -105,23 +105,7 @@ namespace itertools {
    *
    * This function returns an iterable lazy object, which can be used in range-based for loops:
    *
-   * @code{.cpp}
-   * std::array<int, 5> arr { 1, 2, 3, 4, 5 };
-   *
-   * for (auto i : slice(arr, 1, 3)) {
-   *     std::cout << i << " ";
-   * }
-   * std::cout << "\n";
-   *
-   * for (auto i : slice(arr, 3, 7)) {
-   *     std::cout << i << " ";
-   * }
-   * std::cout << "\n";
-   *
-   * for (auto i : slice(arr, 4, 3)) {
-   *     std::cout << i << " "; // empty slice
-   * }
-   * @endcode
+   * @include doc_slice.cpp
    *
    * Output:
    *
