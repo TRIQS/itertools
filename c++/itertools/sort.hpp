@@ -26,6 +26,7 @@
 #include <cstddef>
 #include <functional>
 #include <iterator>
+#include <ranges>
 
 namespace itertools {
 
@@ -98,6 +99,38 @@ namespace itertools {
       }
     }
     return swaps;
+  }
+
+  /**
+   * @brief Bubble sort elements in the given range.
+   *
+   * @details See itertools::bubble_sort for more details.
+   *
+   * @tparam Range Forward range type.
+   * @tparam Compare Comparison function type.
+   * @param rng A forward range to sort.
+   * @param comp Comparison function callable with two dereferenced iterators.
+   * @return Number of swaps necessary to sort the range.
+   */
+  template <std::ranges::forward_range Range, class Compare = std::less<>>
+  std::size_t bubble_sort(Range &&rng, Compare comp = {}) { // NOLINT (ranges need not be forwarded)
+    return bubble_sort(std::ranges::begin(rng), std::ranges::end(rng), comp);
+  }
+
+  /**
+   * @brief Insertion sort elements in the given range.
+   *
+   * @details See itertools::insertion_sort for more details.
+   *
+   * @tparam Range Bidirectional range type.
+   * @tparam Compare Comparison function type.
+   * @param rng A bidirectional range to sort.
+   * @param comp Comparison function callable with two dereferenced iterators.
+   * @return Number of swaps necessary to sort the range.
+   */
+  template <std::ranges::bidirectional_range Range, class Compare = std::less<>>
+  std::size_t insertion_sort(Range &&rng, Compare comp = {}) { // NOLINT (ranges need not be forwarded)
+    return insertion_sort(std::ranges::begin(rng), std::ranges::end(rng), comp);
   }
 
   /** @} */
