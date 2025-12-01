@@ -48,9 +48,8 @@ namespace itertools {
    * @param comp Comparison function callable with two dereferenced iterators.
    * @return Number of swaps necessary to sort the range.
    */
-  template <class ForwardIt, class Compare>
-    requires std::forward_iterator<ForwardIt>
-  std::size_t bubble_sort(ForwardIt first, ForwardIt last, Compare comp) {
+  template <std::forward_iterator ForwardIt, class Compare = std::less<>>
+  std::size_t bubble_sort(ForwardIt first, ForwardIt last, Compare comp = {}) {
     if (first == last) { return 0; }
     std::size_t n_swaps = 0;
     for (ForwardIt sorted = first; first != last; last = sorted) {
@@ -64,18 +63,6 @@ namespace itertools {
       }
     }
     return n_swaps;
-  }
-
-  /**
-   * @ingroup sorting
-   * @overload
-   *
-   * Sets the default comparison function to `std::less{}`.
-   */
-  template <class ForwardIt>
-    requires std::forward_iterator<ForwardIt>
-  std::size_t bubble_sort(ForwardIt first, ForwardIt last) {
-    return bubble_sort(first, last, std::less{});
   }
 
   /**
@@ -97,9 +84,8 @@ namespace itertools {
    * @param comp Comparison function callable with two dereferenced iterators.
    * @return Number of swaps necessary to sort the range.
    */
-  template <class RandomIt, class Compare>
-    requires std::random_access_iterator<RandomIt>
-  std::size_t insertion_sort(RandomIt first, RandomIt last, Compare comp) {
+  template <std::random_access_iterator RandomIt, class Compare = std::less<>>
+  std::size_t insertion_sort(RandomIt first, RandomIt last, Compare comp = {}) {
     if (first == last) { return 0; }
     std::size_t swaps = 0;
     for (RandomIt i = std::next(first); i != last; ++i) {
@@ -109,18 +95,6 @@ namespace itertools {
       }
     }
     return swaps;
-  }
-
-  /**
-   * @ingroup sorting
-   * @overload
-   *
-   * Sets the default comparison function to `std::less{}`.
-   */
-  template <class RandomIt>
-    requires std::random_access_iterator<RandomIt>
-  std::size_t insertion_sort(RandomIt first, RandomIt last) {
-    return insertion_sort(first, last, std::less{});
   }
 
 } // namespace itertools
