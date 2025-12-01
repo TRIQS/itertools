@@ -371,64 +371,72 @@ TEST(Itertools, RangeRandomAccessOperations) {
   }
 }
 
-inline static std::default_random_engine &randint_engine() {
-  static thread_local std::default_random_engine eng{std::random_device{}()};
-  return eng;
-}
-
-template <typename T> inline static T randint(T a, T b) {
-  static_assert(std::is_integral<T>::value && sizeof(T) > 1, "The type must be an integer!");
-  return std::uniform_int_distribution<T>(a, b)(randint_engine());
+// Create and fill a container of size n with random integers in [a,b].
+template <typename C> auto random_int_range(std::size_t n, int a, int b) {
+  static std::default_random_engine eng{0x12345678};
+  auto cont = C(n);
+  std::ranges::generate(cont, [&]() { return std::uniform_int_distribution<typename C::value_type>(a, b)(eng); });
+  return cont;
 }
 
 TEST(Itertools, BubbleSort) {
-  // Create a vector of random length and fill it with random numbers.
-  std::forward_list<int> test1;
-  for (auto _ : range(randint(0, 100))) { test1.push_front(randint(-1000, 1000)); }
-  std::forward_list<int> test2 = test1; // Make a copy, sorting is in-place
+  // std::less, int range
+  auto l1     = random_int_range<std::forward_list<int>>(100, -1000, 1000);
+  auto l1_std = l1;
+  bubble_sort(l1.begin(), l1.end());
+  l1_std.sort();
+  EXPECT_EQ(l1, l1_std);
 
-  bubble_sort(test1.begin(), test1.end());
-  test2.sort();
-  for (auto [lhs, rhs] : zip(test1, test2)) { EXPECT_EQ(lhs, rhs); }
-
-  bubble_sort(test1.begin(), test1.end(), std::greater{});
-  test2.sort(std::greater{});
-  for (auto [lhs, rhs] : zip(test1, test2)) { EXPECT_EQ(lhs, rhs); }
+  // std::greater, size_t range
+  auto l2     = random_int_range<std::forward_list<std::size_t>>(100, 5, 77);
+  auto l2_std = l2;
+  bubble_sort(l2.begin(), l2.end(), std::greater{});
+  l2_std.sort(std::greater{});
+  EXPECT_EQ(l2, l2_std);
 }
 
 TEST(Itertools, BubbleSortSwaps) {
-  std::vector<int> test1 = {100, 2, 3, 56, 200, 3, -52, 3, 3, 99, 33, 177, -199};
-  std::vector<int> test2 = test1; // Make a copy, sorting is in-place
-
-  std::size_t swaps = bubble_sort(test1.begin(), test1.end());
-  std::sort(test2.begin(), test2.end());
-  for (auto [lhs, rhs] : zip(test1, test2)) { EXPECT_EQ(lhs, rhs); }
+  auto v1     = std::vector<int>{100, 2, 3, 56, 200, 3, -52, 3, 3, 99, 33, 177, -199};
+  auto v1_std = v1;
+  auto swaps  = bubble_sort(v1.begin(), v1.end());
+  std::ranges::sort(v1_std);
+  EXPECT_EQ(v1, v1_std);
   EXPECT_EQ(swaps, 37);
+
+  auto v2     = std::vector<long>{1, 2, 3};
+  auto swaps2 = bubble_sort(v2.begin(), v2.end(), std::greater{});
+  EXPECT_EQ(v2, std::vector<long>({3, 2, 1}));
+  EXPECT_EQ(swaps2, 3);
 }
 
 TEST(Itertools, InsertionSort) {
-  // Create a vector of random length and fill it with random numbers.
-  std::vector<int> test1(randint(0, 100));
-  for (auto &e : test1) { e = randint(-1000, 1000); }
-  std::vector<int> test2 = test1; // Make a copy, sorting is in-place
+  // std::less, int range
+  auto v1     = random_int_range<std::vector<int>>(100, -1000, 1000);
+  auto v1_std = v1;
+  insertion_sort(v1.begin(), v1.end());
+  std::ranges::sort(v1_std);
+  EXPECT_EQ(v1, v1_std);
 
-  insertion_sort(test1.begin(), test1.end());
-  std::sort(test2.begin(), test2.end());
-  for (auto [lhs, rhs] : zip(test1, test2)) { EXPECT_EQ(lhs, rhs); }
-
-  insertion_sort(test1.begin(), test1.end(), std::greater{});
-  std::sort(test2.begin(), test2.end(), std::greater{});
-  for (auto [lhs, rhs] : zip(test1, test2)) { EXPECT_EQ(lhs, rhs); }
+  // std::greater, size_t range
+  auto v2     = random_int_range<std::vector<std::size_t>>(100, 5, 77);
+  auto v2_std = v2;
+  insertion_sort(v2.begin(), v2.end(), std::greater{});
+  std::ranges::sort(v2_std, std::greater{});
+  EXPECT_EQ(v2, v2_std);
 }
 
 TEST(Itertools, InsertionSortSwaps) {
-  std::vector<int> test1 = {100, 2, 3, 56, 200, 3, -52, 3, 3, 99, 33, 177, -199};
-  std::vector<int> test2 = test1; // Make a copy, sorting is in-place
-
-  std::size_t swaps = insertion_sort(test1.begin(), test1.end());
-  std::sort(test2.begin(), test2.end());
-  for (auto [lhs, rhs] : zip(test1, test2)) { EXPECT_EQ(lhs, rhs); }
+  auto v1     = std::vector<int>{100, 2, 3, 56, 200, 3, -52, 3, 3, 99, 33, 177, -199};
+  auto v1_std = v1;
+  auto swaps  = insertion_sort(v1.begin(), v1.end());
+  std::ranges::sort(v1_std);
+  EXPECT_EQ(v1, v1_std);
   EXPECT_EQ(swaps, 37);
+
+  auto v2     = std::vector<long>{1, 2, 3};
+  auto swaps2 = insertion_sort(v2.begin(), v2.end(), std::greater{});
+  EXPECT_EQ(v2, std::vector<long>({3, 2, 1}));
+  EXPECT_EQ(swaps2, 3);
 }
 
 int main(int argc, char **argv) {
