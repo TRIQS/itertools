@@ -87,12 +87,12 @@ namespace itertools {
    * @param comp Comparison function callable with two dereferenced iterators.
    * @return Number of swaps necessary to sort the range.
    */
-  template <std::random_access_iterator RandomIt, class Compare = std::less<>>
-  std::size_t insertion_sort(RandomIt first, RandomIt last, Compare comp = {}) {
+  template <std::bidirectional_iterator BidirIt, class Compare = std::less<>>
+  std::size_t insertion_sort(BidirIt first, BidirIt last, Compare comp = {}) {
     if (first == last) { return 0; }
     std::size_t swaps = 0;
-    for (RandomIt i = std::next(first); i != last; ++i) {
-      for (RandomIt j = i; j != first && comp(*j, *std::prev(j)); --j) {
+    for (BidirIt i = std::next(first); i != last; ++i) {
+      for (BidirIt j = i; j != first && comp(*j, *std::prev(j)); --j) {
         std::iter_swap(std::prev(j), j);
         ++swaps;
       }
