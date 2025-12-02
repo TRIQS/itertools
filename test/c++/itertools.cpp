@@ -411,17 +411,17 @@ TEST(Itertools, BubbleSortSwaps) {
 
 TEST(Itertools, InsertionSort) {
   // std::less, int range
-  auto v1     = random_int_range<std::vector<int>>(100, -1000, 1000);
+  auto v1     = random_int_range<std::list<int>>(100, -1000, 1000);
   auto v1_std = v1;
   insertion_sort(v1.begin(), v1.end());
-  std::ranges::sort(v1_std);
+  v1_std.sort();
   EXPECT_EQ(v1, v1_std);
 
   // std::greater, size_t range
-  auto v2     = random_int_range<std::vector<std::size_t>>(100, 5, 77);
+  auto v2     = random_int_range<std::list<std::size_t>>(100, 5, 77);
   auto v2_std = v2;
   insertion_sort(v2, std::greater{});
-  std::ranges::sort(v2_std, std::greater{});
+  v2_std.sort(std::greater{});
   EXPECT_EQ(v2, v2_std);
 }
 
