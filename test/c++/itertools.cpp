@@ -373,8 +373,8 @@ TEST(Itertools, RangeRandomAccessOperations) {
 
 // Create and fill a container of size n with random integers in [a,b].
 template <typename C> auto random_int_range(std::size_t n, int a, int b) {
-  static std::default_random_engine eng{0x12345678};
-  auto cont = C(n);
+  static std::default_random_engine eng{std::random_device{}()};
+  auto cont = C(std::uniform_int_distribution<std::size_t>(0, n)(eng));
   std::ranges::generate(cont, [&]() { return std::uniform_int_distribution<typename C::value_type>(a, b)(eng); });
   return cont;
 }
