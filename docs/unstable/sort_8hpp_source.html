@@ -119,72 +119,64 @@ $(function(){initNavTree('sort_8hpp_source.html','',''); });
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &lt;iterator&gt;</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &lt;ranges&gt;</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &lt;utility&gt;</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">namespace </span>itertools {</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span></div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keyword">template</span> &lt;std::forward_iterator ForwardIt, <span class="keyword">typename</span> Compare = std::less&lt;&gt;&gt;</div>
-<div class="foldopen" id="foldopen00058" data-start="{" data-end="}">
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="group__sorting.html#ga7558958544fb9d898b0e0eed6db625bb">   58</a></span>  std::size_t <a class="code hl_function" href="group__sorting.html#ga7558958544fb9d898b0e0eed6db625bb">bubble_sort</a>(ForwardIt first, ForwardIt last, Compare comp = {}) {</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">namespace </span>itertools {</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <span class="keyword">template</span> &lt;std::forward_iterator ForwardIt, <span class="keyword">class</span> Compare = std::less&lt;&gt;&gt;</div>
+<div class="foldopen" id="foldopen00057" data-start="{" data-end="}">
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="group__sorting.html#ga7558958544fb9d898b0e0eed6db625bb">   57</a></span>  std::size_t <a class="code hl_function" href="group__sorting.html#ga7558958544fb9d898b0e0eed6db625bb">bubble_sort</a>(ForwardIt first, ForwardIt last, Compare comp = {}) {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordflow">if</span> (first == last) { <span class="keywordflow">return</span> 0; }</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    std::size_t n_swaps = 0;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> unsorted_end = last; first != unsorted_end;) {</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>      <span class="keyword">auto</span> last_swap = first;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>      <span class="keywordflow">for</span> (<span class="keyword">auto</span> curr = first, next = std::next(first); next != unsorted_end; ++curr, ++next) {</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">if</span> (comp(*next, *curr)) {</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>          std::iter_swap(next, curr);</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>          last_swap = next;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>          ++n_swaps;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>        }</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>      }</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>      unsorted_end = last_swap; <span class="comment">// Everything after last_swap is now in final position</span></div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    }</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordflow">return</span> n_swaps;</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">for</span> (ForwardIt sorted = first; first != last; last = sorted) {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>      sorted = first;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>      <span class="keywordflow">for</span> (ForwardIt curr = first, prev = first; ++curr != last; ++prev) {</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">if</span> (comp(*curr, *prev)) {</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>          std::iter_swap(curr, prev);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>          sorted = curr;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>          ++n_swaps;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        }</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>      }</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    }</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordflow">return</span> n_swaps;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  }</div>
 </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span></div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="keyword">template</span> &lt;std::b<span class="keywordtype">id</span>irectional_iterator B<span class="keywordtype">id</span>irIt, <span class="keyword">typename</span> Compare = std::less&lt;&gt;&gt;</div>
-<div class="foldopen" id="foldopen00095" data-start="{" data-end="}">
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno"><a class="line" href="group__sorting.html#ga8558b21fabcc45802154301b74a5abf1">   95</a></span>  std::size_t <a class="code hl_function" href="group__sorting.html#ga8558b21fabcc45802154301b74a5abf1">insertion_sort</a>(BidirIt first, BidirIt last, Compare comp = {}) {</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordflow">if</span> (first == last) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    std::size_t n_swaps = 0;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> unsorted_begin = std::next(first); unsorted_begin != last; ++unsorted_begin) {</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>      <span class="keywordflow">for</span> (<span class="keyword">auto</span> curr = unsorted_begin; curr != first; --curr) {</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keyword">auto</span> prev = std::prev(curr);</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordflow">if</span> (!comp(*curr, *prev)) <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        std::iter_swap(prev, curr);</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        ++n_swaps;</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>      }</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    }</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordflow">return</span> n_swaps;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  }</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span></div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <span class="keyword">template</span> &lt;std::b<span class="keywordtype">id</span>irectional_iterator B<span class="keywordtype">id</span>irIt, <span class="keyword">class</span> Compare = std::less&lt;&gt;&gt;</div>
+<div class="foldopen" id="foldopen00092" data-start="{" data-end="}">
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="group__sorting.html#ga8558b21fabcc45802154301b74a5abf1">   92</a></span>  std::size_t <a class="code hl_function" href="group__sorting.html#ga8558b21fabcc45802154301b74a5abf1">insertion_sort</a>(BidirIt first, BidirIt last, Compare comp = {}) {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordflow">if</span> (first == last) { <span class="keywordflow">return</span> 0; }</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    std::size_t swaps = 0;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordflow">for</span> (BidirIt i = std::next(first); i != last; ++i) {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>      <span class="keywordflow">for</span> (BidirIt j = i; j != first &amp;&amp; comp(*j, *std::prev(j)); --j) {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        std::iter_swap(std::prev(j), j);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        ++swaps;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      }</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordflow">return</span> swaps;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  }</div>
 </div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span></div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  <span class="keyword">template</span> &lt;std::ranges::forward_range Range, <span class="keyword">typename</span> Compare = std::less&lt;&gt;&gt;</div>
-<div class="foldopen" id="foldopen00124" data-start="{" data-end="}">
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno"><a class="line" href="group__sorting.html#gaf8fc6c7d24bc910132086cada4a30942">  124</a></span>  std::size_t <a class="code hl_function" href="group__sorting.html#ga7558958544fb9d898b0e0eed6db625bb">bubble_sort</a>(Range &amp;&amp;rng, Compare comp = {}) { <span class="comment">// NOLINT (ranges need not be forwarded)</span></div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__sorting.html#ga7558958544fb9d898b0e0eed6db625bb">bubble_sort</a>(std::ranges::begin(rng), std::ranges::end(rng), comp);</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  <span class="keyword">template</span> &lt;std::ranges::forward_range Range, <span class="keyword">class</span> Compare = std::less&lt;&gt;&gt;</div>
+<div class="foldopen" id="foldopen00116" data-start="{" data-end="}">
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="group__sorting.html#gaf8fc6c7d24bc910132086cada4a30942">  116</a></span>  std::size_t <a class="code hl_function" href="group__sorting.html#ga7558958544fb9d898b0e0eed6db625bb">bubble_sort</a>(Range &amp;&amp;rng, Compare comp = {}) { <span class="comment">// NOLINT (ranges need not be forwarded)</span></div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__sorting.html#ga7558958544fb9d898b0e0eed6db625bb">bubble_sort</a>(std::ranges::begin(rng), std::ranges::end(rng), comp);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>  }</div>
 </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span></div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  <span class="keyword">template</span> &lt;std::ranges::b<span class="keywordtype">id</span>irectional_range Range, <span class="keyword">typename</span> Compare = std::less&lt;&gt;&gt;</div>
-<div class="foldopen" id="foldopen00140" data-start="{" data-end="}">
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno"><a class="line" href="group__sorting.html#ga0eff6b84f980bf5c7cfb6a0992c6125b">  140</a></span>  std::size_t <a class="code hl_function" href="group__sorting.html#ga8558b21fabcc45802154301b74a5abf1">insertion_sort</a>(Range &amp;&amp;rng, Compare comp = {}) { <span class="comment">// NOLINT (ranges need not be forwarded)</span></div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__sorting.html#ga8558b21fabcc45802154301b74a5abf1">insertion_sort</a>(std::ranges::begin(rng), std::ranges::end(rng), comp);</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  }</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span></div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  <span class="keyword">template</span> &lt;std::ranges::b<span class="keywordtype">id</span>irectional_range Range, <span class="keyword">class</span> Compare = std::less&lt;&gt;&gt;</div>
+<div class="foldopen" id="foldopen00132" data-start="{" data-end="}">
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno"><a class="line" href="group__sorting.html#ga0eff6b84f980bf5c7cfb6a0992c6125b">  132</a></span>  std::size_t <a class="code hl_function" href="group__sorting.html#ga8558b21fabcc45802154301b74a5abf1">insertion_sort</a>(Range &amp;&amp;rng, Compare comp = {}) { <span class="comment">// NOLINT (ranges need not be forwarded)</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordflow">return</span> <a class="code hl_function" href="group__sorting.html#ga8558b21fabcc45802154301b74a5abf1">insertion_sort</a>(std::ranges::begin(rng), std::ranges::end(rng), comp);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  }</div>
 </div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span></div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>} <span class="comment">// namespace itertools</span></div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="preprocessor">#endif </span><span class="comment">// _ITERTOOLS_SORT_HPP</span></div>
-<div class="ttc" id="agroup__sorting_html_ga7558958544fb9d898b0e0eed6db625bb"><div class="ttname"><a href="group__sorting.html#ga7558958544fb9d898b0e0eed6db625bb">itertools::bubble_sort</a></div><div class="ttdeci">std::size_t bubble_sort(ForwardIt first, ForwardIt last, Compare comp={})</div><div class="ttdoc">Bubble sort elements in the given range.</div><div class="ttdef"><b>Definition</b> <a href="#l00058">sort.hpp:58</a></div></div>
-<div class="ttc" id="agroup__sorting_html_ga8558b21fabcc45802154301b74a5abf1"><div class="ttname"><a href="group__sorting.html#ga8558b21fabcc45802154301b74a5abf1">itertools::insertion_sort</a></div><div class="ttdeci">std::size_t insertion_sort(BidirIt first, BidirIt last, Compare comp={})</div><div class="ttdoc">Insertion sort elements in the given range.</div><div class="ttdef"><b>Definition</b> <a href="#l00095">sort.hpp:95</a></div></div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>} <span class="comment">// namespace itertools</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="preprocessor">#endif </span><span class="comment">// _ITERTOOLS_SORT_HPP</span></div>
+<div class="ttc" id="agroup__sorting_html_ga7558958544fb9d898b0e0eed6db625bb"><div class="ttname"><a href="group__sorting.html#ga7558958544fb9d898b0e0eed6db625bb">itertools::bubble_sort</a></div><div class="ttdeci">std::size_t bubble_sort(ForwardIt first, ForwardIt last, Compare comp={})</div><div class="ttdoc">Bubble sort elements in the given range.</div><div class="ttdef"><b>Definition</b> <a href="#l00057">sort.hpp:57</a></div></div>
+<div class="ttc" id="agroup__sorting_html_ga8558b21fabcc45802154301b74a5abf1"><div class="ttname"><a href="group__sorting.html#ga8558b21fabcc45802154301b74a5abf1">itertools::insertion_sort</a></div><div class="ttdeci">std::size_t insertion_sort(BidirIt first, BidirIt last, Compare comp={})</div><div class="ttdoc">Insertion sort elements in the given range.</div><div class="ttdef"><b>Definition</b> <a href="#l00092">sort.hpp:92</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
