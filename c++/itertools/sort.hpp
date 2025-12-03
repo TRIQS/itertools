@@ -27,6 +27,7 @@
 #include <functional>
 #include <iterator>
 #include <ranges>
+#include <utility>
 
 namespace itertools {
 
@@ -53,20 +54,22 @@ namespace itertools {
    * @param comp Comparison function callable with two dereferenced iterators.
    * @return Number of swaps necessary to sort the range.
    */
-  template <std::forward_iterator ForwardIt, class Compare = std::less<>>
+  template <std::forward_iterator ForwardIt, typename Compare = std::less<>>
   std::size_t bubble_sort(ForwardIt first, ForwardIt last, Compare comp = {}) {
-    if (first == last) { return 0; }
     std::size_t n_swaps = 0;
-    for (ForwardIt sorted = first; first != last; last = sorted) {
-      sorted = first;
-      for (ForwardIt curr = first, prev = first; ++curr != last; ++prev) {
-        if (comp(*curr, *prev)) {
-          std::iter_swap(curr, prev);
-          sorted = curr;
+
+    for (auto unsorted_end = last; first != unsorted_end;) {
+      auto last_swap = first;
+      for (auto curr = first, next = std::next(first); next != unsorted_end; ++curr, ++next) {
+        if (comp(*next, *curr)) {
+          std::iter_swap(next, curr);
+          last_swap = next;
           ++n_swaps;
         }
       }
+      unsorted_end = last_swap; // Everything after last_swap is now in final position
     }
+
     return n_swaps;
   }
 
@@ -88,17 +91,22 @@ namespace itertools {
    * @param comp Comparison function callable with two dereferenced iterators.
    * @return Number of swaps necessary to sort the range.
    */
-  template <std::bidirectional_iterator BidirIt, class Compare = std::less<>>
+  template <std::bidirectional_iterator BidirIt, typename Compare = std::less<>>
   std::size_t insertion_sort(BidirIt first, BidirIt last, Compare comp = {}) {
-    if (first == last) { return 0; }
-    std::size_t swaps = 0;
-    for (BidirIt i = std::next(first); i != last; ++i) {
-      for (BidirIt j = i; j != first && comp(*j, *std::prev(j)); --j) {
-        std::iter_swap(std::prev(j), j);
-        ++swaps;
+    if (first == last) return 0;
+
+    std::size_t n_swaps = 0;
+
+    for (auto unsorted_begin = std::next(first); unsorted_begin != last; ++unsorted_begin) {
+      for (auto curr = unsorted_begin; curr != first; --curr) {
+        auto prev = std::prev(curr);
+        if (!comp(*curr, *prev)) break;
+        std::iter_swap(prev, curr);
+        ++n_swaps;
       }
     }
-    return swaps;
+
+    return n_swaps;
   }
 
   /**
@@ -112,7 +120,7 @@ namespace itertools {
    * @param comp Comparison function callable with two dereferenced iterators.
    * @return Number of swaps necessary to sort the range.
    */
-  template <std::ranges::forward_range Range, class Compare = std::less<>>
+  template <std::ranges::forward_range Range, typename Compare = std::less<>>
   std::size_t bubble_sort(Range &&rng, Compare comp = {}) { // NOLINT (ranges need not be forwarded)
     return bubble_sort(std::ranges::begin(rng), std::ranges::end(rng), comp);
   }
@@ -128,7 +136,7 @@ namespace itertools {
    * @param comp Comparison function callable with two dereferenced iterators.
    * @return Number of swaps necessary to sort the range.
    */
-  template <std::ranges::bidirectional_range Range, class Compare = std::less<>>
+  template <std::ranges::bidirectional_range Range, typename Compare = std::less<>>
   std::size_t insertion_sort(Range &&rng, Compare comp = {}) { // NOLINT (ranges need not be forwarded)
     return insertion_sort(std::ranges::begin(rng), std::ranges::end(rng), comp);
   }

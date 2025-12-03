@@ -371,7 +371,7 @@ TEST(Itertools, RangeRandomAccessOperations) {
   }
 }
 
-// Create and fill a container of size n with random integers in [a,b].
+// Create and fill a container with random size in [0,n] with random integers in [a,b].
 template <typename C> auto random_int_range(std::size_t n, int a, int b) {
   static std::default_random_engine eng{std::random_device{}()};
   auto cont = C(std::uniform_int_distribution<std::size_t>(0, n)(eng));
