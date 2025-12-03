@@ -109,16 +109,16 @@ $(function(){initNavTree('group__sorting.html','',''); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga7558958544fb9d898b0e0eed6db625bb" id="r_ga7558958544fb9d898b0e0eed6db625bb"><td class="memTemplParams" colspan="2">template&lt;std::forward_iterator ForwardIt, class Compare = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:ga7558958544fb9d898b0e0eed6db625bb" id="r_ga7558958544fb9d898b0e0eed6db625bb"><td class="memTemplParams" colspan="2">template&lt;std::forward_iterator ForwardIt, typename Compare = std::less&lt;&gt;&gt; </td></tr>
 <tr class="memitem:ga7558958544fb9d898b0e0eed6db625bb template"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga7558958544fb9d898b0e0eed6db625bb">itertools::bubble_sort</a> (ForwardIt first, ForwardIt last, Compare comp={})</td></tr>
 <tr class="memdesc:ga7558958544fb9d898b0e0eed6db625bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bubble sort elements in the given range.  <br /></td></tr>
-<tr class="memitem:gaf8fc6c7d24bc910132086cada4a30942" id="r_gaf8fc6c7d24bc910132086cada4a30942"><td class="memTemplParams" colspan="2">template&lt;std::ranges::forward_range Range, class Compare = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:gaf8fc6c7d24bc910132086cada4a30942" id="r_gaf8fc6c7d24bc910132086cada4a30942"><td class="memTemplParams" colspan="2">template&lt;std::ranges::forward_range Range, typename Compare = std::less&lt;&gt;&gt; </td></tr>
 <tr class="memitem:gaf8fc6c7d24bc910132086cada4a30942 template"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#gaf8fc6c7d24bc910132086cada4a30942">itertools::bubble_sort</a> (Range &amp;&amp;rng, Compare comp={})</td></tr>
 <tr class="memdesc:gaf8fc6c7d24bc910132086cada4a30942"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bubble sort elements in the given range.  <br /></td></tr>
-<tr class="memitem:ga8558b21fabcc45802154301b74a5abf1" id="r_ga8558b21fabcc45802154301b74a5abf1"><td class="memTemplParams" colspan="2">template&lt;std::bidirectional_iterator BidirIt, class Compare = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:ga8558b21fabcc45802154301b74a5abf1" id="r_ga8558b21fabcc45802154301b74a5abf1"><td class="memTemplParams" colspan="2">template&lt;std::bidirectional_iterator BidirIt, typename Compare = std::less&lt;&gt;&gt; </td></tr>
 <tr class="memitem:ga8558b21fabcc45802154301b74a5abf1 template"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga8558b21fabcc45802154301b74a5abf1">itertools::insertion_sort</a> (BidirIt first, BidirIt last, Compare comp={})</td></tr>
 <tr class="memdesc:ga8558b21fabcc45802154301b74a5abf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insertion sort elements in the given range.  <br /></td></tr>
-<tr class="memitem:ga0eff6b84f980bf5c7cfb6a0992c6125b" id="r_ga0eff6b84f980bf5c7cfb6a0992c6125b"><td class="memTemplParams" colspan="2">template&lt;std::ranges::bidirectional_range Range, class Compare = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:ga0eff6b84f980bf5c7cfb6a0992c6125b" id="r_ga0eff6b84f980bf5c7cfb6a0992c6125b"><td class="memTemplParams" colspan="2">template&lt;std::ranges::bidirectional_range Range, typename Compare = std::less&lt;&gt;&gt; </td></tr>
 <tr class="memitem:ga0eff6b84f980bf5c7cfb6a0992c6125b template"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ga0eff6b84f980bf5c7cfb6a0992c6125b">itertools::insertion_sort</a> (Range &amp;&amp;rng, Compare comp={})</td></tr>
 <tr class="memdesc:ga0eff6b84f980bf5c7cfb6a0992c6125b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insertion sort elements in the given range.  <br /></td></tr>
 </table>
@@ -129,7 +129,7 @@ Functions</h2></td></tr>
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::forward_iterator ForwardIt, class Compare = std::less&lt;&gt;&gt; </div>
+template&lt;std::forward_iterator ForwardIt, typename Compare = std::less&lt;&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">std::size_t itertools::bubble_sort </td>
@@ -172,7 +172,7 @@ template&lt;std::forward_iterator ForwardIt, class Compare = std::less&lt;&gt;&g
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of swaps necessary to sort the range. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8hpp_source.html#l00057">57</a> of file <a class="el" href="sort_8hpp_source.html">sort.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8hpp_source.html#l00058">58</a> of file <a class="el" href="sort_8hpp_source.html">sort.hpp</a>.</p>
 
 </div>
 </div>
@@ -182,7 +182,7 @@ template&lt;std::forward_iterator ForwardIt, class Compare = std::less&lt;&gt;&g
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::ranges::forward_range Range, class Compare = std::less&lt;&gt;&gt; </div>
+template&lt;std::ranges::forward_range Range, typename Compare = std::less&lt;&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">std::size_t itertools::bubble_sort </td>
@@ -217,7 +217,7 @@ template&lt;std::ranges::forward_range Range, class Compare = std::less&lt;&gt;&
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of swaps necessary to sort the range. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8hpp_source.html#l00116">116</a> of file <a class="el" href="sort_8hpp_source.html">sort.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8hpp_source.html#l00124">124</a> of file <a class="el" href="sort_8hpp_source.html">sort.hpp</a>.</p>
 
 </div>
 </div>
@@ -227,7 +227,7 @@ template&lt;std::ranges::forward_range Range, class Compare = std::less&lt;&gt;&
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::bidirectional_iterator BidirIt, class Compare = std::less&lt;&gt;&gt; </div>
+template&lt;std::bidirectional_iterator BidirIt, typename Compare = std::less&lt;&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">std::size_t itertools::insertion_sort </td>
@@ -270,7 +270,7 @@ template&lt;std::bidirectional_iterator BidirIt, class Compare = std::less&lt;&g
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of swaps necessary to sort the range. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8hpp_source.html#l00092">92</a> of file <a class="el" href="sort_8hpp_source.html">sort.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8hpp_source.html#l00095">95</a> of file <a class="el" href="sort_8hpp_source.html">sort.hpp</a>.</p>
 
 </div>
 </div>
@@ -280,7 +280,7 @@ template&lt;std::bidirectional_iterator BidirIt, class Compare = std::less&lt;&g
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::ranges::bidirectional_range Range, class Compare = std::less&lt;&gt;&gt; </div>
+template&lt;std::ranges::bidirectional_range Range, typename Compare = std::less&lt;&gt;&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname">std::size_t itertools::insertion_sort </td>
@@ -315,7 +315,7 @@ template&lt;std::ranges::bidirectional_range Range, class Compare = std::less&lt
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Number of swaps necessary to sort the range. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="sort_8hpp_source.html#l00132">132</a> of file <a class="el" href="sort_8hpp_source.html">sort.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="sort_8hpp_source.html#l00140">140</a> of file <a class="el" href="sort_8hpp_source.html">sort.hpp</a>.</p>
 
 </div>
 </div>
