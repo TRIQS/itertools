@@ -77,6 +77,10 @@ var NAVTREE =
         ] ],
         [ "product_range", "group__integer__range.html#gac1b835b5787ccc1e2734690d63e6825d", null ]
       ] ],
+      [ "Sorting", "group__sorting.html", [
+        [ "bubble_sort", "group__sorting.html#ga7558958544fb9d898b0e0eed6db625bb", null ],
+        [ "insertion_sort", "group__sorting.html#ga8558b21fabcc45802154301b74a5abf1", null ]
+      ] ],
       [ "Utilities", "group__utilities.html", [
         [ "chunk_range", "group__utilities.html#gabb91b8815600796bd9da1fe9ada77dc7", null ],
         [ "distance", "group__utilities.html#gac075e63f5924e0d2bd1a3d85f3f9e362", null ],

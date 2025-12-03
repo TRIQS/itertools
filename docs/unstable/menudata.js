@@ -66,6 +66,9 @@ var menudata={children:[
 {text:"all_t",url:"structitertools_1_1range_1_1all__t.html"},
 {text:"const_iterator",url:"structitertools_1_1range_1_1const__iterator.html"}]},
 {text:"product_range",url:"group__integer__range.html#gac1b835b5787ccc1e2734690d63e6825d"}]},
+{text:"Sorting",url:"group__sorting.html",children:[
+{text:"bubble_sort",url:"group__sorting.html#ga7558958544fb9d898b0e0eed6db625bb"},
+{text:"insertion_sort",url:"group__sorting.html#ga8558b21fabcc45802154301b74a5abf1"}]},
 {text:"Utilities",url:"group__utilities.html",children:[
 {text:"chunk_range",url:"group__utilities.html#gabb91b8815600796bd9da1fe9ada77dc7"},
 {text:"distance",url:"group__utilities.html#gac075e63f5924e0d2bd1a3d85f3f9e362"},

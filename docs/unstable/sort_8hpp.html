@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>TRIQS/itertools: itertools::range::all_t</title>
+<title>TRIQS/itertools: itertools/sort.hpp</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,7 +74,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('structitertools_1_1range_1_1all__t.html','',''); });
+$(function(){initNavTree('sort_8hpp.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -100,19 +100,36 @@ $(function(){initNavTree('structitertools_1_1range_1_1all__t.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">itertools::range::all_t<div class="ingroups"><a class="el" href="group__integer__range.html">Integer range</a></div></div></div>
+  <div class="headertitle"><div class="title">sort.hpp</div></div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><code>#include &lt;algorithm&gt;</code><br />
+<code>#include &lt;cstddef&gt;</code><br />
+<code>#include &lt;functional&gt;</code><br />
+<code>#include &lt;iterator&gt;</code><br />
+<code>#include &lt;ranges&gt;</code><br />
+</div><a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Provides functions for sorting ranges. </p>
 
-<p><code>#include &lt;<a class="el" href="range_8hpp_source.html">itertools/range.hpp</a>&gt;</code></p>
-<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Denote a full range at compile-time. </p>
-<p>Can be used for accessing slices of multi-dimensional arrays. </p>
-
-<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00099">99</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
-<li>itertools/<a class="el" href="range_8hpp_source.html">range.hpp</a></li>
-</ul>
+<p class="definition">Definition in file <a class="el" href="sort_8hpp_source.html">sort.hpp</a>.</p>
+</div>
+<p><a href="sort_8hpp_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ga7558958544fb9d898b0e0eed6db625bb" id="r_ga7558958544fb9d898b0e0eed6db625bb"><td class="memTemplParams" colspan="2">template&lt;std::forward_iterator ForwardIt, class Compare = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:ga7558958544fb9d898b0e0eed6db625bb template"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sorting.html#ga7558958544fb9d898b0e0eed6db625bb">itertools::bubble_sort</a> (ForwardIt first, ForwardIt last, Compare comp={})</td></tr>
+<tr class="memdesc:ga7558958544fb9d898b0e0eed6db625bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bubble sort elements in the given range.  <br /></td></tr>
+<tr class="memitem:gaf8fc6c7d24bc910132086cada4a30942" id="r_gaf8fc6c7d24bc910132086cada4a30942"><td class="memTemplParams" colspan="2">template&lt;std::ranges::forward_range Range, class Compare = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:gaf8fc6c7d24bc910132086cada4a30942 template"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sorting.html#gaf8fc6c7d24bc910132086cada4a30942">itertools::bubble_sort</a> (Range &amp;&amp;rng, Compare comp={})</td></tr>
+<tr class="memdesc:gaf8fc6c7d24bc910132086cada4a30942"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bubble sort elements in the given range.  <br /></td></tr>
+<tr class="memitem:ga8558b21fabcc45802154301b74a5abf1" id="r_ga8558b21fabcc45802154301b74a5abf1"><td class="memTemplParams" colspan="2">template&lt;std::bidirectional_iterator BidirIt, class Compare = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:ga8558b21fabcc45802154301b74a5abf1 template"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sorting.html#ga8558b21fabcc45802154301b74a5abf1">itertools::insertion_sort</a> (BidirIt first, BidirIt last, Compare comp={})</td></tr>
+<tr class="memdesc:ga8558b21fabcc45802154301b74a5abf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insertion sort elements in the given range.  <br /></td></tr>
+<tr class="memitem:ga0eff6b84f980bf5c7cfb6a0992c6125b" id="r_ga0eff6b84f980bf5c7cfb6a0992c6125b"><td class="memTemplParams" colspan="2">template&lt;std::ranges::bidirectional_range Range, class Compare = std::less&lt;&gt;&gt; </td></tr>
+<tr class="memitem:ga0eff6b84f980bf5c7cfb6a0992c6125b template"><td class="memItemLeft" align="right" valign="top">std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__sorting.html#ga0eff6b84f980bf5c7cfb6a0992c6125b">itertools::insertion_sort</a> (Range &amp;&amp;rng, Compare comp={})</td></tr>
+<tr class="memdesc:ga0eff6b84f980bf5c7cfb6a0992c6125b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insertion sort elements in the given range.  <br /></td></tr>
+</table>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
@@ -126,7 +143,7 @@ $(function(){initNavTree('structitertools_1_1range_1_1all__t.html','',''); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>itertools</b></li><li class="navelem"><a href="classitertools_1_1range.html">range</a></li><li class="navelem"><a href="structitertools_1_1range_1_1all__t.html">all_t</a></li>
+    <li class="navelem"><b>itertools</b></li><li class="navelem"><a href="sort_8hpp.html">sort.hpp</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

@@ -8,6 +8,7 @@ var dir_e6396aa9aeb50fc06708f48ec9beacf2 =
     [ "range.hpp", "range_8hpp.html", "range_8hpp" ],
     [ "sentinel.hpp", "sentinel_8hpp.html", "sentinel_8hpp" ],
     [ "slice.hpp", "slice_8hpp.html", "slice_8hpp" ],
+    [ "sort.hpp", "sort_8hpp.html", "sort_8hpp" ],
     [ "stride.hpp", "stride_8hpp.html", "stride_8hpp" ],
     [ "transform.hpp", "transform_8hpp.html", "transform_8hpp" ],
     [ "utils.hpp", "utils_8hpp.html", "utils_8hpp" ],
