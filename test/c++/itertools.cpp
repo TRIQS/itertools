@@ -165,6 +165,39 @@ TEST(Itertools, Product) {
   EXPECT_EQ(count, 1 * 2 * 3 * 4);
 }
 
+TEST(Itertools, ProductVec) {
+  // multiply two ranges stored in a vector
+  std::vector<int> v1{0, 1, 2};
+  std::vector<int> v2{0, 1, 2};
+  std::vector<std::vector<int>> ranges{v1, v2};
+
+  // expected results with right-to-left iteration (last range fastest)
+  std::vector<std::vector<int>> expected{{0, 0}, {0, 1}, {0, 2}, {1, 0}, {1, 1}, {1, 2}, {2, 0}, {2, 1}, {2, 2}};
+
+  std::vector<std::vector<int>> result;
+  for (auto vec : product_vec(ranges)) result.push_back(vec);
+  EXPECT_EQ(result, expected);
+
+  // check that the total count is correct for various numbers of ranges
+  for (int n = 1; n <= 4; ++n) {
+    std::vector<std::vector<int>> multi_ranges(n, std::vector<int>{0, 1, 2});
+    int count = 0;
+    for ([[maybe_unused]] auto vec : product_vec(multi_ranges)) ++count;
+    int expected_count = 1;
+    for (int k = 0; k < n; ++k) expected_count *= 3;
+    EXPECT_EQ(count, expected_count);
+  }
+
+  // empty product: cartesian product of zero ranges yields single empty tuple
+  std::vector<std::vector<int>> empty_ranges;
+  int empty_count = 0;
+  for (auto vec : product_vec(empty_ranges)) {
+    EXPECT_TRUE(vec.empty());
+    ++empty_count;
+  }
+  EXPECT_EQ(empty_count, 1);
+}
+
 TEST(Itertools, Slice) {
   // slice an integer range in various ways
   for (long N : range(1, 6)) {

@@ -29,6 +29,7 @@
 #include <iterator>
 #include <tuple>
 #include <utility>
+#include <vector>
 
 namespace itertools {
 
@@ -199,6 +200,181 @@ namespace itertools {
   template <typename... Rs> multiplied(Rs &&...) -> multiplied<std::decay_t<Rs>...>;
 
   /**
+   * @ingroup range_iterators
+   * @brief Iterator for a itertools::multiplied_vec (cartesian product of homogeneous ranges) range.
+   *
+   * @details Similar to itertools::prod_iter, but works with a vector of homogeneous ranges
+   * instead of a tuple of heterogeneous ranges. This allows for a runtime-determined number of ranges.
+   *
+   * Incrementing is done from right to left, i.e. the iterator of the last range is incremented first.
+   * Once an iterator reaches the end of its range, it is reset to the beginning and the iterator of the
+   * previous range is incremented once.
+   *
+   * Dereferencing returns a vector containing the results of dereferencing each iterator.
+   *
+   * See itertools::product_vec(std::vector<R> const &) for more details.
+   *
+   * @tparam Iter Iterator type of the ranges.
+   */
+  template <typename Iter>
+  struct prod_iter_vec : iterator_facade<prod_iter_vec<Iter>, std::vector<typename std::iterator_traits<Iter>::value_type>> {
+    /// Value type of the dereferenced iterators.
+    using value_type = typename std::iterator_traits<Iter>::value_type;
+
+    /// Vector containing the begin iterators of the original ranges.
+    std::vector<Iter> its_begin;
+
+    /// Vector containing the end iterators of the original ranges.
+    std::vector<Iter> its_end;
+
+    /// Vector containing the current iterators of the original ranges.
+    std::vector<Iter> its;
+
+    /// Flag to track completion for empty product (yields single empty vector).
+    bool done = false;
+
+    /// Default constructor.
+    prod_iter_vec() = default;
+
+    /**
+     * @brief Construct a product iterator from given begin iterators and end iterators.
+     *
+     * @param its_begin Vector containing begin iterators of the original ranges.
+     * @param its_end Vector containing end iterators of the original ranges.
+     */
+    prod_iter_vec(std::vector<Iter> its_begin, std::vector<Iter> its_end)
+       : its_begin(std::move(its_begin)), its_end(std::move(its_end)), its(this->its_begin) {}
+
+    /// Increment the iterator by incrementing the current iterators starting with the iterator of the last range.
+    void increment() {
+      if (its.empty()) {
+        done = true;
+        return;
+      }
+      for (std::size_t i = its.size(); i-- > 1;) {
+        ++its[i];
+        if (its[i] != its_end[i]) return;
+        its[i] = its_begin[i];
+      }
+      ++its[0];
+    }
+
+    /**
+     * @brief Equal-to operator for two itertools::prod_iter_vec objects.
+     *
+     * @param other itertools::prod_iter_vec to compare with.
+     * @return True, if all original iterators are equal.
+     */
+    [[nodiscard]] bool operator==(prod_iter_vec const &other) const { return its == other.its && done == other.done; }
+
+    /**
+     * @brief Equal-to operator for a itertools::prod_iter_vec and an itertools::sentinel_t.
+     *
+     * @details We reach the end of the product range, when the first iterator, i.e. `its[0]`, is at its end,
+     * or when done=true for empty products.
+     *
+     * @tparam SentinelIter Iterator type of the sentinel.
+     * @param s itertools::sentinel_t to compare with.
+     * @return True, if the first iterator, i.e. `its[0]`, is equal to the iterator of the sentinel.
+     */
+    template <typename SentinelIter> [[nodiscard]] bool operator==(sentinel_t<SentinelIter> const &s) const {
+      if (its.empty()) return done;
+      return s.it == its[0];
+    }
+
+    /**
+     * @brief Dereference the iterator.
+     * @return Vector containing the dereferenced values of all original iterators.
+     */
+    [[nodiscard]] std::vector<value_type> dereference() const {
+      std::vector<value_type> result;
+      result.reserve(its.size());
+      for (auto const &it : its) result.push_back(*it);
+      return result;
+    }
+  };
+
+  /**
+   * @ingroup adapted_ranges
+   * @brief Represents a cartesian product of homogeneous ranges stored in a vector.
+   *
+   * @details See itertools::product_vec(std::vector<R> const &) for more details.
+   *
+   * @tparam R Range type.
+   */
+  template <typename R> struct multiplied_vec {
+    /// Vector containing the original ranges.
+    std::vector<R> tu;
+
+    /// Iterator type of the product range.
+    using iterator = prod_iter_vec<decltype(std::begin(std::declval<R &>()))>;
+
+    /// Const iterator type the product range.
+    using const_iterator = prod_iter_vec<decltype(std::cbegin(std::declval<R &>()))>;
+
+    /**
+     * @brief Constructs a cartesian product (multiplied_vec) range from a vector of ranges.
+     *
+     * @param rgs Vector of ranges to be multiplied.
+     */
+    explicit multiplied_vec(std::vector<R> rgs) : tu(std::move(rgs)) {}
+
+    /// Default equal-to operator.
+    [[nodiscard]] bool operator==(multiplied_vec const &) const = default;
+
+    /**
+     * @brief Beginning of the product range.
+     * @return itertools::prod_iter_vec representing the beginning of the product range.
+     */
+    [[nodiscard]] iterator begin() noexcept {
+      std::vector<decltype(std::begin(std::declval<R &>()))> b, e;
+      b.reserve(tu.size());
+      e.reserve(tu.size());
+      for (auto &r : tu) {
+        b.push_back(std::begin(r));
+        e.push_back(std::end(r));
+      }
+      return iterator{std::move(b), std::move(e)};
+    }
+
+    /// Const version of begin().
+    [[nodiscard]] const_iterator cbegin() const noexcept {
+      std::vector<decltype(std::cbegin(std::declval<R const &>()))> b, e;
+      b.reserve(tu.size());
+      e.reserve(tu.size());
+      for (auto const &r : tu) {
+        b.push_back(std::cbegin(r));
+        e.push_back(std::cend(r));
+      }
+      return const_iterator{std::move(b), std::move(e)};
+    }
+
+    /// Const overload of begin().
+    [[nodiscard]] const_iterator begin() const noexcept { return cbegin(); }
+
+    /**
+     * @brief End of the product range.
+     * @return itertools::sentinel_t containing the end iterator of the first original range, i.e. `std::end(tu[0])`.
+     *         For empty products, returns a default-constructed sentinel (unused, as done flag is checked instead).
+     */
+    [[nodiscard]] auto end() noexcept {
+      using SentinelIter = decltype(std::end(std::declval<R &>()));
+      if (tu.empty()) return make_sentinel(SentinelIter{});
+      return make_sentinel(std::end(tu[0]));
+    }
+
+    /// Const version of end().
+    [[nodiscard]] auto cend() const noexcept {
+      using SentinelIter = decltype(std::cend(std::declval<R const &>()));
+      if (tu.empty()) return make_sentinel(SentinelIter{});
+      return make_sentinel(std::cend(tu[0]));
+    }
+
+    /// Const overload of end().
+    [[nodiscard]] auto end() const noexcept { return cend(); }
+  };
+
+  /**
    * @addtogroup range_adapting_functions
    * @{
    */
@@ -238,6 +414,47 @@ namespace itertools {
    * @return A product (itertools::multiplied) range.
    */
   template <typename... Rs> [[nodiscard]] itertools::multiplied<Rs...> product(Rs &&...rgs) { return {std::forward<Rs>(rgs)...}; }
+
+  /**
+   * @brief Lazy-multiply a vector of homogeneous ranges by forming their cartesian product.
+   *
+   * @details Similar to itertools::product, but takes a vector of homogeneous ranges instead of
+   * a variadic number of potentially heterogeneous ranges. This allows for a runtime-determined
+   * number of ranges.
+   *
+   * They are traversed such that the last range is traversed the fastest (see the example below).
+   * The number of elements in a product range is equal to the product of the sizes of the given ranges.
+   * This function returns an iterable lazy object, which can be used in range-based for loops:
+   *
+   * @code{.cpp}
+   * std::vector<int> v1 { 0, 1, 2 };
+   * std::vector<int> v2 { 0, 1, 2 };
+   * std::vector<std::vector<int>> ranges { v1, v2 };
+   *
+   * for (auto vec : product_vec(ranges)) {
+   *   std::cout << "[" << vec[0] << ", " << vec[1] << "]\n";
+   * }
+   * @endcode
+   *
+   * Output:
+   *
+   * ```
+   * [0, 0]
+   * [0, 1]
+   * [0, 2]
+   * [1, 0]
+   * [1, 1]
+   * [1, 2]
+   * [2, 0]
+   * [2, 1]
+   * [2, 2]
+   * ```
+   *
+   * @tparam R Range type.
+   * @param rgs Vector of ranges to be used.
+   * @return A product (itertools::multiplied_vec) range.
+   */
+  template <typename R> [[nodiscard]] itertools::multiplied_vec<R> product_vec(std::vector<R> rgs) { return multiplied_vec<R>{std::move(rgs)}; }
 
   namespace detail {
 
