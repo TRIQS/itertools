@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['end_5fidx_0',['end_idx',['../structitertools_1_1sliced.html#a2b039ddc71e7e9e11380a2dd4889079d',1,'itertools::sliced']]]
+  ['done_0',['done',['../structitertools_1_1prod__iter__vec.html#ab9fde7a26470d706535bf11a6e36ae92',1,'itertools::prod_iter_vec']]]
 ];

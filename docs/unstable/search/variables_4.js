@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['pos_0',['pos',['../structitertools_1_1range_1_1const__iterator.html#a8aa56ef49d3022fe29a0a1efa7c84c9e',1,'itertools::range::const_iterator']]]
+  ['lambda_0',['lambda',['../structitertools_1_1transform__iter.html#a53af0def93d7124ce4b009ea141df510',1,'itertools::transform_iter::lambda'],['../structitertools_1_1transformed.html#a4f131b23ac05b35690e284473800f02c',1,'itertools::transformed::lambda']]]
 ];
