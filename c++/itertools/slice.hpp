@@ -118,7 +118,7 @@ namespace itertools {
    * @param rg Range to be sliced.
    * @param start_idx Index where the slice starts.
    * @param end_idx Index of the first element past the end of the sliced range (excluded).
-   * @return A itertools::sliced range.
+   * @return An itertools::sliced range.
    */
   template <typename R> [[nodiscard]] sliced<R> slice(R &&rg, std::ptrdiff_t start_idx, std::ptrdiff_t end_idx) {
     return {std::forward<R>(rg), start_idx, std::max(start_idx, end_idx)};

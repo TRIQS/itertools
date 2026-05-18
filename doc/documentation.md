@@ -16,7 +16,7 @@ can be iterated over.
 Lazy means that new elements are produced on the fly whenever they are needed instead of being precomputed
 when the range is created.
 
-The following range adpating functions are available in **itertools**:
+The following range adapting functions are available in **itertools**:
 
 * @ref itertools::enumerate "enumerate"
 * @ref itertools::make_product "make_product"
@@ -93,7 +93,7 @@ The following @ref sorting functions are defined in **itertools**:
 ## Utilities
 
 @ref utilities are mostly internal implementation details and should not concern everyday users.
-The only functions the might be intersting to some users are: @ref itertools::chunk_range "chunk_range",
+The only functions that might be interesting to some users are: @ref itertools::chunk_range "chunk_range",
 @ref itertools::make_vector_from_range "make_vector_from_range" and @ref itertools::omp_chunk "omp_chunk".
 
 The following utilities are defined in **itertools**:

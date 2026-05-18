@@ -34,7 +34,7 @@ namespace itertools {
 
   /**
    * @ingroup range_iterators
-   * @brief Iterator for a itertools::zipped range.
+   * @brief Iterator for an itertools::zipped range.
    *
    * @details It stores iterators of the original ranges in a tuple. Incrementing simply increments each iterator
    * individually. Dereferencing returns a tuple containing the results of dereferencing each iterator.
@@ -74,7 +74,7 @@ namespace itertools {
     [[nodiscard]] bool operator==(zip_iter const &other) const { return its == other.its; }
 
     /**
-     * @brief Equal-to operator for a itertools::zip_iter and an itertools::sentinel_t.
+     * @brief Equal-to operator for an itertools::zip_iter and an itertools::sentinel_t.
      *
      * @details Only one of the iterators has to be equal to the corresponding iterator of the sentinel. In case the 
      * original ranges have different lengths, the itertools::zipped range should have the length of the shortest range.
@@ -202,7 +202,7 @@ namespace itertools {
    *
    * @tparam Rs Range types.
    * @param rgs Ranges to zip.
-   * @return A itertools::zipped range.
+   * @return An itertools::zipped range.
    */
   template <typename... Rs> [[nodiscard]] zipped<Rs...> zip(Rs &&...rgs) { return {std::forward<Rs>(rgs)...}; }
 

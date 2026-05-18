@@ -36,7 +36,7 @@ namespace itertools {
    *
    * @tparam R Range type.
    * @param rg Range to chunk.
-   * @return A itertools::sliced range, containing the chunk of the original range that belongs to the current thread.
+   * @return An itertools::sliced range, containing the chunk of the original range that belongs to the current thread.
    */
   template <typename R> auto omp_chunk(R &&rg) {
     auto total_size           = itertools::distance(std::cbegin(rg), std::cend(rg));

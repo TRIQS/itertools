@@ -103,7 +103,7 @@ Find below an itemized list of changes in this release.
 * Minor doc cleanups for doxygen generation, add Doxyfile and update .gitignore
 
 ### c++20
-* Resplace std::result_of by std::invoke_result
+* Replace std::result_of by std::invoke_result
 
 ### cmake
 * Bump Version number to 1.1.0

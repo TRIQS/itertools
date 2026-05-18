@@ -24,7 +24,7 @@ Instead, we refer the user to the **itertools** CI builds on
 
 @section install_steps Installation steps
 
-1. Download the source code of the latest stable version by cloning the [TRIQS/itertools](https://github.com/triqs/itertools)
+1. Download the source code of the latest stable version by cloning the [TRIQS/itertools](https://github.com/TRIQS/itertools)
 repository from GitHub:
 
     ```console
