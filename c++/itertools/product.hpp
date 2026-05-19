@@ -35,16 +35,16 @@ namespace itertools {
 
   /**
    * @ingroup range_iterators
-   * @brief Iterator for a itertools::multiplied (cartesian product) range.
+   * @brief Iterator for an itertools::multiplied (cartesian product) range.
    *
    * @details It stores three tuples of iterators of the original ranges:
    * - `its_begin` contains the begin iterators of all ranges
    * - `its_end` contains the end iterators of all ranges
    * - `its` contains the current iterators of all ranges
    *
-   * Incrementing is done from right to left, i.e. the iterator of the last range is incremented first.
-   * Once an iterator reaches the end of its range, it is reset to the beginning and the iterator of the
-   * previous range is incremented once.
+   * Incrementing is done from right to left, i.e. the iterator of the last range is incremented first. Once an iterator 
+   * reaches the end of its range, it is reset to the beginning and the iterator of the previous range is incremented 
+   * once.
    *
    * Dereferencing returns a tuple containing the results of dereferencing each iterator.
    *
@@ -106,7 +106,7 @@ namespace itertools {
     [[nodiscard]] bool operator==(prod_iter const &other) const { return its == other.its; }
 
     /**
-     * @brief Equal-to operator for a itertools::prod_iter and an itertools::sentinel_t.
+     * @brief Equal-to operator for an itertools::prod_iter and an itertools::sentinel_t.
      *
      * @details We reach the end of the product range, when the first iterator, i.e. `std::get<0>(its)`, is at its end.
      *
@@ -145,7 +145,7 @@ namespace itertools {
     /// Iterator type of the product range.
     using iterator = prod_iter<std::tuple<decltype(std::end(std::declval<Rs &>()))...>, decltype(std::begin(std::declval<Rs &>()))...>;
 
-    /// Const iterator type the product range.
+    /// Const iterator type of the product range.
     using const_iterator = prod_iter<std::tuple<decltype(std::cend(std::declval<Rs &>()))...>, decltype(std::cbegin(std::declval<Rs &>()))...>;
 
     /**
@@ -160,7 +160,7 @@ namespace itertools {
     [[nodiscard]] bool operator==(multiplied const &) const = default;
 
     private:
-    // Helper function to create a itertools::prod_iter representing the beginning of the product range.
+    // Helper function to create an itertools::prod_iter representing the beginning of the product range.
     template <size_t... Is> [[gnu::always_inline]] auto _begin(std::index_sequence<Is...>) {
       return iterator{std::make_tuple(std::begin(std::get<Is>(tu))...), std::make_tuple(std::end(std::get<Is>(tu))...)};
     }
@@ -185,7 +185,8 @@ namespace itertools {
 
     /**
      * @brief End of the product range.
-     * @return itertools::sentinel_t containing the end iterator of the first original range, i.e. `std::end(std::get<0>(tu))`.
+     * @return itertools::sentinel_t containing the end iterator of the first original range, i.e. 
+     * `std::end(std::get<0>(tu))`.
      */
     [[nodiscard]] auto end() noexcept { return make_sentinel(std::end(std::get<0>(tu))); }
 
@@ -201,7 +202,7 @@ namespace itertools {
 
   /**
    * @ingroup range_iterators
-   * @brief Iterator for a itertools::multiplied_vec (cartesian product of homogeneous ranges) range.
+   * @brief Iterator for an itertools::multiplied_vec (cartesian product of homogeneous ranges) range.
    *
    * @details Similar to itertools::prod_iter, but works with a vector of homogeneous ranges
    * instead of a tuple of heterogeneous ranges. This allows for a runtime-determined number of ranges.
@@ -268,7 +269,7 @@ namespace itertools {
     [[nodiscard]] bool operator==(prod_iter_vec const &other) const { return its == other.its && done == other.done; }
 
     /**
-     * @brief Equal-to operator for a itertools::prod_iter_vec and an itertools::sentinel_t.
+     * @brief Equal-to operator for an itertools::prod_iter_vec and an itertools::sentinel_t.
      *
      * @details We reach the end of the product range, when the first iterator, i.e. `its[0]`, is at its end,
      * or when done=true for empty products.
@@ -309,7 +310,7 @@ namespace itertools {
     /// Iterator type of the product range.
     using iterator = prod_iter_vec<decltype(std::begin(std::declval<R &>()))>;
 
-    /// Const iterator type the product range.
+    /// Const iterator type of the product range.
     using const_iterator = prod_iter_vec<decltype(std::cbegin(std::declval<R &>()))>;
 
     /**
@@ -382,19 +383,14 @@ namespace itertools {
   /**
    * @brief Lazy-multiply a given number of ranges by forming their cartesian product.
    *
-   * @details An arbitrary number of ranges are multiplied together into a cartesian product range.
-   * They are traversed such that the last range is traversed the fastest (see the example below).
+   * @details An arbitrary number of ranges are multiplied together into a cartesian product range. They are traversed 
+   * such that the last range is traversed the fastest (see the example below). 
+   * 
    * The number of elements in a product range is equal to the product of the sizes of the given ranges.
+   * 
    * This function returns an iterable lazy object, which can be used in range-based for loops:
    *
-   * @code{.cpp}
-   * std::vector<int> v1 { 1, 2, 3 };
-   * std::vector<char> v2 { 'a', 'b' };
-   *
-   * for (auto [i, c] : product(v1, v2)) {
-   *   std::cout << "(" << i << ", " << c << ")\n";
-   * }
-   * @endcode
+   * @include doc_product.cpp
    *
    * Output:
    *
@@ -407,7 +403,8 @@ namespace itertools {
    * (3, b)
    * ```
    *
-   * See also <a href="https://en.cppreference.com/w/cpp/ranges/cartesian_product_view">std::ranges::views::cartesian_product</a>.
+   * See also <a href="https://en.cppreference.com/w/cpp/ranges/cartesian_product_view">
+   * std::ranges::views::cartesian_product</a>.
    *
    * @tparam Rs Range types.
    * @param rgs Ranges to be used.

@@ -34,11 +34,11 @@ namespace itertools {
 
   /**
    * @ingroup range_iterators
-   * @brief Iterator for a itertools::transformed range.
+   * @brief Iterator for an itertools::transformed range.
    *
-   * @details It stores an iterator of the original range and a callable object that is used to transform the
-   * elements of the original range. Incrementing simply increments the iterator. Dereferencing returns the
-   * result of the callable object applied to the dereferenced iterator, i.e. the transformed element.
+   * @details It stores an iterator of the original range and a callable object that is used to transform the elements 
+   * of the original range. Incrementing simply increments the iterator. Dereferencing returns the result of the 
+   * callable object applied to the dereferenced iterator, i.e. the transformed element.
    *
    * See itertools::transform(R &&, F) for more details.
    *
@@ -99,7 +99,7 @@ namespace itertools {
     [[nodiscard]] bool operator==(transform_iter const &other) const { return it == other.it; }
 
     /**
-     * @brief Equal-to operator for a itertools::transform_iter and an itertools::sentinel_t.
+     * @brief Equal-to operator for an itertools::transform_iter and an itertools::sentinel_t.
      *
      * @tparam SentinelIter Iterator type of the sentinel.
      * @param s itertools::sentinel_t to compare with.
@@ -161,15 +161,10 @@ namespace itertools {
    *
    * @details The value type of the transformed range depends on the return type of the callable.
    *
-   * This function returns an iterable lazy object (a itertools::transformed range), which can be used in range-based for loops:
+   * This function returns an iterable lazy object (an itertools::transformed range), which can be used in range-based
+   * for loops:
    *
-   * @code{.cpp}
-   * std::list<int> list { 1, 2, 3, 4, 5 };
-   *
-   * for (auto i : itertools::transform(list, [](int i) { return i * i; })) {
-   *   std::cout << i << " ";
-   * }
-   * @endcode
+   * @include doc_transform.cpp
    *
    * Output:
    *
@@ -183,7 +178,7 @@ namespace itertools {
    * @tparam F Callable type.
    * @param rg Range to transform.
    * @param lambda Callable to be applied to the given range.
-   * @return A itertools::transformed range.
+   * @return An itertools::transformed range.
    */
   template <typename R, typename F> [[nodiscard]] auto transform(R &&rg, F lambda) {
     return transformed<R, F>{std::forward<R>(rg), std::move(lambda)};

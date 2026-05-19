@@ -1,5 +1,24 @@
 @page changelog Changelog
 
+## Version 2.0.0
+
+This is Version 2.0.0 of Itertools, a single-header library for adapting C++ ranges.
+
+We thank all contributors: Thomas Hahn, Henri Menke, Dylan Simon, Nils Wentzell
+
+Find below an itemized list of changes in this release.
+
+### General
+* Add example codes to doc folder and make sure they compile
+* Updated documentation
+* Add product_vec for runtime-sized cartesian products
+* Add sorting functions that track number of swaps
+* Range constructors take std::integral to avoid warnings
+* Make range a std::random_access_range
+
+### doc
+* Add FI support notice to README.md
+
 ## Version 1.3.0
 
 This is Version 1.3.0 of Itertools, a single-header library for adapting C++ ranges.
@@ -84,7 +103,7 @@ Find below an itemized list of changes in this release.
 * Minor doc cleanups for doxygen generation, add Doxyfile and update .gitignore
 
 ### c++20
-* Resplace std::result_of by std::invoke_result
+* Replace std::result_of by std::invoke_result
 
 ### cmake
 * Bump Version number to 1.1.0

@@ -34,7 +34,7 @@ namespace itertools {
 
   /**
    * @ingroup range_iterators
-   * @brief Iterator for a itertools::strided range.
+   * @brief Iterator for an itertools::strided range.
    *
    * @details It stores an iterator of the original range as well as a stride. Incrementing advances the original
    * iterator by the given stride. Dereferencing simply returns the dereferenced original iterator.
@@ -148,18 +148,7 @@ namespace itertools {
    *
    * This function returns an iterable lazy object, which can be used in range-based for loops:
    *
-   * @code{.cpp}
-   * std::vector<int> vec { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-   *
-   * for (auto i : stride(vec, 3)) {
-   *   std::cout << i << " ";
-   * }
-   * std::cout << "\n";
-   *
-   * for (auto i : stride(vec, 10)) {
-   *   std::cout << i << " ";
-   * }
-   * @endcode
+   * @include doc_stride.cpp
    *
    * Output:
    *
@@ -168,12 +157,12 @@ namespace itertools {
    * 1
    * ```
    *
-   * See also See also <a href="https://en.cppreference.com/w/cpp/ranges/stride_view">std::ranges::views::stride</a>.
+   * See also <a href="https://en.cppreference.com/w/cpp/ranges/stride_view">std::ranges::views::stride</a>.
    *
    * @tparam R Range type.
    * @param rg Original range.
    * @param stride Number of elements to skip when incrementing.
-   * @return A itertools::strided range.
+   * @return An itertools::strided range.
    */
   template <typename R> [[nodiscard]] strided<R> stride(R &&rg, std::ptrdiff_t stride) { return {std::forward<R>(rg), stride}; }
 

@@ -31,11 +31,12 @@ namespace itertools {
    * @ingroup utilities
    * @brief Distribute a range as evenly as possible across all OMP threads.
    *
-   * @details See chunk_range(std::ptrdiff_t, std::ptrdiff_t, long, long) and slice(R &&, std::ptrdiff_t, std::ptrdiff_t) for more details.
+   * @details See chunk_range(std::ptrdiff_t, std::ptrdiff_t, long, long) and slice(R &&, std::ptrdiff_t, 
+   * std::ptrdiff_t) for more details.
    *
    * @tparam R Range type.
    * @param rg Range to chunk.
-   * @return A itertools::sliced range, containing the chunk of the original range that belongs to the current thread.
+   * @return An itertools::sliced range, containing the chunk of the original range that belongs to the current thread.
    */
   template <typename R> auto omp_chunk(R &&rg) {
     auto total_size           = itertools::distance(std::cbegin(rg), std::cend(rg));

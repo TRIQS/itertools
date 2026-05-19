@@ -31,7 +31,7 @@ include (FetchContent)
 FetchContent_Declare(
   itertools
   GIT_REPOSITORY https://github.com/TRIQS/itertools.git
-  GIT_TAG        1.2.x
+  GIT_TAG        2.0.x
 )
 FetchContent_MakeAvailable(itertools)
 
@@ -40,7 +40,7 @@ add_executable(my_executable main.cpp)
 target_link_libraries(my_executable itertools::itertools_c)
 ```
 
-Note that the above will also build [goolgetest](https://github.com/google/googletest) and the unit tests for **itertools**.
+Note that the above will also build [googletest](https://github.com/google/googletest) and the unit tests for **itertools**.
 To disable this, you can put `set(Build_Tests OFF CACHE BOOL "" FORCE)` before fetching the content.
 
 @subsection find_package find_package
@@ -73,7 +73,7 @@ $ source path_to_install_dir/share/itertools/itertoolsvars.sh
 
 @subsection add_sub add_subdirectory
 
-You can also integrate **itertools** into our CMake project by placing the entire source tree in a subdirectory and call `add_subdirectory()`:
+You can also integrate **itertools** into your CMake project by placing the entire source tree in a subdirectory and call `add_subdirectory()`:
 
 ```cmake
 cmake_minimum_required(VERSION 3.20)
@@ -91,6 +91,6 @@ Here, it is assumed that the **itertools** source tree is in a subdirectory `dep
 
 @section other Other
 
-Since **itertools** is header-only, you can also simply copy the relevant files directly into our project.
+Since **itertools** is header-only, you can also simply copy the relevant files directly into your project.
 For example, you could place the `c++/itertools` directory from the **itertools** source tree into the include path of your project.
 You can then build or compile it with any available method.

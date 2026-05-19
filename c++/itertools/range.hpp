@@ -49,26 +49,7 @@ namespace itertools {
    *
    * This function returns an iterable lazy object, which can be used in range-based for loops:
    *
-   * @code{.cpp}
-   * for (auto i : range(5)) {
-   *   std::cout << i << " ";
-   * }
-   * std::cout << "\n";
-   *
-   * for (auto i : range(-2, 1)) {
-   *   std::cout << i << " ";
-   * }
-   * std::cout << "\n";
-   *
-   * for (auto i : range(10, 3, -2)) {
-   *   std::cout << i << " ";
-   * }
-   * std::cout << "\n";
-   *
-   * for (auto i : range(0, 10, -1)) {
-   *   std::cout << i << " "; // empty
-   * }
-   * @endcode
+   * @include doc_range.cpp
    *
    * Output:
    *
@@ -106,7 +87,8 @@ namespace itertools {
 
     /**
      * @brief Default constructor.
-     * @deprecated Use range::range(long, long) or range::range(long, long, long) instead.
+     * @deprecated Use range::range(std::integral auto, std::integral auto) or range::range(std::integral auto, 
+     * std::integral auto, std::integral auto) instead.
      */
     [[deprecated("range default construction deprecated. Use range::all for full range in slicing operation")]] range() = default;
 
@@ -370,11 +352,7 @@ namespace itertools {
    * @details The given integers specify the excluded last values of the individual itertools::range objects. Each range
    * starts at 0 and has a step size of 1.
    *
-   * @code{.cpp}
-   * for (auto [i1, i2] : product_range(2, 3)) {
-   *   std::cout << "(" << i1 << ", " << i2 << ")\n";
-   * }
-   * @endcode
+   * @include doc_product_range.cpp
    *
    * Output:
    *
@@ -407,25 +385,7 @@ namespace itertools {
   /**
    * @brief Create a cartesian product range of integer ranges from a tuple of integers.
    *
-   * @details The integers in the given tuple specify the excluded last values of the individual itertools::range
-   * objects. Each range starts at 0 and has a step size of 1.
-   *
-   * @code{.cpp}
-   * for (auto [i1, i2] : product_range(std::make_tuple(2, 3))) {
-   *   std::cout << "(" << i1 << ", " << i2 << ")\n";
-   * }
-   * @endcode
-   *
-   * Output:
-   *
-   * ```
-   * (0, 0)
-   * (0, 1)
-   * (0, 2)
-   * (1, 0)
-   * (1, 1)
-   * (1, 2)
-   * ```
+   * @details It simply forwards the integers in the given tuple to itertools::product_range.
    *
    * @tparam Is Integer types.
    * @param idx_tpl Tuple containing the excluded last values of the integer ranges.
@@ -439,25 +399,7 @@ namespace itertools {
   /**
    * @brief Create a cartesian product range of integer ranges from an array of integers.
    *
-   * @details The integers in the given array specify the excluded last values of the individual itertools::range
-   * objects. Each range starts at 0 and has a step size of 1.
-   *
-   * @code{.cpp}
-   * for (auto [i1, i2] : product_range(std::array{2, 3})) {
-   *   std::cout << "(" << i1 << ", " << i2 << ")\n";
-   * }
-   * @endcode
-   *
-   * Output:
-   *
-   * ```
-   * (0, 0)
-   * (0, 1)
-   * (0, 2)
-   * (1, 0)
-   * (1, 1)
-   * (1, 2)
-   * ```
+   * @details It simply forwards the integers in the given array to itertools::product_range.
    *
    * @tparam I Integer type.
    * @tparam N Number of elements in the array.
@@ -472,12 +414,7 @@ namespace itertools {
   /**
    * @brief Apply a function to every element of an integer itertools::range.
    *
-   * @code{.cpp}
-   * // print out the first 10 squares
-   * itertools::foreach(itertools::range(1, 11), [](int i) {
-   *   std::cout << i * i << " ";
-   * });
-   * @endcode
+   * @include doc_for_each.cpp
    *
    * Output:
    *

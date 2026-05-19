@@ -35,9 +35,9 @@ namespace itertools {
    * @ingroup range_iterators
    * @brief Iterator for an itertools::enumerated range.
    *
-   * @details It stores an iterator of the original range and an index. Incrementing advances the iterator
-   * and the index by 1. Dereferencing returns a std::pair consisting of the current index and the current
-   * dereferenced value of the original iterator.
+   * @details It stores an iterator of the original range and an index. Incrementing advances the iterator and the index 
+   * by 1. Dereferencing returns a `std::pair` consisting of the current index and the current dereferenced value of the 
+   * original iterator.
    *
    * See itertools::enumerate(R &&) for more details.
    *
@@ -74,7 +74,7 @@ namespace itertools {
     [[nodiscard]] bool operator==(enum_iter const &other) const { return it == other.it; }
 
     /**
-     * @brief Equal-to operator for a itertools::enum_iter and an itertools::sentinel_t.
+     * @brief Equal-to operator for an itertools::enum_iter and an itertools::sentinel_t.
      *
      * @tparam SentinelIter Iterator type of the sentinel.
      * @param s itertools::sentinel_t to compare with.
@@ -139,17 +139,11 @@ namespace itertools {
    * @ingroup range_adapting_functions
    * @brief Lazy-enumerate a given range (similar to Python's enumerate).
    *
-   * @details Each element in the original range is assigned an index, starting from zero. This function
-   * returns an iterable lazy object (a itertools::enumerated range), which iterates over tuples consisting
-   * of the index and the value of the dereferenced iterator of the original range:
+   * @details Each element in the original range is assigned an index, starting from zero. This function returns an 
+   * iterable lazy object (an itertools::enumerated range), which iterates over tuples consisting of the index and the
+   * value of the dereferenced iterator of the original range:
    *
-   * @code{.cpp}
-   * std::vector<char> vec { 'a', 'b', 'c' };
-   *
-   * for (auto [idx, val] : enumerate(vec)) {
-   *   std::cout << "(" << idx << ", " << val << ")\n";
-   * }
-   * @endcode
+   * @include doc_enumerate.cpp
    *
    * Output:
    *
@@ -163,7 +157,7 @@ namespace itertools {
    *
    * @tparam R Range type.
    * @param rg Range to enumerate.
-   * @return A itertools::enumerated range.
+   * @return An itertools::enumerated range.
    */
   template <typename R> [[nodiscard]] enumerated<R> enumerate(R &&rg) { return {std::forward<R>(rg)}; }
 

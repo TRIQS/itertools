@@ -56,6 +56,6 @@
  * @defgroup utilities Utilities
  * @brief Utilities are mostly internal implementation details and should not concern everyday users.
  *
- * @details The only functions the might be intersting to some users are: @ref itertools::chunk_range "chunk_range",
+ * @details The only functions that might be interesting to some users are: @ref itertools::chunk_range "chunk_range",
  * @ref itertools::make_vector_from_range "make_vector_from_range" and @ref itertools::omp_chunk "omp_chunk".
  */

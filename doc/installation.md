@@ -13,14 +13,18 @@ If you want to skip the installation step, you can go directly to @ref integrati
 
 @section dependencies Dependencies
 
-The dependencies of **itertools** are as follows:
+The dependencies of the C++ **itertools** library are as follows:
 
-* gcc version 12 or later OR clang version 15 or later OR IntelLLVM (icx) 2023.1.0 or later
-* CMake version 3.20 or later (for installation or integration into an existing project via CMake)
+* C++20 compatible compiler 
+* CMake version 3.20
+
+We do not provide explicit version requirements.
+Instead, we refer the user to the **itertools** CI builds on 
+[GitHub Actions](https://github.com/TRIQS/itertools/actions), where recent OS and compiler versions are tested.
 
 @section install_steps Installation steps
 
-1. Download the source code of the latest stable version by cloning the [TRIQS/itertools](https://github.com/triqs/itertools)
+1. Download the source code of the latest stable version by cloning the [TRIQS/itertools](https://github.com/TRIQS/itertools)
 repository from GitHub:
 
     ```console
@@ -62,7 +66,7 @@ $ cd itertools.src && git tag
 Checkout the version of the code that you want:
 
 ```console
-$ git checkout 1.2.0
+$ git checkout 1.3.0
 ```
 
 and follow steps 2 to 4 to compile the code.
