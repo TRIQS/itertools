@@ -37,7 +37,7 @@ var menudata={children:[
 {text:"Other",url:"integration.html#other"}]},
 {text:"Examples",url:"examples.html",children:[
 {text:"Compiling the examples",url:"examples.html#compiling"},
-{text:"Example 1: Comparison with std ranges",url:"ex1.html"}]},
+{text:"Example 1: Comparison with std::ranges",url:"ex1.html"}]},
 {text:"API Documentation",url:"documentation.html",children:[
 {text:"Range adapting functions",url:"group__range__adapting__functions.html",children:[
 {text:"enumerate",url:"group__range__adapting__functions.html#gace1ee535281e62c9889b53f0a9a21b52"},

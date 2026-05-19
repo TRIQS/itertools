@@ -42,7 +42,7 @@ var NAVTREE =
     ] ],
     [ "Examples", "examples.html", [
       [ "Compiling the examples", "examples.html#compiling", null ],
-      [ "Example 1: Comparison with std ranges", "ex1.html", null ]
+      [ "Example 1: Comparison with std::ranges", "ex1.html", null ]
     ] ],
     [ "API Documentation", "documentation.html", [
       [ "Range adapting functions", "group__range__adapting__functions.html", [
@@ -102,6 +102,6 @@ var NAVTREEINDEX =
 "changelog.html"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronization';
-var SYNCOFFMSG = 'click to enable panel synchronization';
-var LISTOFALLMEMBERS = 'List of all members';
+const SYNCONMSG = 'click to disable panel synchronization';
+const SYNCOFFMSG = 'click to enable panel synchronization';
+const LISTOFALLMEMBERS = 'List of all members';
