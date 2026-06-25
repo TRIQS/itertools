@@ -271,6 +271,13 @@ TEST(Itertools, Range) {
   EXPECT_EQ(res, 1000);
 }
 
+TEST(Itertools, EmptyProductRange) {
+  // check that the product range is empty if one of the ranges is empty
+  long count = 0;
+  for ([[maybe_unused]] auto [l, m] : product_range(0, 5)) ++count;
+  EXPECT_EQ(count, 0);
+}
+
 TEST(Itertools, CombinationOfRangeAdaptingFunctions) {
   std::vector<int> vec1{1, 2, 3, 4, 5, 6};
   std::vector<int> vec2{0, 1, 2, 3, 4};
