@@ -4,20 +4,26 @@
 
 This is Version 2.0.0 of Itertools, a single-header library for adapting C++ ranges.
 
-We thank all contributors: Thomas Hahn, Henri Menke, Dylan Simon, Nils Wentzell
+We thank all contributors: Jenny Coulter, Thomas Hahn, Henri Menke, Dylan Simon, Nils Wentzell
 
 Find below an itemized list of changes in this release.
 
 ### General
-* Add example codes to doc folder and make sure they compile
 * Updated documentation
 * Add product_vec for runtime-sized cartesian products
 * Add sorting functions that track number of swaps
 * Range constructors take std::integral to avoid warnings
 * Make range a std::random_access_range
+* Add test for empty product ranges
 
 ### doc
+* Add example codes to doc folder and make sure they compile
 * Add FI support notice to README.md
+* Fix typos in docs
+
+### cmake
+* Disable C++20 module scanning for clair-c2py compatibility
+* Suppress -Wc2y-extensions and c++26-extension warnings for Clang
 
 ## Version 1.3.0
 
