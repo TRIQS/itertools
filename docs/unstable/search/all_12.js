@@ -8,7 +8,7 @@ var searchData=
   ['slice_2ehpp_5',['slice.hpp',['../slice_8hpp.html',1,'']]],
   ['sliced_6',['sliced',['../structitertools_1_1sliced.html',1,'itertools']]],
   ['sort_2ehpp_7',['sort.hpp',['../sort_8hpp.html',1,'']]],
-  ['sorting_8',['Sorting',['../group__sorting.html',1,'Sorting'],['../documentation.html#autotoc_md21',1,'Sorting']]],
+  ['sorting_8',['Sorting',['../group__sorting.html',1,'Sorting'],['../documentation.html#autotoc_md22',1,'Sorting']]],
   ['start_9',['Where to start?',['../index.html#start',1,'']]],
   ['start_5fidx_10',['start_idx',['../structitertools_1_1sliced.html#adcc7e72aeac6afe16bcfc664314c51a2',1,'itertools::sliced']]],
   ['std_3a_3aranges_11',['Example 1: Comparison with std::ranges',['../ex1.html',1,'']]],
