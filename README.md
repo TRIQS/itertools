@@ -1,6 +1,6 @@
 
 [![build](https://github.com/TRIQS/itertools/workflows/build/badge.svg?branch=unstable)](https://github.com/TRIQS/itertools/actions?query=workflow%3Abuild)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21691728.svg)](https://doi.org/10.5281/zenodo.21691728)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21691728-blue.svg)](https://doi.org/10.5281/zenodo.21691728)
 
 # itertools
 
