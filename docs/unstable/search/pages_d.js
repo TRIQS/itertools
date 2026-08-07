@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['options_0',['Custom CMake options',['../installation.html#cmake_options',1,'']]],
-  ['other_1',['Other',['../integration.html#other',1,'']]],
-  ['overview_2',['Overview',['../index.html',1,'']]]
+  ['print_20hpp_0',['print.hpp',['../examples.html#print_header',1,'']]],
+  ['projects_1',['Integration in C++ projects',['../integration.html',1,'']]]
 ];

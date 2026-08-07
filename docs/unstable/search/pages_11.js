@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['the_20examples_0',['Compiling the examples',['../examples.html#compiling',1,'']]],
-  ['to_20start_1',['Where to start?',['../index.html#start',1,'']]]
+  ['utilities_0',['Utilities',['../documentation.html#autotoc_md23',1,'']]]
 ];

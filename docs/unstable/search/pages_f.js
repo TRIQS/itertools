@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['range_0',['Integer range',['../documentation.html#autotoc_md21',1,'']]],
-  ['range_20adapting_20functions_1',['Range adapting functions',['../documentation.html#autotoc_md18',1,'']]],
-  ['range_20iterators_2',['Range iterators',['../documentation.html#autotoc_md20',1,'']]],
-  ['ranges_3',['Adapted ranges',['../documentation.html#autotoc_md19',1,'']]]
+  ['sorting_0',['Sorting',['../documentation.html#autotoc_md22',1,'']]],
+  ['start_1',['Where to start?',['../index.html#start',1,'']]],
+  ['std_3a_3aranges_2',['Example 1: Comparison with std::ranges',['../ex1.html',1,'']]],
+  ['steps_3',['Installation steps',['../installation.html#install_steps',1,'']]]
 ];

@@ -180,8 +180,6 @@ using&#160;</td><td class="memItemRight"><b>index_t</b> = long</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a74ba266a769b2f6e69032e3eecbbcc77" id="r_a74ba266a769b2f6e69032e3eecbbcc77"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a74ba266a769b2f6e69032e3eecbbcc77">range</a> ()=default</td></tr>
-<tr class="memdesc:a74ba266a769b2f6e69032e3eecbbcc77"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
 <tr class="memitem:a479ae029af01cfed0dfc81e964e5f702" id="r_a479ae029af01cfed0dfc81e964e5f702"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a479ae029af01cfed0dfc81e964e5f702">range</a> (std::integral auto first, std::integral auto last) noexcept</td></tr>
 <tr class="memdesc:a479ae029af01cfed0dfc81e964e5f702"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a range with a step size of 1 and a given first and last (excluded) value.  <br /></td></tr>
 <tr class="memitem:a78aa0177492685fb5346519c932a5f23" id="r_a78aa0177492685fb5346519c932a5f23"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a78aa0177492685fb5346519c932a5f23">range</a> (std::integral auto first, std::integral auto last, std::integral auto step)</td></tr>
@@ -208,10 +206,10 @@ long&#160;</td><td class="memItemRight"><b>first</b> () const</td></tr>
 <tr class="memitem:a8719b3bea5288e9aec56d5f9db6a84a3" id="r_a8719b3bea5288e9aec56d5f9db6a84a3"><td class="memItemLeft"><a id="a8719b3bea5288e9aec56d5f9db6a84a3" name="a8719b3bea5288e9aec56d5f9db6a84a3"></a>
 long&#160;</td><td class="memItemRight"><b>last</b> () const</td></tr>
 <tr class="memdesc:a8719b3bea5288e9aec56d5f9db6a84a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get last value of the range (excluded). <br /></td></tr>
-<tr class="memitem:a50fdc112f34aa15825873152fefbbb45" id="r_a50fdc112f34aa15825873152fefbbb45"><td class="memItemLeft"><a class="el" href="#a74ba266a769b2f6e69032e3eecbbcc77">range</a>&#160;</td><td class="memItemRight"><a class="el" href="#a50fdc112f34aa15825873152fefbbb45">operator+</a> (long shift) const</td></tr>
+<tr class="memitem:a50fdc112f34aa15825873152fefbbb45" id="r_a50fdc112f34aa15825873152fefbbb45"><td class="memItemLeft"><a class="el" href="#a479ae029af01cfed0dfc81e964e5f702">range</a>&#160;</td><td class="memItemRight"><a class="el" href="#a50fdc112f34aa15825873152fefbbb45">operator+</a> (long shift) const</td></tr>
 <tr class="memdesc:a50fdc112f34aa15825873152fefbbb45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shift the whole range by a given amount.  <br /></td></tr>
 <tr class="memitem:a737361786d74eb7afa46b8b7aa5c9fc3" id="r_a737361786d74eb7afa46b8b7aa5c9fc3"><td class="memItemLeft"><a id="a737361786d74eb7afa46b8b7aa5c9fc3" name="a737361786d74eb7afa46b8b7aa5c9fc3"></a>
-bool&#160;</td><td class="memItemRight"><b>operator==</b> (<a class="el" href="#a74ba266a769b2f6e69032e3eecbbcc77">range</a> const &amp;) const =default</td></tr>
+bool&#160;</td><td class="memItemRight"><b>operator==</b> (<a class="el" href="#a479ae029af01cfed0dfc81e964e5f702">range</a> const &amp;) const =default</td></tr>
 <tr class="memdesc:a737361786d74eb7afa46b8b7aa5c9fc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default equal-to operator. <br /></td></tr>
 <tr class="memitem:a25acb30d01e6e168b42f8f2f0db4dd6e" id="r_a25acb30d01e6e168b42f8f2f0db4dd6e"><td class="memItemLeft"><a id="a25acb30d01e6e168b42f8f2f0db4dd6e" name="a25acb30d01e6e168b42f8f2f0db4dd6e"></a>
 <a class="el" href="#acf12ca39b6ea57ca386c9cc2c34e0240">const_reverse_iterator</a>&#160;</td><td class="memItemRight"><b>rbegin</b> () const noexcept</td></tr>
@@ -234,41 +232,12 @@ static constexpr <a class="el" href="structitertools_1_1range_1_1all__t.html">al
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a71bf4ca37900f2883a8a6a5eb3ae7224" id="r_a71bf4ca37900f2883a8a6a5eb3ae7224"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a71bf4ca37900f2883a8a6a5eb3ae7224">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="#a74ba266a769b2f6e69032e3eecbbcc77">range</a> &amp;rg)</td></tr>
+<tr class="memitem:a71bf4ca37900f2883a8a6a5eb3ae7224" id="r_a71bf4ca37900f2883a8a6a5eb3ae7224"><td class="memItemLeft">std::ostream &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a71bf4ca37900f2883a8a6a5eb3ae7224">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="#a479ae029af01cfed0dfc81e964e5f702">range</a> &amp;rg)</td></tr>
 <tr class="memdesc:a71bf4ca37900f2883a8a6a5eb3ae7224"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write the range details to <span class="tt">std::ostream</span>.  <br /></td></tr>
 </table>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a74ba266a769b2f6e69032e3eecbbcc77" name="a74ba266a769b2f6e69032e3eecbbcc77"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a74ba266a769b2f6e69032e3eecbbcc77">&#9670;&#160;</a></span>range() <span class="overload">[1/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">itertools::range::range </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Default constructor. </p>
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated</a></b></dt><dd>Use <a class="el" href="#a479ae029af01cfed0dfc81e964e5f702" title="Construct a range with a step size of 1 and a given first and last (excluded) value.">range::range(std::integral auto, std::integral auto)</a> or <a class="el" href="#a78aa0177492685fb5346519c932a5f23" title="Construct a range with a given step size and a given first and last (excluded) value.">range::range(std::integral auto, 
-std::integral auto, std::integral auto)</a> instead. </dd></dl>
-
-</div>
-</div>
 <a id="a479ae029af01cfed0dfc81e964e5f702" name="a479ae029af01cfed0dfc81e964e5f702"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a479ae029af01cfed0dfc81e964e5f702">&#9670;&#160;</a></span>range() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a479ae029af01cfed0dfc81e964e5f702">&#9670;&#160;</a></span>range() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -303,12 +272,12 @@ std::integral auto, std::integral auto)</a> instead. </dd></dl>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00101">101</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00094">94</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
 
 </div>
 </div>
 <a id="a78aa0177492685fb5346519c932a5f23" name="a78aa0177492685fb5346519c932a5f23"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a78aa0177492685fb5346519c932a5f23">&#9670;&#160;</a></span>range() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a78aa0177492685fb5346519c932a5f23">&#9670;&#160;</a></span>range() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -350,12 +319,12 @@ std::integral auto, std::integral auto)</a> instead. </dd></dl>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00112">112</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00105">105</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
 
 </div>
 </div>
 <a id="ae687872d315369aa9353ebba6ba5bbfd" name="ae687872d315369aa9353ebba6ba5bbfd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae687872d315369aa9353ebba6ba5bbfd">&#9670;&#160;</a></span>range() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae687872d315369aa9353ebba6ba5bbfd">&#9670;&#160;</a></span>range() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -385,7 +354,7 @@ std::integral auto, std::integral auto)</a> instead. </dd></dl>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00120">120</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00113">113</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
 
 </div>
 </div>
@@ -416,7 +385,7 @@ std::integral auto, std::integral auto)</a> instead. </dd></dl>
 <p>Beginning of the integer range. </p>
 <dl class="section return"><dt>Returns</dt><dd>Iterator with its current value set to the first value of the range. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00316">316</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00309">309</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
 
 </div>
 </div>
@@ -446,7 +415,7 @@ std::integral auto, std::integral auto)</a> instead. </dd></dl>
 <p>End of the range. </p>
 <dl class="section return"><dt>Returns</dt><dd>Iterator with its current value set to <a class="el" href="#a7c057e5f15c1a8491e310e23c73c51a7" title="Get first value of the range.">first()</a> + <a class="el" href="#aba2e1e67f13f6faa70417f84677f8371" title="Get step size between two elements of the range.">step()</a> * <a class="el" href="#aeba034794b1c57fe30955d7a25828bf6" title="Get number of elements in the range.">size()</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00334">334</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00327">327</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
 
 </div>
 </div>
@@ -476,7 +445,7 @@ std::integral auto, std::integral auto)</a> instead. </dd></dl>
 <p>Beginning of the integer range in reverse order. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reverse iterator initialized with <a class="el" href="#a929c0a98ea77f9ddb3333e71aaaad03b" title="The same as cend().">end()</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00325">325</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00318">318</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
 
 </div>
 </div>
@@ -506,7 +475,7 @@ std::integral auto, std::integral auto)</a> instead. </dd></dl>
 <p>End of the range in reverse order. </p>
 <dl class="section return"><dt>Returns</dt><dd>Reverse iterator initialized with <a class="el" href="#af64f8926795ad7ac462b1f0774ada5c0" title="The same as cbegin().">begin()</a>. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00343">343</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00336">336</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
 
 </div>
 </div>
@@ -520,7 +489,7 @@ std::integral auto, std::integral auto)</a> instead. </dd></dl>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a74ba266a769b2f6e69032e3eecbbcc77">range</a> itertools::range::operator+ </td>
+          <td class="memname"><a class="el" href="#a479ae029af01cfed0dfc81e964e5f702">range</a> itertools::range::operator+ </td>
           <td>(</td>
           <td class="paramtype">long</td>          <td class="paramname"><span class="paramname"><em>shift</em></span></td><td>)</td>
           <td> const</td>
@@ -543,7 +512,7 @@ std::integral auto, std::integral auto)</a> instead. </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Shifted range. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00145">145</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00138">138</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
 
 </div>
 </div>
@@ -565,7 +534,7 @@ std::integral auto, std::integral auto)</a> instead. </dd></dl>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="#a74ba266a769b2f6e69032e3eecbbcc77">range</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>rg</em></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="#a479ae029af01cfed0dfc81e964e5f702">range</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>rg</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -585,7 +554,7 @@ std::integral auto, std::integral auto)</a> instead. </dd></dl>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Reference to os. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00154">154</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="range_8hpp_source.html#l00147">147</a> of file <a class="el" href="range_8hpp_source.html">range.hpp</a>.</p>
 
 </div>
 </div>
