@@ -63,10 +63,10 @@ namespace itertools {
    */
   class range {
     // First value of the range.
-    long first_ = 0;
+    long first_;
 
     // Last value of the range (excluded).
-    long last_ = -1;
+    long last_;
 
     // Number of integers between two elements of the range.
     long step_ = 1;
@@ -84,13 +84,6 @@ namespace itertools {
 
     /// Integer type for backward compatibility.
     using index_t = long;
-
-    /**
-     * @brief Default constructor.
-     * @deprecated Use range::range(std::integral auto, std::integral auto) or range::range(std::integral auto, 
-     * std::integral auto, std::integral auto) instead.
-     */
-    [[deprecated("range default construction deprecated. Use range::all for full range in slicing operation")]] range() = default;
 
     /**
      * @brief Construct a range with a step size of 1 and a given first and last (excluded) value.
